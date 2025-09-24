@@ -29,5 +29,4 @@ None in use for now.
 - Rating
 - Date
 
-**Images:** Both the main and the secondary entities should have access to using images, in order to show the product,
-either is the store's catalog or a review, to transmit transparency.
+**Images:** Only the main/primary entity will be able to be uploaded with images.
