@@ -25,5 +25,5 @@ Secondariy entity: A review, with the author, a mark (Format pending confirmatio
 Images: Both the main and the secondary entities should have access to using images, in order to show the product,
 either is the store's catalog or a review, to transmit transparency.
 
-Search, filter or categorization: Posibility of searching and item by its name or filter the page to avoid 
+Search, filter or categorization: Posibility of searching an item by its name or filter the page to avoid 
 items that do not match with the desired categorization.
