@@ -18,14 +18,14 @@ None in use for now.
 --------------------------------------------------------------------------
 ## Functionality:
 
-**Main entity:** Product, with its corresponding information: 
+**Main entity:** Product: 
 - Name
 - Brand
 - Price
 - Description
 - Images
 
-**Secondariy entity:** Reviews of the product:
+**Secondariy entity:** Review:
 - Author
 - Rating
 - Date
