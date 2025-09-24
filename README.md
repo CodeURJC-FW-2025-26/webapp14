@@ -20,7 +20,6 @@ None in use for now.
 
 **Main entity:** Product: 
 - Name
-- Brand
 - Price
 - Description
 - Images
