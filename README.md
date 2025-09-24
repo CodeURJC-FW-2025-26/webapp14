@@ -1,29 +1,34 @@
 # webapp14
-SellOra (geek store specialized in retro gaming and merchandise)
+# SellOra
 --------------------------------------------------------------------------
-Members:
+## Members:
 
-Name and Surnames         Official university mail        Github username
+| Name and Surnames | University Mail | Github Username |
+|-----------|-----------|-----------|
+| Nuria Amrani Villuendas   | n.amrani.2024@alumnos.urjc.es   | Nur1aURJC   |
+| Rim Afoud  |  r.afoud.2024@alumnos.urjc.es | rimafd  |
+| Ignacio Roncero Medina   | i.roncero.2024@alumnos.urjc.es   | NachoRonc   |
 
-Nuria Amrani Villuendas / n.amrani.2024@alumnos.urjc.es / Nur1aURJC
-
-Rim Afoud               / r.afoud.2024@alumnos.urjc.es  / rimafd
-
-Ignacio Roncero Medina  / i.roncero.2024@alumnos.urjc.es/ NachoRonc
 
 --------------------------------------------------------------------------
-Cordination Tools:
+## Cordination Tools:
 
 None in use for now.
+
 --------------------------------------------------------------------------
-Functionality:
+## Functionality:
 
-Main entity: The product, with it's corresponding information: Name, brand, price, description, images...
+**Main entity:** Product, with its corresponding information: 
+- Name
+- Brand
+- Price
+- Description
+- Images
 
-Secondariy entity: A review, with the author, a mark (Format pending confirmation), date...
+**Secondariy entity:** Reviews of the product:
+- Author
+- Rating
+- Date
 
-Images: Both the main and the secondary entities should have access to using images, in order to show the product,
+**Images:** Both the main and the secondary entities should have access to using images, in order to show the product,
 either is the store's catalog or a review, to transmit transparency.
-
-Search, filter or categorization: Posibility of searching an item by its name or filter the page to avoid 
-items that do not match with the desired categorization.
