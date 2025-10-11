@@ -1,15 +1,19 @@
 .header {
-    background-color: rgb(135, 135, 180);
+    background-color: rgb(74, 74, 97);
     color: black;
     padding: 20px 0;
     text-align: center;
     background-image: ;
+    padding: 60px 20px;
+    border-radius: 20px;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+    padding: 80px 20px; 
+
 }
 
 .custom-navbar {
-    background-color: rgb(170, 168, 168);
+    background-color: rgb(162, 157, 170);
 }
-
 
 
 
@@ -53,10 +57,10 @@ span{
 
 
 .card {
-  background-color: ;
+  background-color: rgb(204, 193, 197);
   border-radius: 15px;
   padding: 20px;
-  border: 1px solid lightgrey;
+  border: 1px solid rgb(207, 205, 205);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 
 }
@@ -77,11 +81,11 @@ span{
 
 
 .card-body {
-    color:white;
+    color:rgb(0, 0, 0);
 
 }
 .card-title {
-    color: #fff;
+    color: #0a0909;
 }
 
 
@@ -114,5 +118,11 @@ button:hover {
   transform: scale(1.1);
 }
 
+.header h1 {
+  letter-spacing: 2px;
 
 
+
+ .footer {
+  border-radius: 20px 20px 0 0;
+}
