@@ -7,9 +7,13 @@
     <!--Bootstrap links-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <link href="https://getbootstrap.com/docs/5.3/examples/cover/" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.3/examples/headers/" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.3/examples/footers/" rel="stylesheet">
     <!--Boostrap Icons-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    
 
     <link rel="stylesheet" href="./recursos/SELLORA.css">
 
@@ -22,15 +26,27 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single+Ink:wght@100..900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 
-</head>
-    
+  <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="css/responsive.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/custom.css">
+
+
+  </head>
+
 <header class="header text-center py-5 mb-4">
-  <h1 class="display-4"> {SellOra}</h1>
+  <h1 class="display-4">Welcome to SellOra</h1>
   <h2 class="display-6">- Your favorite retro shop -</h2>
   <p class="lead">- Vintage Consoles & Games  -</p>
 </header>
 
 <body>
+
+
 <!--Navigation bar with bootstrap-->
 
 <nav class="navbar navbar-expand-lg custom-navbar">
@@ -62,31 +78,36 @@
   </div>
 </nav>
 
+
 <div class="container py-4"> 
     <!--first row-->
     <div class="row g-4 mb-4">
+      <div class="d-flex justify-content-end">
+        <button type="button" class="button">+ Create new product </button>
+    </div>
         <!--Product 1-->
      <div class="col-12 col-md-6 col-lg-4">
         <div class='card h-100'>
-            <img src="" class="card-img-top" alt="Product 1">
-            <div class="card-body">
-                <h4 class="card-title">Retro R36S Portable Console</h4>
-                <p class="card-text">Console with TF Card 64GB Mini Portable Video Game Console (White)</p>
-                <p class="card-text">€45.99</p>
+            <img src="" class="card-img-top" alt="Product1">
+            <div class="card-body"> 
+                <h4 class="card-title">Product Name</h4>
+                <p class="card-text">Product Small Description</p>
+                <p class="card-text">Price</p>
                 <button type="button" class="btn btn-custom">View more</button>
                 <button type="button" class="btn btn-custom">Add to Basket</button>
             </div>
         </div>
+
     </div>
 
     <!--Product 2-->
      <div class="col-12 col-md-6 col-lg-4">
         <div class='card h-100'>
-            <img src="" class="card-img-top" alt="Producto2">
+            <img src="" class="card-img-top" alt="Product2">
             <div class="card-body">
                 <h4 class="card-title">EA SPORTS F1 24</h4>
                 <p class="card-text">F1 2024 Standar Edition PS4</p>
-                <p class="card-text">€29.99</p>
+                <p class="card-text">29.99€</p>
                 <button class="btn btn-custom me-2">View more</button>
                 <button type="button" class="btn btn-custom">Add to Basket</button>
             </div>
@@ -96,11 +117,11 @@
     <!--Product 3-->
      <div class="col-12 col-md-6 col-lg-4">
         <div class='card h-100'>
-            <img src="" class="card-img-top" alt="Producto3">
+            <img src="" class="card-img-top" alt="Product3">
             <div class="card-body">
                 <h4 class="card-title">Product Name </h4>
                 <p class="card-text">Product Small Description</p>
-                <p class="card-text">Price</p>
+                <p class="card-text">Price €</p>
                 <button class="btn btn-custom me-2">View more</button>
                 <button type="button" class="btn btn-custom">Add to Basket</button>
             </div>
@@ -118,7 +139,7 @@
             <div class="card-body">
                 <h4 class="card-title">Product Name </h4>
                 <p class="card-text">Product Small Description</p>
-                <p class="card-text">Price</p>
+                <p class="card-text">Price €</p>
                 <button class="btn btn-custom me-2">View more</button>
                 <button type="button" class="btn btn-custom">Add to Basket</button>
             </div>
@@ -132,7 +153,7 @@
             <div class="card-body">
                 <h4 class="card-title">Product Name </h4>
                 <p class="card-text">Product Small Description</p>
-                <p class="card-text">Price</p>
+                <p class="card-text">Price €</p>
                 <button class="btn btn-custom me-2">View more</button>
                 <button type="button" class="btn btn-custom">Add to Basket</button>
             </div>
@@ -187,7 +208,7 @@
     <!--Product 9-->
      <div class="col-12 col-md-6 col-lg-4">
         <div class='card'>
-            <img src="" class="card-img-top" alt="Producto9">
+            <img src=" " class="card-img-top" alt="Producto9">
             <div class="card-body">
                 <h4 class="card-title">Product Name </h4>
                 <p class="card-text">Product Small Description</p>
@@ -197,6 +218,9 @@
             </div>
         </div>
     </div>
+
+
+
 
 </div>
 
@@ -208,6 +232,8 @@
         </p> 
         <a href="#" class="text-white me-2"><i class="bi bi-instagram"></i></a>
         <a href="#" class="text-white me-2"><i class="bi bi-tiktok"></i></a>
+
+    
 </footer>
 
 </html>
