@@ -10,14 +10,15 @@
   color: white; 
   padding: 80px 20px; 
   text-align: center;
-  border-radius: 20px; 
+  border-radius: 0px; 
   display: flex;
   flex-direction: column;
   justify-content: center; 
   align-items: center;     
-  margin-bottom: 40px; 
-  height: 100vh;
   background: rgba(255, 255, 255, 0.05);
+  margin-bottom: 40px; 
+  height: 85vh;
+
 }
 
 
@@ -87,7 +88,7 @@ h4{
     font-family: 'arial', sans-serif;}
 
 .custom-navbar {
-background-color: rgb(203, 205, 211);
+  background-color: rgb(203, 205, 211);
   font-size: 1.3rem; 
   max-width: 1300px;
   margin: 0 auto;
