@@ -16,22 +16,86 @@
   justify-content: center; 
   align-items: center;     
   margin-bottom: 40px; 
-
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.05);
 }
+
+
 
 
 
 .header h1 {
-  font-size: 4.5rem;
-  margin-bottom: 15px;
+  font-family: 'Gravitas One', sans-serif;
+  font-size: 6rem;
+  color: #e5deff;
+  text-transform: uppercase;
+  display: block;
+  padding: 20px 50px;
+  border-radius: 20px;
+
+  /*glow */
+  text-shadow:
+    0 0 15px rgba(29, 30, 102, 0.3),
+    0 0 30px rgba(36, 25, 102, 0.4),
+    0 0 45px rgba(37, 29, 105, 0.6);
+  box-shadow:
+    0 0 25px #bda8ff,
+    inset 0 0 15px #bda8ff;
+  transition: all 0.3s ease;
 }
+
+.header h1:hover {
+  transform: scale(1.05);
+  box-shadow:
+    0 0 35px #bda8ff,
+    inset 0 0 20px #bda8ff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 .header h2 {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
+  font-family: 'Bitcount Prop Single Ink', sans-serif;
+  font-size: 4rem;
+  letter-spacing: 2px;
+  margin-bottom: 15px;
+  text-shadow: 0 0 5px #201446, 0 0 10px rgba(187,168,255,0.3);
+  transition: all 0.3s ease;
+}
+.header h2:hover {
+  text-shadow: 0 0 15px #bda8ff, 0 0 25px rgba(187,168,255,0.5);
+  transform: scale(1.05);
 }
 
+.header h3 {
+  color: #d6d4df;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  text-shadow: 0 0 4px #a7a0bb, 0 0 8px rgba(187,168,255,0.2);
+  font-family: 'BBH Sans Bogle', sans-serif;
+  font-size: 3.6rem;
+}
 
+.header h3:hover {
+  transform: scale(1.03);
+}
+
+h4{
+    font-family: 'BBH Sans Bogle', sans-serif;
+    font-size: 2.3rem;
+}
+
+.h6{
+    font-family: 'arial', sans-serif;}
 
 .custom-navbar {
 background-color: rgb(203, 205, 211);
@@ -46,30 +110,11 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
-h1{
-    font-size: 4rem;
-    font-family: 'Gravitas One', sans-serif;
-    color: #bbb1c0;
-  
-}
 
 
-h2 {
-    font-family: 'Bitcount Prop Single Ink', sans-serif;
-    font-size: 4rem;   
-}
 
-h3{
-    font-family: 'BBH Sans Bogle', sans-serif;
-    color:rgb(95, 116, 161)}
 
-h4{
-    font-family: 'BBH Sans Bogle', sans-serif;
-    font-size: 2.3rem;
-}
 
-.h6{
-    font-family: 'arial', sans-serif;}
 
 .card-text{
     font-family: 'ARIAL', sans-serif;
