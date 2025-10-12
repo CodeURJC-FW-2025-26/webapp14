@@ -210,10 +210,9 @@ button:hover {
 }
 
 .upload-back {
-  margin: 70px;         
-  display: inline-flex; 
+  margin: 20px;         
   align-items: center;  
   gap: 8px;             
   font-family: 'BBH Sans Bogle', sans-serif;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
 }
