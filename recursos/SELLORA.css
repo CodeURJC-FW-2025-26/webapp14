@@ -1,9 +1,9 @@
 
 
 .header {
-  position: relative; /* for overlay */
-  background-color: rgb(74, 74, 97); /* keep your original color */
-  background-image: url('https://i.pinimg.com/736x/67/a2/c6/67a2c6896733dbcf816ea713607a1aab.jpg'); /* add your image */
+  position: relative; 
+  background-color: rgb(74, 74, 97); 
+  background-image: url('https://i.pinimg.com/736x/67/a2/c6/67a2c6896733dbcf816ea713607a1aab.jpg'); 
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -11,7 +11,7 @@
   padding: 80px 20px; 
   text-align: center;
   border-radius: 20px; 
-    display: flex;
+  display: flex;
   flex-direction: column;
   justify-content: center; 
   align-items: center;     
@@ -145,6 +145,10 @@ span{
   padding: 10px 20px;
 }
 
+.btn-custom:hover {
+  background-color: #2a2479;
+  transform: scale(1.05);
+}
 
 button {
   background-color: rgb(47, 77, 209);
@@ -161,10 +165,7 @@ button:hover {
   background-color: rgb(63, 63, 133);
   transform: scale(1.1);
 }
-.btn-custom:hover {
-  background-color: #2a2479;
-  transform: scale(1.05);
-}
+
 
 .header h1 {
   letter-spacing: 2px;
