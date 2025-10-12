@@ -77,10 +77,7 @@ header {
   transform: scale(1.03);
 }
 
-h4{
-    font-family: 'BBH Sans Bogle', sans-serif;
-    font-size: 2.3rem;
-}
+
 
 .h6{
     font-family: 'arial', sans-serif;}
@@ -91,31 +88,6 @@ h4{
   max-width: 1300px;
   margin: 0 auto;
 }
-
-
-
-body {
-  color:black;
-  font-family: 'Poppins', sans-serif;
-}
-
-
-
-
-
-
-.card-text{
-    font-family: 'ARIAL', sans-serif;
-    color: black;
-    font-size: 1rem;
-}
-
-p{
-    font-family: 'BBH Sans Bogle', sans-serif;
-    color: rgb(71, 19, 19);
-    font-size: 1.4rem;
-}
-
 
 .navbar-brand{
     font-family: 'Instrument Serif', sans-serif;
@@ -133,6 +105,11 @@ span{
 
 }
 
+
+body {
+  color:black;
+  font-family: 'Poppins', sans-serif;
+}
 
 .card {
   background-color: rgb(191, 192, 201);
@@ -161,12 +138,35 @@ span{
 
 
 .card-body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     color:rgb(0, 0, 0);
 
 }
-.card-title {
+.card-title{
+    font-family: 'BBH Sans Bogle', sans-serif;
+    font-size: 2.3rem;
     color: #0a0909;
+
 }
+
+.card-text{
+    font-family: 'ARIAL', sans-serif;
+    color: black;
+    font-size: 1rem;
+    flex-grow: 1;
+}
+
+
+p{
+    font-family: 'BBH Sans Bogle', sans-serif;
+    color: rgb(71, 19, 19);
+    font-size: 1.4rem;
+}
+
+
+
 
 
 
@@ -210,9 +210,10 @@ button:hover {
 }
 
 .upload-back {
-  margin: 20px;         
+  margin: 70px;         
+  display: inline-flex; 
   align-items: center;  
   gap: 8px;             
   font-family: 'BBH Sans Bogle', sans-serif;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
 }
