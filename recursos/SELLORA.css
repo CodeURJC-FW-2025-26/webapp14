@@ -1,6 +1,4 @@
-
-
-.header {
+header {
   position: relative; 
   background-color: rgb(74, 74, 97); 
   background-image: url('https://i.pinimg.com/736x/67/a2/c6/67a2c6896733dbcf816ea713607a1aab.jpg'); 
@@ -100,7 +98,6 @@ body {
   color:black;
   font-family: 'Poppins', sans-serif;
 }
-
 
 
 
@@ -210,4 +207,13 @@ button:hover {
 .text-white {
   color: white;
   font-family: 'BBH Sans Bogle', sans-serif;
+}
+
+.upload-back {
+  margin: 70px;         
+  display: inline-flex; 
+  align-items: center;  
+  gap: 8px;             
+  font-family: 'BBH Sans Bogle', sans-serif;
+  font-size: 1.4rem;
 }
