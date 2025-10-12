@@ -1,53 +1,98 @@
+
+
 .header {
-    background-color: rgb(74, 74, 97);
-    color: black;
-    padding: 20px 0;
-    text-align: center;
-    background-image: ;
-    padding: 60px 20px;
-    border-radius: 20px;
-    text-shadow: 1px 1px 5px rgba(0,0,0,0.2);
-    padding: 80px 20px; 
+  position: relative; /* for overlay */
+  background-color: rgb(74, 74, 97); /* keep your original color */
+  background-image: url('https://i.pinimg.com/736x/67/a2/c6/67a2c6896733dbcf816ea713607a1aab.jpg'); /* add your image */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white; 
+  padding: 80px 20px; 
+  text-align: center;
+  border-radius: 20px; 
+    display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center;     
+  margin-bottom: 40px; 
 
 }
+
+
+
+.header h1 {
+  font-size: 4.5rem;
+  margin-bottom: 15px;
+}
+
+.header h2 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+
 
 .custom-navbar {
-    background-color: rgb(162, 157, 170);
+background-color: rgb(203, 205, 211);
+  font-size: 1.3rem; 
+  text-align: center; 
+  justify-content: center;
 }
-
 
 
 body {
-  background-color: whitesmoke;
   color:black;
   font-family: 'Poppins', sans-serif;
 }
 
 h1{
     font-size: 4rem;
-    font-family: 'Instrument Serif', sans-serif;
-    text-shadow:2px 2px #ebe3e3;
-
+    font-family: 'Gravitas One', sans-serif;
+    color: #bbb1c0;
+  
 }
 
 
 h2 {
     font-family: 'Bitcount Prop Single Ink', sans-serif;
-    font-size: 4rem;
-    color:#111;
-    text-shadow:2px 2px #290b30; 
+    font-size: 4rem;   
 }
 
+h3{
+    font-family: 'BBH Sans Bogle', sans-serif;
+    color:rgb(95, 116, 161)}
+
+h4{
+    font-family: 'BBH Sans Bogle', sans-serif;
+    font-size: 2.3rem;
+}
+
+.h6{
+    font-family: 'arial', sans-serif;}
+
+.card-text{
+    font-family: 'ARIAL', sans-serif;
+    color: black;
+    font-size: 1rem;
+}
 
 p{
-    font-family: 'Instrument Serif', sans-serif;
+    font-family: 'BBH Sans Bogle', sans-serif;
+    color: rgb(71, 19, 19);
+    font-size: 1.4rem;
 }
 
 
-a{
+.navbar-brand{
     font-family: 'Instrument Serif', sans-serif;
+    font-size: 2rem;
+    color: #141e7a;
 }
 
+ .navbar-text, .nav-item{
+    font-family: 'Instrument Serif', sans-serif;
+    font-size: 1.5rem;}
 
 
 span{
@@ -57,7 +102,7 @@ span{
 
 
 .card {
-  background-color: rgb(204, 193, 197);
+  background-color: rgb(191, 192, 201);
   border-radius: 15px;
   padding: 20px;
   border: 1px solid rgb(207, 205, 205);
@@ -77,6 +122,8 @@ span{
     height: 200px;
     object-fit: cover;  
     background-color: #111;
+    border-radius: 10px;
+    margin-bottom: 15px;
 }
 
 
@@ -91,14 +138,12 @@ span{
 
 
 .btn-custom {
-  background-color: #d13642;
+  background-color: #362f9c;
   color: white;
   border-radius: 25px;
   border: none;
   padding: 10px 20px;
-  
 }
-
 
 
 button {
@@ -108,7 +153,6 @@ button {
   border: none;
   border-radius: 25px;
   cursor: pointer;
-  transition: transform 0.3s ease, background-color 0.3s ease;
   margin-bottom: 20px;
 
 }
@@ -117,12 +161,16 @@ button:hover {
   background-color: rgb(63, 63, 133);
   transform: scale(1.1);
 }
+.btn-custom:hover {
+  background-color: #2a2479;
+  transform: scale(1.05);
+}
 
 .header h1 {
   letter-spacing: 2px;
 
-
-
- .footer {
-  border-radius: 20px 20px 0 0;
+}
+.text-white {
+  color: white;
+  font-family: 'BBH Sans Bogle', sans-serif;
 }
