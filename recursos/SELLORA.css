@@ -263,9 +263,8 @@ button:hover {
 
 .product-price {
   font-family: 'BBH Sans Bogle', sans-serif;
-  font-size: 1.6rem;
+  font-size: 2rem;
   color: rgb(139, 0, 0);
-  margin-top: auto;
 }
 
 @media (max-width: 768px) {
@@ -294,10 +293,27 @@ button:hover {
     font-size: 1rem;
   }
 
-  .product-price {
-    margin-top: 20px;
+  .product-details .d-flex {
+    width: 100%;
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-top: 12px;
+  }
+
+  .product-details .review-actions {
+    justify-content: flex-end;
+    flex-shrink: 0;
+    display: flex;
+    gap: 10px;
+  }
+
+  .product-details .review-actions button {
+    white-space: nowrap;
   }
 }
+
 
 
 
@@ -323,7 +339,6 @@ button:hover {
   margin-bottom: 10px;
 }
 
-.review-input,
 .review-textarea {
   width: 100%;
   padding: 12px 15px;
@@ -332,12 +347,6 @@ button:hover {
   font-family: 'Arial', sans-serif;
   font-size: 1rem;
 }
-
-.review-textarea {
-  height: 120px;
-  resize: none;
-}
-
 .review-card {
   background-color: rgb(191, 192, 201);
   border-radius: 15px;
@@ -361,7 +370,7 @@ button:hover {
 }
 
 .review-author {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: bold;
   color: #0a0909;
 }
