@@ -10,15 +10,77 @@
 
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
         <link rel="stylesheet" href="../recursos/SELLORA.css">
-    </head>
+
+        <!--Fonts de Google-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single+Ink:wght@100..900&display=swap" rel="stylesheet">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single+Ink:wght@100..900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+        
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=BBH+Sans+Bogle&family=Bitcount+Prop+Single+Ink:wght@100..900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=BBH+Sans+Bogle&family=Bitcount+Prop+Single+Ink:wght@100..900&family=Gravitas+One&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Almendra:ital,wght@0,400;0,700;1,400;1,700&family=BBH+Sans+Bogle&family=Bitcount+Prop+Single+Ink:wght@100..900&family=Gravitas+One&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+        </head>
     <body>
-        <p class="upload-back">
-        <a href="SELLORA.html"><i class="bi bi-arrow-left"></i></a>
-        Go back
-        </p>
+        <body style="background-color: #9ba4b8;"></body>
+        <p class="upload-back"><button class="btn-custom2"><a href="SELLORA.html"><i class="bi bi-arrow-left"></i>
+        </a>Go back</button></p>
 
-        <h4 class="card-title">Add a product</h4>
+        <h4 class="add-product">Add your product</h4>
 
+        <div class="ap-cont">
+        <!-- fotos -->
+        <div class="ap-left">
+        <h3>Upload Images</h3>
+        <div class="ap-main-img"></div>
+            <div class="ap-minis">
+            <div class="mini-img"></div>
+            <div class="mini-img"></div>
+            <div class="mini-img"></div>
+            <div class="mini-img"></div>
+        </div>
+    </div>
 
+        <!-- form -->
+        <form class="ap-right">
+        <label>Product Name
+            <input type="text" placeholder="Enter product name">
+        </label>
+
+        <label>Description
+        <textarea rows="4" placeholder="Write a short description"></textarea>
+        </label>
+
+        <label>Category
+        <select>
+            <option>Select Category</option>
+            <option>Videogames</option>
+            <option>Consoles</option>
+            <option>Merchandising & Letter Paper</option>
+            <option>Esports</option>
+        </select>
+        </label>
+
+        <label>Tags
+        <input type="text" placeholder="League of Legends, retro, consoles...">
+        </label>
+
+        <div class="ap-btns">
+        <button type="button" class="btn-custom">Cancel</button>
+        <button type="submit" class="btn-custom">Save</button>
+        </div>
+        </form>
+  </div>
     </body>
 </html>

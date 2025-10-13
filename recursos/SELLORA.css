@@ -198,7 +198,6 @@ button:hover {
   transform: scale(1.1);
 }
 
-
 .header h1 {
   letter-spacing: 2px;
 
@@ -209,16 +208,195 @@ button:hover {
 }
 
 .upload-back {
-  margin: 70px;         
-  display: inline-flex; 
-  align-items: center;  
-  gap: 8px;             
-  font-family: 'BBH Sans Bogle', sans-serif;
-  font-size: 1.4rem;
+  text-align: left;
+  margin: 20px;
 }
 
+.btn-custom2 {
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgb(207, 205, 205);
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-size: 20px;
+  color: black;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
 
+.btn-custom2 a {
+  color: black; 
+  display: flex;
+  align-items: center;
+  font-size: 22px;
+}
 
+.btn-custom2 i {
+  transition: transform 0.2s ease;
+}
+
+.btn-custom2 a:hover i {
+  transform: translateX(-2px);
+}
+
+.add-product {
+  margin-left: 60px; 
+  margin-top: 20px;
+  color: black;
+  font-family: 'BBH Sans Bogle', sans-serif;
+  font-size: 35px;
+
+}
+
+/* Fondo y tipografía */
+body {
+  background: #9aa3b5;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 40px;
+}
+
+/* Cabecera: botón + título */
+.ap-header {
+  margin-bottom: 30px;
+}
+
+.ap-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: black;
+  margin-top: 10px;
+}
+
+/* Botón "Go back" */
+.btn-custom2 {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 20px;
+  padding: 10px 16px;
+  font-weight: 700;
+  color: black;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.btn-custom2 a {
+  text-decoration: none;
+  color: black; /* flecha negra */
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+}
+
+body {
+  background: #9aa3b5;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 40px;
+}
+
+.btn-custom2 {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 20px;
+  padding: 10px 16px;
+  font-weight: 700;
+  color: black;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.btn-custom2 {
+  text-decoration: none;
+  color: black; 
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  border: 1px solid rgb(207, 205, 205);
+}
+
+.ap-cont {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 40px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  padding: 30px;
+}
+
+.ap-left {
+  flex: 0 0 360px;
+}
+
+.ap-main-img {
+  background: #dfe3ea;
+  border-radius: 12px;
+  width: 100%;
+  aspect-ratio: 4/3;
+  margin-bottom: 16px;
+}
+
+.ap-minis {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.mini-img {
+  background: #dfe3ea;
+  border-radius: 8px;
+  width: 100px;
+  height: 100px;
+}
+
+.ap-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.ap-right label {
+  font-weight: bold;
+  color: black;
+  display: block;
+}
+
+.ap-right input,
+.ap-right textarea,
+.ap-right select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  margin-top: 6px;
+  box-sizing: border-box;
+}
+
+.ap-btns {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+@media (max-width: 900px) {
+  .ap-cont {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .ap-left {
+    flex: none;
+    width: 100%;
+    max-width: 400px;
+  }
+}
 
 
 .product-card {
