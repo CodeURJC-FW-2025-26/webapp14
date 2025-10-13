@@ -169,7 +169,6 @@ p{
 
 
 
-
 .btn-custom {
   background-color: #362f9c;
   color: white;
@@ -216,4 +215,203 @@ button:hover {
   gap: 8px;             
   font-family: 'BBH Sans Bogle', sans-serif;
   font-size: 1.4rem;
+}
+
+
+
+
+
+.product-card {
+  background-color: rgb(191, 192, 201);
+  border-radius: 15px;
+  padding: 30px;
+  border: 1px solid rgb(207, 205, 205);
+  display: flex;
+  align-items: stretch;
+  gap: 20px;
+  width: 100%;
+  min-height: 700px;
+  margin: 40px auto;
+}
+
+.product-image {
+  width: 45%;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.product-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.product-name {
+  font-family: 'BBH Sans Bogle', sans-serif;
+  font-size: 2rem;
+  color: #0a0909;
+}
+
+.product-description {
+  font-family: 'Arial', sans-serif;
+  font-size: 1.1rem;
+  margin-top: 10px;
+  color: black;
+}
+
+.product-price {
+  font-family: 'BBH Sans Bogle', sans-serif;
+  font-size: 1.6rem;
+  color: rgb(139, 0, 0);
+  margin-top: auto;
+}
+
+@media (max-width: 768px) {
+  .product-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-height: auto;
+  }
+
+  .product-image {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .product-details {
+    width: 100%;
+    align-items: center;
+  }
+
+  .product-name {
+    font-size: 1.8rem;
+  }
+
+  .product-description {
+    font-size: 1rem;
+  }
+
+  .product-price {
+    margin-top: 20px;
+  }
+}
+
+
+
+
+.review-form {
+  background-color: rgb(191, 192, 201);
+  border: 1px solid rgb(207, 205, 205);
+  border-radius: 15px;
+  padding: 25px;
+  margin: 40px auto;
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.review-form h3 {
+  font-family: 'BBH Sans Bogle', sans-serif;
+  font-size: 1.5rem;
+  color: #0a0909;
+  margin-bottom: 10px;
+}
+
+.review-input,
+.review-textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 10px;
+  border: 1px solid #aaa;
+  font-family: 'Arial', sans-serif;
+  font-size: 1rem;
+}
+
+.review-textarea {
+  height: 120px;
+  resize: none;
+}
+
+.review-card {
+  background-color: rgb(191, 192, 201);
+  border-radius: 15px;
+  padding: 20px 25px;
+  border: 1px solid rgb(207, 205, 205);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 900px;
+  margin: 20px auto 40px auto;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  min-height: 200px;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'BBH Sans Bogle', sans-serif;
+}
+
+.review-author {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #0a0909;
+}
+
+.review-date {
+  font-size: 0.95rem;
+  color: #333;
+  font-style: italic;
+}
+
+.review-content {
+  font-family: 'Arial', sans-serif;
+  font-size: 1.05rem;
+  color: black;
+  line-height: 1.5;
+  margin-top: 10px;
+}
+
+.review-rating {
+  font-size: 1.3rem;
+  color: rgb(139, 0, 0);
+  margin-top: auto;
+  align-self: flex-end;
+}
+
+.review-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.review-card:hover,
+.review-form:hover {
+  transform: scale(1.01);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 768px) {
+  .review-form, .review-card {
+    padding: 15px;
+    text-align: center;
+  }
+
+  .review-header {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .review-actions {
+    justify-content: center;
+  }
 }
