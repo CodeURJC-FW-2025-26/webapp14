@@ -62,7 +62,7 @@ None in use for now.
 
 ---
 
-#### Nacho Roncero – Página de detalle
+#### Ignacio Roncero Medina – Página de detalle
 **Tareas realizadas:**  
 - Implementación de la **página de detalle** mostrando toda la información de un elemento seleccionado.  
 - Visualización de entidades secundarias relacionadas.  
@@ -84,7 +84,7 @@ None in use for now.
 
 ---
 
-#### Nuria – Página de nuevo elemento
+#### Nuria Amrani Villuendas – Página de nuevo elemento
 **Tareas realizadas:**  
 - Implementación de la **página de nuevo elemento** con formulario completo para crear un nuevo elemento de la entidad principal.  
 - Inclusión de botones “Guardar” y “Cancelar” .   
