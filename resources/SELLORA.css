@@ -182,22 +182,6 @@ p{
   transform: scale(1.05);
 }
 
-button {
-  background-color: rgb(47, 77, 209);
-  color: white;
-  padding: 12px 25px;
-  border: none;
-  border-radius: 25px;
-  cursor: pointer;
-  margin-bottom: 20px;
-
-}
-
-button:hover {
-  background-color: rgb(63, 63, 133);
-  transform: scale(1.1);
-}
-
 .header h1 {
   letter-spacing: 2px;
 
@@ -243,9 +227,7 @@ button:hover {
   color: black;
   font-family: 'BBH Sans Bogle', sans-serif;
   font-size: 35px;
-
-}
-  background: #9aa3b5; {
+  background: #9aa3b5; 
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 40px;
