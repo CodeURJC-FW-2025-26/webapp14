@@ -96,14 +96,16 @@ None in use for now.
 
 
 **5 most significant commits:**  
-1. [Commit 1](#)  
-2. [Commit 2](#)  
-3. [Commit 3](#)  
-4. [Commit 4](#)  
-5. [Commit 5](#)  
+1. [Commit 1][#Elimination of navigation bar in detail page, fix of back button](https://github.com/CodeURJC-FW-2025-26/webapp14/commit/a78a3642197fd8762519ba52097581e12e793fdc)  
+2. [Commit 2][#Implementation of add product page](https://github.com/CodeURJC-FW-2025-26/webapp14/commit/b3bcc560dca9c812f01578dc30a764fef3d5b50e)  
+3. [Commit 3][#Creation of add product page](https://github.com/CodeURJC-FW-2025-26/webapp14/commit/b180cb5f9e721466086d1cbd0dd75d0b7b35dde6)  
+4. [Commit 4][#Added three items to the home page](https://github.com/CodeURJC-FW-2025-26/webapp14/commit/aa143ee51ef1b0a5db51b1aa0f92939a423c36ce)  
+5. [Commit 5][#Favicon implementation](https://github.com/CodeURJC-FW-2025-26/webapp14/commit/8b81f4fa4ac8a9ba39676d59a30dda10dd9184ad)  
 
 **Files with most participation:**  
-Add product page, upload.html
+1. SELLORA.html (https://github.com/CodeURJC-FW-2025-26/webapp14/blob/main/pages/SELLORA.html)
+2. SELLORA.css (https://github.com/CodeURJC-FW-2025-26/webapp14/blob/main/resources/SELLORA.css)
+3. Upload.html (https://github.com/CodeURJC-FW-2025-26/webapp14/blob/main/pages/upload.html)
 
 
 
