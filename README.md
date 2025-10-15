@@ -67,19 +67,20 @@ Home page file : SELLORA.html
 - Implementation of the product detail page, displaying all information for a selected item.
 - Display of related secondary entities.
 - Each secondary entity has an associated “Delete” and “Edit” button (currently without functionality).
-- Contribution to the overall CSS of the website.
+- Contribution to the overall CSS of the website, mainly in the ones related with the detail page, product and review ones.
 
   
 **5 most significant commits:**  
-1. [Commit 1](#)  
-2. [Commit 2](#)  
-3. [Commit 3](#)  
+1. [Commit 1](#Pág Producto y actualizacion css)
+2. [Commit 2](#Botones para home, ajustes visuales y botones no funcionales)  
+3. [Commit 3](#mi parte)  
 4. [Commit 4](#)  
 5. [Commit 5](#)  
 
 **Files with most participation:**  
- 
-
+1. detail.html
+2. SELLORA.css
+3. SELLORA.html
 ---
 
 #### Nuria Amrani Villuendas – Add New Product Page
