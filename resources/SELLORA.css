@@ -303,25 +303,23 @@ body {
 
 .ap-cont {
   display: flex;
-  align-items: flex-start;
   justify-content: space-between;
-  gap: 40px;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 16px;
-  padding: 30px;
-}
-
-.mainpic {
-  width: 51%;
+  align-items: flex-end;  
+  padding: 0;             
+  gap: 150px;              
 }
 
 .mainpic-container {
+  flex: 1;
   display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  margin-bottom: -60px;
-  margin-left: -30px;
-  gap: 40px; 
+  align-items: flex-end;  
+  justify-content: flex-start; 
+}
+
+.mainpic {
+  width: 110%;
+  height: auto;
+  display: block;
 }
 
 .ap-right {
@@ -353,6 +351,7 @@ body {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
+  margin-top: 20px;
 }
 
 @media (max-width: 900px) {
@@ -361,11 +360,26 @@ body {
     align-items: center;
   }
 
-  .ap-left {
-    flex: none;
-    width: 100%;
-    max-width: 400px;
+  .mainpic-container {
+    justify-content: center;
   }
+
+  .mainpic {
+    max-width: 90%;
+  }
+}
+
+.ap-file {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.ap-file input[type="file"] {
+  width: 460px;   
+  margin-right: 60px; 
 }
 
 
