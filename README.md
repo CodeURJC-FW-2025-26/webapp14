@@ -51,14 +51,16 @@ None in use for now.
 - Contribution to the overall CSS of the website.
 
 **5 most significant commits:**  
-1. [Commit 1](#) –   
-2. [Commit 2](#) – 
-3. [Commit 3](#) – 
-4. [Commit 4](#) –  
-5. [Commit 5](#) – 
+1. [Commit 1][#Home page, grid implementation](https://github.com/CodeURJC-FW-2025-26/webapp14/commit/0ec0d6ee74877ff86e1ebeaa1ca917b9f72c34bf) –   
+2. [Commit 2][#New buttons and CSS changes](https://github.com/CodeURJC-FW-2025-26/webapp14/commit/4e5bb953c539f16fab4d9e93a601e8b45c2771c9) – 
+3. [Commit 3][# Updated products with images and refined the image styles”](https://github.com/CodeURJC-FW-2025-26/webapp14/commit/b93c104a3a8babb75bf92ec0d03eed07f3687f03) – 
+4. [Commit 4](https://github.com/CodeURJC-FW-2025-26/webapp14/commit/1c3fec25a481281ec509b20b92ba3966c1d6fdfe) –  
+5. [Commit 5][# README document update: practice 1](https://github.com/CodeURJC-FW-2025-26/webapp14/commit/37c8c844396f06b4df0775e356540c395754db55) – 
 
 **Files with most participation:**  
-Home page file : SELLORA.html
+1- SELLORA.html (https://github.com/CodeURJC-FW-2025-26/webapp14/blob/main/pages/SELLORA.html)
+2- SELLORA.css (https://github.com/CodeURJC-FW-2025-26/webapp14/blob/main/resources/SELLORA.css)
+3- README.md (https://github.com/CodeURJC-FW-2025-26/webapp14/blob/main/README.md)
 
 ---
 
