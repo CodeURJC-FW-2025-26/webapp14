@@ -198,32 +198,33 @@ p{
 }
 
 .upload-back {
-  text-align: left;
-  margin: 20px;
+  display: flex;
+  justify-content: flex-start; 
+  width: auto;
 }
 
 .btn-custom2 {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   background-color: rgba(255, 255, 255, 0.2);
   border: 1px solid rgb(207, 205, 205);
   border-radius: 20px;
   padding: 10px 20px;
   font-size: 20px;
   color: black;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  width: auto;              
+  max-width: fit-content;   
+  
 }
 
-.btn-custom2 {
-  color: black; 
-  align-items: center;
-  font-size: 22px;
-  margin-left: -15px;
-  margin-top: -15px;
-}
-
-.btn-custom2 {
-  transition: transform 0.2s ease;
+.btn-custom2:hover {
+  transform: scale(1.05);
+  background-color: rgba(255, 255, 255, 0.3);
 }
 
 .add-product {
