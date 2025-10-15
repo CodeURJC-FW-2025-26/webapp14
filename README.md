@@ -71,16 +71,16 @@ Home page file : SELLORA.html
 
   
 **5 most significant commits:**  
-1. [Commit 1](#Pág Producto y actualizacion css)
-2. [Commit 2](#Botones para home, ajustes visuales y botones no funcionales)  
-3. [Commit 3](#mi parte)  
+1. [Commit 1][#Pág Producto y actualizacion css](https://github.com/CodeURJC-FW-2025-26/webapp14/commit/e73af418f1e26d8e75a77afdbc4a71c548b4e878)
+2. [Commit 2][#Botones para home, ajustes visuales y botones no funcionales](https://github.com/CodeURJC-FW-2025-26/webapp14/commit/8040f17b267d9d6a2f501d6f1de3ca02f4576afb)
+3. [Commit 3][#mi parte](https://github.com/CodeURJC-FW-2025-26/webapp14/commit/c4d3ecc898cc42fee05442be3a8d29056c8481bc)
 4. [Commit 4](#)  
 5. [Commit 5](#)  
 
 **Files with most participation:**  
-1. detail.html
-2. SELLORA.css
-3. SELLORA.html
+1. detail.html (https://github.com/CodeURJC-FW-2025-26/webapp14/blob/main/pages/detail.html)
+2. SELLORA.css (https://github.com/CodeURJC-FW-2025-26/webapp14/blob/main/resources/SELLORA.css)
+3. SELLORA.html (https://github.com/CodeURJC-FW-2025-26/webapp14/blob/main/pages/SELLORA.html)
 ---
 
 #### Nuria Amrani Villuendas – Add New Product Page
