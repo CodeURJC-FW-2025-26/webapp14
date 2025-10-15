@@ -36,9 +36,21 @@ None in use for now.
 ## Project - Part 1
 
 ### Screenshots
-- **Home Page**  
-- **Product Detail Page**  
+- **Home Page**
+
+<img width="1901" height="907" alt="image" src="https://github.com/CodeURJC-FW-2025-26/webapp14/blob/main/resources/images/HOMEPAGE.png" />
+<img width="1901" height="907" alt="image" src="https://github.com/CodeURJC-FW-2025-26/webapp14/blob/main/resources/images/HOMEPAGE%202.png" />
+<img width="1901" height="907" alt="image" src="https://github.com/CodeURJC-FW-2025-26/webapp14/blob/main/resources/images/HOMEPAGE%203.png" />
+<img width="1901" height="907" alt="image" src="https://github.com/CodeURJC-FW-2025-26/webapp14/blob/main/resources/images/HOMEPAGE%204.png" />
+
+
+- **Product Detail Page**
+<img width="1901" height="907" alt="image" src="https://github.com/CodeURJC-FW-2025-26/webapp14/blob/main/resources/images/DETAILPAGE%201.png" />
+<img width="1901" height="907" alt="image" src="https://github.com/CodeURJC-FW-2025-26/webapp14/blob/main/resources/images/DETAILPAGE2.png" />
+<img width="1901" height="907" alt="image" src="https://github.com/CodeURJC-FW-2025-26/webapp14/blob/main/resources/images/DETAILPAGE3.png" />
+
 - **Add new product page**  
+<img width="1901" height="907" alt="image" src="https://github.com/CodeURJC-FW-2025-26/webapp14/blob/main/resources/images/UPLOADPAGE.png" />
 
 ### Members' participation 
 
