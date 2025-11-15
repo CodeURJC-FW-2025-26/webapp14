@@ -1,14 +1,6 @@
 [
-    {
-        "user": "Pepe",
-        "title": "Vendo moto",
-        "text": "Barata, barata",
-        "imageFilename": "post0.jpeg"
-    },
-    {
-        "user": "Juan",
-        "title": "Compro coche",
-        "text": "Pago bien",
-        "imageFilename": "post1.jpeg"
-    }
+///Aquí pondremos el contenido de los archivos demos de la página web, que se tienen que inicializar para que se metan en la
+///base de datos, vamos los 9 productos que tenemos en la página principal.
+///Además las imagenes que subamos con este json diría que tendrían que ir aquí además también de todas las fotos de la página base
+///como el logo, el fondo, etc.
 ]
