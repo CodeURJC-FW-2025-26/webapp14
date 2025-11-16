@@ -13,8 +13,13 @@ router.get('/', async (req, res) => {
 
     let posts = await board.getPosts();
 
-    res.render('index', { posts });
+    res.render('SELLORA', { posts });
 });
+
+router.get('/upload', (req, res) => {
+    res.render('upload');
+});
+
 
 router.post('/post/new', upload.single('image'), async (req, res) => {
 
@@ -31,11 +36,13 @@ router.post('/post/new', upload.single('image'), async (req, res) => {
 
 });
 
+
+
 router.get('/post/:id', async (req, res) => {
 
     let post = await board.getPost(req.params.id);
 
-    res.render('show_post', { post });
+    res.render('detail', { post });
 });
 
 router.get('/post/:id/delete', async (req, res) => {
@@ -56,4 +63,3 @@ router.get('/post/:id/image', async (req, res) => {
     res.download(board.UPLOADS_FOLDER + '/' + post.imageFilename);
 
 });
-
