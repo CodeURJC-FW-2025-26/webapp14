@@ -84,7 +84,7 @@
 
 <main class="container py-4">
       <div class="d-flex justify-content-end">
-          <a href="/upload.html" class="btn btn-custom me-2">+ Upload new product </a> 
+        <button type="button" class="btn btn-custom me-2" onclick="window.location.href='/upload'">+ Upload new product</button>
       </div>
 
       <div class="row g-4 mb-4">
@@ -96,7 +96,7 @@
                 <h4 class="card-title">{{title}}</h4>
                 <p class="card-text">{{text}}</p>
                 <p>{{price}}</p>
-            <button class="btn btn-custom me-2" onclick="window.location.href='/post/{{_id}}'">View more</button> <!--I used js cause when i tried making a link with a button aparience it didnt stay in the same place as the others.-->
+                <button class="btn btn-custom me-2" onclick="window.location.href='/post/{{_id}}'">View more</button>
             </div>
         </div>
     </div>
