@@ -37,6 +37,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Almendra:ital,wght@0,400;0,700;1,400;1,700&family=BBH+Sans+Bogle&family=Bitcount+Prop+Single+Ink:wght@100..900&family=Gravitas+One&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 
+
+
   </head>
 
 
@@ -44,43 +46,7 @@
 <body style="background-color: #9ba4b8;">
 
 
-<header class="header text-center position relative" >
-
-  <!-- background image with blur -->
-  <div style="background: url('/img/HEADER\ BACKGROUND.jpg') center/cover no-repeat;
-              filter: brightness(0.4) blur(2px);
-              position: absolute; inset: 0; z-index: 0;">
-              </div>
-
-  <div style="position: relative; z-index: 1; padding: 80px 20px;">
-    <h1 class="display-3 fw-bold mb-3">Welcome to SellOra</h1>
-    <h2 class="display-5 mb-2">– Your Favorite Retro Shop –</h2>
-    </br>
-    <h3 class="fs-3 mb-4">Vintage Consoles, Games & More</h3>
-  </div>
-</header>
-
-
-<!--Navigation bar with bootstrap-->
-
-<nav class="navbar navbar-expand-lg custom-navbar">
-
-  <div class="container">
-    <a href="SELLORA.html" class="logo"><img src="/img/logo.png" alt="logo"></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        </ul>
-        <span class="navbar-text">- SellOra</span>
-        </div>
-      </div>
-    </nav>
-    </div>
+{{>partials/header}}
 
 <main class="container py-4">
       <div class="d-flex justify-content-end">
@@ -105,12 +71,6 @@
 </main>
   
 
-<footer class="bg-dark text-white text-center py-4">
-  <h6 class="mb-2">&copy; 2025 SellOra. All rights reserved.</h6>
-    <h6 class="mb-0" >Follow us on:</h6> 
-        <a href="https://www.instagram.com/t1lol/" class="text-white"><i class="bi bi-instagram"></i></a>
-        <a href="https://x.com/hideo_kojima_en" class="text-white"><i class="bi bi-twitter-x"></i></a>
-</footer>
-</body>
+{{>partials/footer}}
 
 </html>
