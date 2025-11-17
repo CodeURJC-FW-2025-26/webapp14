@@ -2,18 +2,18 @@ import express from 'express';
 import multer from 'multer';
 import fs from 'node:fs/promises';
 
-import * as board from './board.js';
+import * as store from './store.js';
 
 const router = express.Router();
 export default router;
 
-const upload = multer({ dest: board.UPLOADS_FOLDER })
+const upload = multer({ dest: store.UPLOADS_FOLDER })
 
 router.get('/', async (req, res) => {
 
-    let posts = await board.getPosts();
+    let products = await store.getProducts();
 
-    res.render('SELLORA', { posts });
+    res.render('SELLORA', { products });
 });
 
 router.get('/upload', (req, res) => {
@@ -21,45 +21,44 @@ router.get('/upload', (req, res) => {
 });
 
 
-router.post('/post/new', upload.single('image'), async (req, res) => {
+router.post('/product/new', upload.single('image'), async (req, res) => {
 
-    let post = {
+    let product = {
         user: req.body.user,
         title: req.body.title,
         text: req.body.text,
         imageFilename: req.file?.filename
     };
 
-    await board.addPost(post);
-
-    res.render('saved_post', { _id: post._id.toString() });
+    const result = await store.addProduct(product);
+    res.render('saved_product', { _id: result.insertedId.toString() });
 
 });
 
 
 
-router.get('/post/:id', async (req, res) => {
+router.get('/product/:id', async (req, res) => {
 
-    let post = await board.getPost(req.params.id);
+    let product = await store.getProduct(req.params.id);
 
-    res.render('detail', { post });
+    res.render('detail', { product });
 });
 
-router.get('/post/:id/delete', async (req, res) => {
+router.get('/product/:id/delete', async (req, res) => {
 
-    let post = await board.deletePost(req.params.id);
+    let product = await store.deleteProduct(req.params.id);
 
-    if (post && post.imageFilename) {
-        await fs.rm(board.UPLOADS_FOLDER + '/' + post.imageFilename);
+    if (product && product.imageFilename) {
+        await fs.rm(store.UPLOADS_FOLDER + '/' + product.imageFilename);
     }
 
-    res.render('deleted_post');
+    res.render('deleted_product');
 });
 
-router.get('/post/:id/image', async (req, res) => {
+router.get('/product/:id/image', async (req, res) => {
 
-    let post = await board.getPost(req.params.id);
+    let product = await store.getProduct(req.params.id);
 
-    res.download(board.UPLOADS_FOLDER + '/' + post.imageFilename);
+    res.download(store.UPLOADS_FOLDER + '/' + product.imageFilename);
 
 });

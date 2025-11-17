@@ -9,7 +9,7 @@ import fs from 'fs';
 import path from 'path';
 
 const dataPath = path.resolve('./data/data.json');
-const posts = JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
+const products = JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
 
 const app = express();
 
@@ -21,7 +21,6 @@ app.set('views', './views');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-console.log(posts);
 
 app.get('/', (req, res) => {
   res.render('SELLORA', {
@@ -39,7 +38,7 @@ app.get('/', (req, res) => {
       { label: "About", link: "/about", active: "" },
     ],
 
-    posts,
+    products,
 
 // Footer
     year: 2025,
