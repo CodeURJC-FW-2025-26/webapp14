@@ -52,8 +52,8 @@
           <div class="d-flex justify-content-between align-items-center">
             <div class="product-price mb-0">{{product.price}}</div>
             <div class="review-actions">
-              <button class="btn btn-custom me-2">Edit</button>
-              <button class="btn btn-custom me-2">Delete</button>
+              <a href="/product/{{product._id}}/edit" class="btn btn-custom me-2">Edit</a>
+              <a href="/product/{{product._id}}/delete" class="btn btn-custom me-2">Delete</a>
             </div>
           </div>
         </div>
@@ -61,8 +61,8 @@
 
 <form class="review-form">
   <h3>Leave your review!</h3>
-  <input type="text" class="review-textarea" placeholder="Your name">
-  <input type="text" class="review-textarea" placeholder="Write your review here...">
+  <input type="text" class="review-textarea" placeholder="Your name" required>
+  <input type="text" class="review-textarea" placeholder="Write your review here..." required>
         <select>
             <option>⭐⭐⭐⭐⭐</option>
             <option>⭐⭐⭐⭐☆</option>
