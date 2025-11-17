@@ -32,7 +32,9 @@ export async function getProducts(){
 }
 
 export async function getProduct(id){
-
-    return await products.findOne({ _id: new ObjectId(id) });
+    try {
+        return await products.findOne({ _id: new ObjectId(id) });
+    } catch (error) {
+        return null;
+    }
 }
-

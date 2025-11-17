@@ -3,7 +3,7 @@
  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PlayStation 2-Black (Fat Model)</title>
+    <title>{{title}}</title>
     <link rel="icon" type="image/png" href="/favicon_io/favicon-32x32.png">
 
     <!--Bootstrap links-->
@@ -42,29 +42,34 @@
 
   <body>
     
-<p class="upload-back"><a href="SELLORA.html" class="btn-custom2"><i class="bi bi-arrow-left"></i> Go back</a></p>
+<button class="btn btn-custom me-2" onclick="window.history.back()">Go back</button>
 
   <body style="background-color: #9ba4b8;">
     <main class="container py-4">
+{{#products}}
 <div class="product-card">
-  <img src="/img/foto_PS2.jpeg" class="product-image" alt="Producto8">
+  <img src="{{product.image}}" class="product-image" alt="{{title}}">
+
   <div class="product-details">
     <div>
-      <div class="product-name">PlayStation 2 - BLACK (FAT MODEL)</div>
+      <div class="product-name">{{title}}</div>
       <div class="product-description">
-        PlayStation 2 fat model in black. Controller and cables included. The all-time best-selling console in history, with a wide catalog full of amazing games that marked our early days!
+        {{text}}
       </div>
     </div>
+
     <div class="d-flex justify-content-between align-items-center">
-      <div class="product-price mb-0">80,00€</div>
+      <div class="product-price mb-0">{{price}}</div>
       <div class="review-actions">
-      <button class="btn btn-custom me-2">Edit</button>
-      <button class="btn btn-custom me-2">Delete</button>
+        <button class="btn btn-custom me-2">Edit</button>
+        <button class="btn btn-custom me-2">Delete</button>
       </div>
     </div>
   </div>
 </div>
-<div class="review-form">
+{{/products}}
+
+<from class="review-form">
   <h3>Leave your review!</h3>
   <input type="text" class="review-textarea" placeholder="Your name">
   <input type="text" class="review-textarea" placeholder="Write your review here...">
@@ -76,37 +81,21 @@
             <option>⭐☆☆☆☆</option>
         </select>
   <button  class="btn btn-custom me-2">Upload</button>
-</div>
+</form>
 
+{{#reviews}}
 <div class="review-card">
   <div class="review-header">
-    <div class="review-author">John Doe</div>
-    <div class="review-date">October 13, 2025</div>
-  </div>
-  <div class="review-content">
-    “The PlayStation 2 still feels timeless. The game library is huge, and the design is iconic.”
-  </div>
-  <div class="review-rating">
-    ⭐⭐⭐⭐☆
-  </div>
-  <div class="review-actions">
-      <button class="btn btn-custom me-2">Edit</button>
-      <button class="btn btn-custom me-2">Delete</button>
-  </div>
-</div>
-
-<div class="review-card">
-  <div class="review-header">
-    <div class="review-author">Jane Smith</div>
-    <div class="review-date">October 12, 2025</div>
+    <div class="review-author">{{author}}</div>
+    <div class="review-date">{{date}}</div>
   </div>
 
   <div class="review-content">
-    “Great condition, arrived fast and works perfectly. Would definitely buy again!”
+    “{{text}}”
   </div>
 
   <div class="review-rating">
-    ⭐⭐⭐⭐⭐
+    {{rating}}
   </div>
 
   <div class="review-actions">
@@ -114,8 +103,10 @@
       <button class="btn btn-custom me-2">Delete</button>
   </div>
 </div>
-  </body>
+{{/reviews}}
+
 </main>
+
     <footer class="bg-dark text-white text-center py-4">
   <h6 class="mb-2">&copy; 2025 SellOra. All rights reserved.</h6>
     <h6 class="mb-0" >Follow us on:</h6> 

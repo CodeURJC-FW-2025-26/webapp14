@@ -1,6 +1,7 @@
 import express from 'express';
 import multer from 'multer';
 import fs from 'node:fs/promises';
+import { ObjectId } from 'mongodb';
 
 import * as store from './store.js';
 
@@ -35,13 +36,13 @@ router.post('/product/new', upload.single('image'), async (req, res) => {
 
 });
 
-
-
 router.get('/product/:id', async (req, res) => {
-
-    let product = await store.getProduct(req.params.id);
-
-    res.render('detail', { product });
+    try {
+        let product = await store.getProduct(req.params.id);
+        res.render('detail', { product });
+    } catch (error) {
+        res.status(404).render('error', { message: 'Producto no encontrado' });
+    }
 });
 
 router.get('/product/:id/delete', async (req, res) => {
