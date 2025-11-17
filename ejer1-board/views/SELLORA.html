@@ -69,9 +69,56 @@
     </div>
     {{/products}}
     </div>
-</main>
+
+      <!-- PAGINATION -->
+    <div class="d-flex justify-content-center mt-4">
+        <nav>
+            <ul class="pagination">
+
+                {{#hasPrevPage}}
+                <li class="page-item">
+                    <a class="page-link" href="/SELLORA?page={{prevPage}}">Previous</a>
+                </li>
+                {{/hasPrevPage}}               
+                {{^hasPrevPage}}
+                <li class="page-item disabled">
+                    <span class="page-link">Previous</span>
+                </li>
+                {{/hasPrevPage}}
+
+                {{#pages}}
+                    {{#currentPage}}
+                        <li class="page-item active">
+                            <span class="page-link">{{number}}</span>
+                        </li>
+                      {{/currentPage}}
+                    {{^currentPage}}
+                        <li class="page-item">
+                            <a class="page-link" href="/SELLORA?page={{number}}">{{number}}</a>
+                        </li>
+                    {{/currentPage}}
+                {{/pages}}
+
+                {{#hasNextPage}}
+                <li class="page-item">
+                    <a class="page-link" href="/SELLORA?page={{nextPage}}">Next</a>
+                </li>
+                {{/hasNextPage}}
+                {{^hasNextPage}}
+                <li class="page-item disabled">
+                    <span class="page-link">Next</span>
+                </li>
+                {{/hasNextPage}}
+
+            </ul>
+        </nav>
+    </div>
+
+  </main>
   
 
 {{>partials/footer}}
 
 </html>
+
+

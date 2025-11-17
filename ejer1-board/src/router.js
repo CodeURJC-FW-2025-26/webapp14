@@ -10,12 +10,33 @@ export default router;
 
 const upload = multer({ dest: store.UPLOADS_FOLDER })
 
+
 router.get('/', async (req, res) => {
+    const page = Math.max(1, parseInt(req.query.page) || 1);
+    const limit = 6;
 
-    let products = await store.getProducts();
+    const data = await store.getProductsPaginated(page, limit);
 
-    res.render('SELLORA', { products });
+    const currentPage = data.currentPage || page;
+    const totalPages = data.totalPages || 1;
+
+    const pages = [];
+    for (let i = 1; i <= totalPages; i++) {
+        pages.push({ number: i, isCurrent: i === currentPage });
+    }
+
+    res.render('SELLORA', {
+        products: data.products || [],
+        currentPage,
+        totalPages,
+        pages,
+        hasPrevPage: currentPage > 1,
+        hasNextPage: currentPage < totalPages,
+        prevPage: Math.max(1, currentPage - 1),
+        nextPage: Math.min(totalPages, currentPage + 1)
+    });
 });
+
 
 router.get('/upload', (req, res) => {
     res.render('upload');
@@ -64,3 +85,8 @@ router.get('/product/:id/image', async (req, res) => {
     res.download(store.UPLOADS_FOLDER + '/' + product.imageFilename);
 
 });
+
+
+
+
+

@@ -36,3 +36,21 @@ export async function getProducts(){
 export async function getProduct(id) {
     return await products.findOne({ _id: new ObjectId(id) });
 }
+
+export async function getProductsPaginated(page = 1, perPage = 6) {
+    page = parseInt(page) || 1;
+    perPage = parseInt(perPage) || 6;
+
+    const skip = (page - 1) * perPage;
+
+    const total = await products.countDocuments();
+    const items = await products.find().skip(skip).limit(perPage).toArray();
+
+    const totalPages = Math.max(1, Math.ceil(total / perPage));
+
+    return { products: productsPage,
+         total, 
+         page, 
+         perPage, 
+         totalPages };
+}
