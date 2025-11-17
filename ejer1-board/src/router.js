@@ -28,6 +28,7 @@ router.post('/product/new', upload.single('image'), async (req, res) => {
         user: req.body.user,
         title: req.body.title,
         text: req.body.text,
+        price: req.body.price,
         imageFilename: req.file?.filename
     };
 
@@ -41,7 +42,7 @@ router.get('/product/:id', async (req, res) => {
         let product = await store.getProduct(req.params.id);
         res.render('detail', { product });
     } catch (error) {
-        res.status(404).render('error', { message: 'Producto no encontrado' });
+        res.status(404).render('error', { message: 'Product not found' });
     }
 });
 

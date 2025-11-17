@@ -1,62 +1,53 @@
 [
   {
-    "_id": "507f1f77bcf86cd799439011",
     "title": "Nintendo 3DS",
     "text": "Nintendo 3DS Console - Red Metallic Edition, Handheld Console with 3D Display, Touchscreen, Wi-Fi, and SD Card Support",
     "price": "249.99€",
     "image": "/img/NINTENDO SELLORA PIC.jpeg"
   },
   {
-    "_id": "507f1f77bcf86cd799439012",
     "title": "EA SPORTS F1 24",
     "text": "F1 24 - Official Formula 1 Racing Game Featuring 2024 Season Cars, Teams & Tracks, Realistic Graphics, Career and Online Modes, Compatible with PlayStation 4",
     "price": "29.99€",
     "image": "/img/F1 SELLORA PIC.jpg"
   },
   {
-    "_id": "507f1f77bcf86cd799439013",
     "title": "T1 FAKER SHIRT",
     "text": "Shirt that belonged to the best League of Legends' player in the world, T1 Faker. Size M.",
     "price": "599,99€",
     "image": "/img/FAKER SHIRT.jpg"
   },
   {
-    "_id": "507f1f77bcf86cd799439014",
     "title": "LEAGUE OF LEGENDS FIORA FIGURE",
     "text": "Figure of the best League of Legends' champion, Fiora. 50cm tall, hand-painted.",
     "price": "1559,00€",
     "image": "/img/FIORA FIGURA.jpg"
   },
   {
-    "_id": "507f1f77bcf86cd799439015",
     "title": "Game Boy Retro Collection",
     "text": "Classic Game Boy 24-Game Retro Pack - Retro Handheld Collection, Authentic Titles for Collectors and Gamers",
     "price": "268,99€",
     "image": "/img/GAMEBOY GAMES SELLORA PIC.jpg"
   },
   {
-    "_id": "507f1f77bcf86cd799439016",
     "title": "LEAGUE OF LEGENDS SION PORTRAIT",
     "text": "League of Legends champion Sion portrait. 24\" x 36\".",
     "price": "65,00€",
     "image": "/img/SION.webp"
   },
   {
-    "_id": "507f1f77bcf86cd799439017",
     "title": "PlayStation 2 - BLACK (FAT MODEL)",
     "text": "PlayStation 2 fat model in black. Controller and cables included. The all-time best-selling console in history, with a wide catalog full of amazing games that marked our early days!",
     "price": "80,00€",
     "image": "/img/foto_PS2.jpeg"
   },
   {
-    "_id": "507f1f77bcf86cd799439018",
     "title": "Jojo's Bizarre Adventure All Star Battle",
     "text": "Jojo's Bizarre Adventure All Star Battle, PS3. A bizarre fighting game based on Hirohiko Araki's manga, a must-have on every Jojofan's shelf!",
     "price": "20,00€",
     "image": "/img/JoJos-Bizarre-Adventure-All-Star-Battle-JPN.webp"
   },
   {
-    "_id": "507f1f77bcf86cd799439019",
     "title": "Metal Gear Solid",
     "text": "The first game of the saga Metal Gear Solid, PS1 version. English PAL Version. Accompany the legendary Solid Snake on his mission to Shadow Mosses.",
     "price": "120,00€",

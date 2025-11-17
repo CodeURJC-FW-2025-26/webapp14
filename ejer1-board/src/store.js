@@ -6,6 +6,8 @@ export default router;
 
 const client = new MongoClient('mongodb://localhost:27017');
 
+await client.connect();
+
 const db = client.db('store');
 const products = db.collection('products');
 
@@ -31,10 +33,6 @@ export async function getProducts(){
     return await products.find().toArray();
 }
 
-export async function getProduct(id){
-    try {
-        return await products.findOne({ _id: new ObjectId(id) });
-    } catch (error) {
-        return null;
-    }
+export async function getProduct(id) {
+    return await products.findOne({ _id: new ObjectId(id) });
 }
