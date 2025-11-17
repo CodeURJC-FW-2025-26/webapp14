@@ -37,20 +37,30 @@ export async function getProduct(id) {
     return await products.findOne({ _id: new ObjectId(id) });
 }
 
-export async function getProductsPaginated(page = 1, perPage = 6) {
+
+
+export async function getProductsPaginated(page = 1, perPage = 6, searchTerm = '') {
     page = parseInt(page) || 1;
     perPage = parseInt(perPage) || 6;
 
     const skip = (page - 1) * perPage;
 
-    const total = await products.countDocuments();
-    const items = await products.find().skip(skip).limit(perPage).toArray();
+    // Construir query opcional para búsqueda
+    const query = {};
+    if (searchTerm) {
+        query.title = { $regex: searchTerm, $options: 'i' }; // búsqueda insensible a mayúsculas
+    }
+
+    const total = await products.countDocuments(query);
+    const items = await products.find(query).skip(skip).limit(perPage).toArray();
 
     const totalPages = Math.max(1, Math.ceil(total / perPage));
 
-    return { products: productsPage,
-         total, 
-         page, 
-         perPage, 
-         totalPages };
+    return {
+        products: items,  
+        total,
+        page,
+        perPage,
+        totalPages
+    };
 }

@@ -11,11 +11,19 @@ export default router;
 const upload = multer({ dest: store.UPLOADS_FOLDER })
 
 
+
+
 router.get('/', async (req, res) => {
     const page = Math.max(1, parseInt(req.query.page) || 1);
     const limit = 6;
+    const searchTerm = req.query.q || '';
 
-    const data = await store.getProductsPaginated(page, limit);
+
+    const data = await store.getProductsPaginated(page,limit,searchTerm);
+
+    if (searchTerm && data.total === 1) {
+        return res.redirect(`/product/${data.products[0]._id}`);
+    }
 
     const currentPage = data.currentPage || page;
     const totalPages = data.totalPages || 1;
@@ -27,13 +35,15 @@ router.get('/', async (req, res) => {
 
     res.render('SELLORA', {
         products: data.products || [],
+        total,
         currentPage,
         totalPages,
         pages,
         hasPrevPage: currentPage > 1,
         hasNextPage: currentPage < totalPages,
         prevPage: Math.max(1, currentPage - 1),
-        nextPage: Math.min(totalPages, currentPage + 1)
+        nextPage: Math.min(totalPages, currentPage + 1),
+        searchTerm
     });
 });
 

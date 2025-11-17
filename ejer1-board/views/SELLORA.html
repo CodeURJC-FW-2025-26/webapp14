@@ -45,11 +45,16 @@
 <body>
 <body style="background-color: #9ba4b8;">
 
+  
 
 {{> partials/header}}
 
 <main class="container py-4">
       
+ <form class="mb-3" method="get" action="/">
+    <input type="text" name="q" class="form-control" placeholder="Search..." value="{{searchTerm}}">
+    <button type="submit" class="btn btn-custom">Search</button>
+</form>
 
       <div class="row g-4 mb-4">
         <div class="d-flex justify-content-end">
@@ -77,7 +82,7 @@
 
                 {{#hasPrevPage}}
                 <li class="page-item">
-                    <a class="page-link" href="/SELLORA?page={{prevPage}}">Previous</a>
+                  <a class="page-link" href="/?page={{prevPage}}&q={{searchTerm}}">Previous</a>
                 </li>
                 {{/hasPrevPage}}               
                 {{^hasPrevPage}}
@@ -94,14 +99,14 @@
                       {{/currentPage}}
                     {{^currentPage}}
                         <li class="page-item">
-                            <a class="page-link" href="/SELLORA?page={{number}}">{{number}}</a>
+                           <a class="page-link" href="/?page={{number}}&q={{searchTerm}}">{{number}}</a>
                         </li>
                     {{/currentPage}}
                 {{/pages}}
 
                 {{#hasNextPage}}
                 <li class="page-item">
-                    <a class="page-link" href="/SELLORA?page={{nextPage}}">Next</a>
+                    <a class="page-link" href="/?page={{nextPage}}&q={{searchTerm}}">Next</a>
                 </li>
                 {{/hasNextPage}}
                 {{^hasNextPage}}
