@@ -49,11 +49,12 @@
 {{> partials/header}}
 
 <main class="container py-4">
-      <div class="d-flex justify-content-end">
-        <button type="button" class="btn btn-custom me-2" onclick="window.location.href='/upload'">+ Upload new product</button>
-      </div>
+      
 
       <div class="row g-4 mb-4">
+        <div class="d-flex justify-content-end">
+        <button type="button" class="btn btn-custom me-2" onclick="window.location.href='/upload'">+ Upload new product</button>
+      </div>
         {{#products}}
      <div class="col-12 col-md-6 col-lg-4">
         <div class='card h-100 d-flex flex-column'> 
