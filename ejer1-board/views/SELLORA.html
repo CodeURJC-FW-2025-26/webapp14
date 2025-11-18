@@ -42,24 +42,31 @@
   </head>
 
 
-<body>
 <body style="background-color: #9ba4b8;">
 
-  
 
 {{> partials/header}}
 
 <main class="container py-4">
       
- <form class="mb-3" method="get" action="/">
-    <input type="text" name="q" class="form-control" placeholder="Search..." value="{{searchTerm}}">
-    <button type="submit" class="btn btn-custom">Search</button>
-</form>
+    <form method="get" action="/" class="mb-3 d-flex" >
+        <div class="input-group">
+        <input type="text" name="q" class="form-control" placeholder="Search..." value="{{searchTerm}}">
+        <button type="submit" class="btn btn-custom">Search</button>
+        </div>
+      </form>
+
+      <div class="mb-3 d-flex flex-wrap gap-2">
+       {{#categories}}
+          <a href="/?category={{name}}&q={{searchTerm}}&page=1" class="btn btn-outline-secondary {{#isActive}}active{{/isActive}}">{{name}}</a>
+        {{/categories}}
+      </div>
 
       <div class="row g-4 mb-4">
         <div class="d-flex justify-content-end">
         <button type="button" class="btn btn-custom me-2" onclick="window.location.href='/upload'">+ Upload new product</button>
       </div>
+
         {{#products}}
      <div class="col-12 col-md-6 col-lg-4">
         <div class='card h-100 d-flex flex-column'> 
@@ -75,14 +82,13 @@
     {{/products}}
     </div>
 
-      <!-- PAGINATION -->
+ <!-- PAGINATION -->
     <div class="d-flex justify-content-center mt-4">
         <nav>
-            <ul class="pagination">
-
+            <ul class="pagination justify-content-center">
                 {{#hasPrevPage}}
                 <li class="page-item">
-                  <a class="page-link" href="/?page={{prevPage}}&q={{searchTerm}}">Previous</a>
+                    <a class="page-link" href="/?page={{prevPage}}&q={{searchTerm}}&category={{category}}">Previous</a>
                 </li>
                 {{/hasPrevPage}}               
                 {{^hasPrevPage}}
@@ -92,21 +98,21 @@
                 {{/hasPrevPage}}
 
                 {{#pages}}
-                    {{#currentPage}}
+                    {{#active}}
                         <li class="page-item active">
                             <span class="page-link">{{number}}</span>
                         </li>
-                      {{/currentPage}}
-                    {{^currentPage}}
+                      {{/active}}
+                    {{^active}}
                         <li class="page-item">
-                           <a class="page-link" href="/?page={{number}}&q={{searchTerm}}">{{number}}</a>
+                          <a class="page-link" href="/?page={{number}}{{#category}}&category={{category}}{{/category}}{{#searchTerm}}&q={{searchTerm}}{{/searchTerm}}">{{number}}</a>
                         </li>
-                    {{/currentPage}}
+                    {{/active}}
                 {{/pages}}
 
                 {{#hasNextPage}}
                 <li class="page-item">
-                    <a class="page-link" href="/?page={{nextPage}}&q={{searchTerm}}">Next</a>
+                  <a class="page-link" href="/?page={{nextPage}}&q={{searchTerm}}&category={{category}}">Next</a>
                 </li>
                 {{/hasNextPage}}
                 {{^hasNextPage}}
@@ -114,8 +120,7 @@
                     <span class="page-link">Next</span>
                 </li>
                 {{/hasNextPage}}
-
-            </ul>
+            </ul>           
         </nav>
     </div>
 
@@ -123,7 +128,7 @@
   
 
 {{>partials/footer}}
-
+</body>
 </html>
 
 

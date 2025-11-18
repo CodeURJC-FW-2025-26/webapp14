@@ -38,29 +38,31 @@ export async function getProduct(id) {
 }
 
 
-
-export async function getProductsPaginated(page = 1, perPage = 6, searchTerm = '') {
+export async function getProductsPaginated(page = 1, limit = 6, searchTerm = '',category = '') {
     page = parseInt(page) || 1;
-    perPage = parseInt(perPage) || 6;
+    const skip = (page - 1) * limit;
 
-    const skip = (page - 1) * perPage;
-
-    // Construir query opcional para búsqueda
+    const currentPage = page;
     const query = {};
     if (searchTerm) {
         query.title = { $regex: searchTerm, $options: 'i' }; // búsqueda insensible a mayúsculas
     }
 
+    if (category && category !== 'All') {
+        query.category = category;
+    }
+
+     const productsList = await products.find(query)
+        .skip(skip)
+        .limit(limit)
+        .toArray();
+        
     const total = await products.countDocuments(query);
-    const items = await products.find(query).skip(skip).limit(perPage).toArray();
-
-    const totalPages = Math.max(1, Math.ceil(total / perPage));
-
+    const totalPages = Math.max(1, Math.ceil(total / limit));
     return {
-        products: items,  
-        total,
-        page,
-        perPage,
+        products: productsList,  
+        currentPage: page,
         totalPages
     };
 }
+

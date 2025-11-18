@@ -2,52 +2,69 @@ import express from 'express';
 import multer from 'multer';
 import fs from 'node:fs/promises';
 import { ObjectId } from 'mongodb';
-
 import * as store from './store.js';
+
+import { Console } from 'node:console';
 
 const router = express.Router();
 export default router;
 
 const upload = multer({ dest: store.UPLOADS_FOLDER })
-router.get('/upload', (req, res) => {
-    res.render('upload');
-});
-
-
 
 
 
 router.get('/', async (req, res) => {
     const page = Math.max(1, parseInt(req.query.page) || 1);
     const limit = 6;
+
     const searchTerm = req.query.q || '';
+    const category = req.query.category || '';
 
 
-    const data = await store.getProductsPaginated(page,limit,searchTerm);
+    const data = await store.getProductsPaginated(page,limit,searchTerm,category);
 
-    if (searchTerm && data.total === 1) {
-        return res.redirect(`/product/${data.products[0]._id}`);
-    }
+    const currentPage = data.currentPage;
+    const totalPages = data.totalPages;
 
-    const currentPage = data.currentPage || page;
-    const totalPages = data.totalPages || 1;
+    const allCategories = ['All', 'Consoles', 'Videogames', 'Esports', 'Comics', 'Merch'];
+
+    const categories = allCategories.map(cat => ({ 
+        name: cat, 
+        isActive: Boolean(category === cat) || (category === '' && cat === 'All')
+    }));
+   
 
     const pages = [];
     for (let i = 1; i <= totalPages; i++) {
-        pages.push({ number: i, isCurrent: i === currentPage });
+        pages.push({ number: i, active: i === currentPage });
     }
+
+
 
     res.render('SELLORA', {
         products: data.products || [],
-        total,
-        currentPage,
-        totalPages,
+        currentPage: data.currentPage,
+        totalPages: data.totalPages,
         pages,
         hasPrevPage: currentPage > 1,
         hasNextPage: currentPage < totalPages,
         prevPage: Math.max(1, currentPage - 1),
         nextPage: Math.min(totalPages, currentPage + 1),
-        searchTerm
+        searchTerm,
+        category,
+        categories ,
+
+    title: "Welcome to SellOra",
+    subtitle: "Your Favorite Retro Shop",
+    tagline: "Vintage Consoles, Games & More",
+    homeLink: "/",
+    logoSrc: "/img/logo.png",
+    navbarText: "- SellOra",
+    navItems: [
+        { label: "Home", link: "/", active: "active" },
+        { label: "Shop", link: "/shop", active: "" },
+        { label: "About", link: "/about", active: "" }
+    ]
     });
 });
 
@@ -64,6 +81,7 @@ router.post('/product/new', upload.single('image'), async (req, res) => {
         title: req.body.title,
         text: req.body.text,
         price: req.body.price,
+        category: req.body.category,
         imageFilename: req.file?.filename
     };
 
