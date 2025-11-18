@@ -61,41 +61,38 @@
         </div>
       </div>
 
-<form class="review-form">
+<form class="review-form" action="/product/{{product._id}}/reviews" method="POST">
   <h3>Leave your review!</h3>
-  <input type="text" class="review-textarea" placeholder="Your name" required>
-  <input type="text" class="review-textarea" placeholder="Write your review here..." required>
-        <select>
-            <option>⭐⭐⭐⭐⭐</option>
-            <option>⭐⭐⭐⭐☆</option>
-            <option>⭐⭐⭐☆☆</option>
-            <option>⭐⭐☆☆☆</option>
-            <option>⭐☆☆☆☆</option>
-        </select>
-  <button  class="btn btn-custom me-2">Upload</button>
+  <input type="text" name="author" class="review-textarea" placeholder="Your name" required>
+  <input type="text" name="text" class="review-textarea" placeholder="Write your review here..." required>
+  <select name="rating" required>
+      <option >⭐⭐⭐⭐⭐</option>
+      <option >⭐⭐⭐⭐☆</option>
+      <option >⭐⭐⭐☆☆</option>
+      <option >⭐⭐☆☆☆</option>
+      <option >⭐☆☆☆☆</option>
+  </select>
+
+  <button type="submit" class="btn btn-custom me-2">Upload</button>
 </form>
 
-{{#reviews}}
+{{#product.reviews}}
 <div class="review-card">
   <div class="review-header">
     <div class="review-author">{{author}}</div>
     <div class="review-date">{{date}}</div>
   </div>
 
-  <div class="review-content">
-    “{{text}}”
-  </div>
+  <div class="review-content">“{{text}}”</div>
 
-  <div class="review-rating">
-    {{rating}}
-  </div>
+  <div class="review-rating">{{rating}}</div>
 
   <div class="review-actions">
-      <button class="btn btn-custom me-2">Edit</button>
-      <button class="btn btn-custom me-2">Delete</button>
+    <a href="/product/{{product._id}}/reviews/{{_id}}/edit" class="btn btn-custom me-2">Edit</a>
+    <a href="/product/{{product._id}}/reviews/{{_id}}/delete" class="btn btn-custom me-2">Delete</a>
   </div>
 </div>
-{{/reviews}}
+{{/product.reviews}}
 
 </main>
 

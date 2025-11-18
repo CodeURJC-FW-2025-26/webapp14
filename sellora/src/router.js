@@ -175,3 +175,81 @@ router.post('/product/:id/edit', upload.single('image'), async (req, res) => {
     res.status(500).send('Error updating product.');
   }
 });
+
+router.post('/product/:id/reviews', async (req, res) => {
+    const productId = req.params.id;
+
+    const review = {
+        _id: new ObjectId(),
+        author: req.body.author,
+        text: req.body.text,
+        rating: req.body.rating,
+    };
+
+    await store.addReview(productId, review);
+
+    res.render("review_confirm", { 
+        message: "Your review has been submitted successfully!",
+        productId 
+    });
+});
+
+router.post('/product/:id/reviews/:reviewId/edit', async (req, res) => {
+    const { id, reviewId } = req.params;
+
+    const updatedReview = {
+        author: req.body.author,
+        text: req.body.text,
+        rating: req.body.rating
+    };
+
+    await store.updateReview(id, reviewId, updatedReview);
+
+    res.render("review_confirm", { 
+        message: "Your review has been updated!",
+        productId: id 
+    });
+});
+
+router.get('/product/:id/reviews/:reviewId/delete', async (req, res) => {
+    const { id, reviewId } = req.params;
+
+    await store.deleteReview(id, reviewId);
+
+    res.render("review_confirm", { 
+        message: "The review has been deleted.",
+        productId: id 
+    });
+});
+
+router.get('/product/:id/reviews/:reviewId/edit', async (req, res) => {
+    const { id, reviewId } = req.params;
+
+    const review = await store.getReview(id, reviewId);
+
+    if (!review) {
+        return res.status(404).render('review_confirm', {
+            message: 'Review not found',
+            productId: id
+        });
+    }
+
+    res.render('edit_review', { review, productId: id });
+});
+
+router.post('/product/:id/reviews/:reviewId/edit', async (req, res) => {
+    const { id, reviewId } = req.params;
+
+    const updatedReview = {
+        author: req.body.author,
+        text: req.body.text,
+        rating: req.body.rating
+    };
+
+    await store.updateReview(id, reviewId, updatedReview);
+
+    res.render("review_confirm", {
+        message: "Your review has been updated!",
+        productId: id
+    });
+});

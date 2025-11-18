@@ -72,3 +72,41 @@ export async function updateProduct(id, update) {
         { $set: update }
     );
 }
+
+export async function addReview(productId, review) {
+    return await products.updateOne(
+        { _id: new ObjectId(productId) },
+        { $push: { reviews: review } }
+    );
+}
+
+export async function deleteReview(productId, reviewId) {
+    return await products.updateOne(
+        { _id: new ObjectId(productId) },
+        { $pull: { reviews: { _id: new ObjectId(reviewId) } } }
+    );
+}
+
+export async function updateReview(productId, reviewId, updatedReview) {
+    return await products.updateOne(
+        { 
+            _id: new ObjectId(productId),
+            "reviews._id": new ObjectId(reviewId)
+        },
+        { 
+            $set: {
+                "reviews.$.author": updatedReview.author,
+                "reviews.$.text": updatedReview.text,
+                "reviews.$.rating": updatedReview.rating
+            }
+        }
+    );
+}
+
+export async function getReview(productId, reviewId) {
+    const product = await products.findOne(
+        { _id: new ObjectId(productId) },
+        { projection: { reviews: 1 } }
+    );
+    return product?.reviews?.find(r => r._id.toString() === reviewId) || null;
+}
