@@ -181,7 +181,7 @@ router.post('/product/:id/edit', upload.single('image'), async (req, res) => {
     }
 
     await store.updateProduct(id, updatedFields);
-    res.redirect(`/product/${id}`);
+    res.render(`updated_product`);
 
   } catch (err) {
     console.error('Error updating product:', err);

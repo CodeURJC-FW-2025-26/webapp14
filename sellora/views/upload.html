@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>Upload Product</title>
+        <link rel="icon" type="image/png" href="/img/favicon-32x32.png">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -32,12 +33,12 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Almendra:ital,wght@0,400;0,700;1,400;1,700&family=BBH+Sans+Bogle&family=Bitcount+Prop+Single+Ink:wght@100..900&family=Gravitas+One&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
         </head>
-    <body>
-        <body style="background-color: #9ba4b8;">
-            <button class="btn btn-custom me-2" onclick="window.history.back()">Go back</button>
-        </body>
+        {{> partials/header}}
 
-        <h4 class="add-product">Add your product</h4>
+    <body style="background-color: #9ba4b8;">
+    <div class="container py-4">
+        <button class="btn btn-custom mb-3" onclick="window.history.back()">Back</button>
+        <div class="card p-4">
 
         <div class="ap-cont">
         <!-- fotos -->
@@ -67,7 +68,6 @@
         </select>
         </label>
 
-
         <label>Price
         <input type="number" name="price" step="0.01" placeholder="Enter product price in €" required>
         </label>
@@ -81,6 +81,11 @@
         <button type="submit" class="btn-custom">Save</button>
         </div>
     </form>
+    </div>
+    </div>
+    </div>
     </body>
-   
+<div class="container" style="margin-top: 20px;">
+   {{>partials/footer}}
+</div>  
 </html>

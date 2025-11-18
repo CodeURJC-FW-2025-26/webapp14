@@ -9,6 +9,7 @@
   "dependencies": {
     "ejs": "^3.1.10",
     "express": "^5.1.0",
+    "express-mustache": "^1.0.4",
     "mongodb": "^6.20.0",
     "multer": "2.0.2",
     "mustache": "^4.2.0",
