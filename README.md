@@ -13,7 +13,6 @@
 
 ### Execution Instructions
 
-This section should explain how to download, build, and run the application. You should include:
 
 ## Prerequisites
 
@@ -22,28 +21,23 @@ This section should explain how to download, build, and run the application. You
 - Required MongoDB version
 
 
-Steps to run the project (preferably with command line instructions), for example:
-
-
 
 
 ## Install dependencies
-
+- 
 npm install
 
 
-Start MongoDB (if not running automatically)
+- Start MongoDB (if not running automatically)
 
 
-
-
-Run the application
+- Run the application
 
 npm run watch
 
 
 
-File Description
+### File Description
 
 
 app.js: Main entry point of the server.
