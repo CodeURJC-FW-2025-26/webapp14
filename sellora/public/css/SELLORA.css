@@ -1,6 +1,6 @@
 .header {
   position: relative; 
-  background-color: rgb(74, 74, 97); 
+  background-color: #9ba4b8;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -14,7 +14,7 @@
   align-items: center;     
   background: rgba(255, 255, 255, 0.05);
   margin-bottom: 40px; 
-  height: 100vh;
+  height: 80vh;
 
 }
 
