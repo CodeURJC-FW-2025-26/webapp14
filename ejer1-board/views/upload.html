@@ -57,8 +57,16 @@
         </label>
 
         <label>Category
-        <input type="text" name="category" placeholder="Enter category">
+        <select name="category" required>
+        <option value="" disabled selected>Select a category</option>
+        <option value="Consoles">Consoles</option>
+        <option value="Videogames">Videogames</option>
+        <option value="Esports">Esports</option>
+        <option value="Comics">Comics</option>
+        <option value="Merch">Merch</option>
+        </select>
         </label>
+
 
         <label>Price
         <input type="number" name="price" step="0.01" placeholder="Enter product price in €" required>
