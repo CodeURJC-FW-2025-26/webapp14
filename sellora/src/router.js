@@ -4,56 +4,47 @@ import fs from 'node:fs/promises';
 import { ObjectId } from 'mongodb';
 import * as store from './store.js';
 
-import { Console } from 'node:console';
-
 const router = express.Router();
 export default router;
 
-const upload = multer({ dest: store.UPLOADS_FOLDER })
-
-
+const upload = multer({ dest: store.UPLOADS_FOLDER });
 
 router.get('/', async (req, res) => {
-    const page = Math.max(1, parseInt(req.query.page) || 1);
-    const limit = 6;
+  const page = Math.max(1, parseInt(req.query.page) || 1);
+  const limit = 6;
 
-    const searchTerm = req.query.q || '';
-    const category = req.query.category || '';
+  const searchTerm = req.query.q || '';
+  const category = req.query.category || '';
 
+  const data = await store.getProductsPaginated(page, limit, searchTerm, category);
 
-    const data = await store.getProductsPaginated(page,limit,searchTerm,category);
+  const currentPage = data.currentPage;
+  const totalPages = data.totalPages;
 
-    const currentPage = data.currentPage;
-    const totalPages = data.totalPages;
+  const allCategories = ['All', 'Consoles', 'Videogames', 'Esports', 'Comics', 'Merch'];
 
-    const allCategories = ['All', 'Consoles', 'Videogames', 'Esports', 'Comics', 'Merch'];
+  const categories = allCategories.map(cat => ({
+    name: cat,
+    isActive: Boolean(category === cat) || (category === '' && cat === 'All')
+  }));
 
-    const categories = allCategories.map(cat => ({ 
-        name: cat, 
-        isActive: Boolean(category === cat) || (category === '' && cat === 'All')
-    }));
-   
+  const pages = [];
+  for (let i = 1; i <= totalPages; i++) {
+    pages.push({ number: i, active: i === currentPage });
+  }
 
-    const pages = [];
-    for (let i = 1; i <= totalPages; i++) {
-        pages.push({ number: i, active: i === currentPage });
-    }
-
-
-
-    res.render('SELLORA', {
-        products: data.products || [],
-        currentPage: data.currentPage,
-        totalPages: data.totalPages,
-        pages,
-        hasPrevPage: currentPage > 1,
-        hasNextPage: currentPage < totalPages,
-        prevPage: Math.max(1, currentPage - 1),
-        nextPage: Math.min(totalPages, currentPage + 1),
-        searchTerm,
-        category,
-        categories ,
-
+  res.render('SELLORA', {
+    products: data.products || [],
+    currentPage,
+    totalPages,
+    pages,
+    hasPrevPage: currentPage > 1,
+    hasNextPage: currentPage < totalPages,
+    prevPage: Math.max(1, currentPage - 1),
+    nextPage: Math.min(totalPages, currentPage + 1),
+    searchTerm,
+    category,
+    categories,
     title: "Welcome to SellOra",
     subtitle: "Your Favorite Retro Shop",
     tagline: "Vintage Consoles, Games & More",
@@ -61,37 +52,61 @@ router.get('/', async (req, res) => {
     logoSrc: "/img/logo.png",
     navbarText: "- SellOra",
     navItems: [
-        { label: "Home", link: "/", active: "active" },
-       
+      { label: "Home", link: "/", active: "active" }
     ]
-    });
+  });
 });
-
 
 router.get('/upload', (req, res) => {
-    res.render('upload');
+  res.render('upload', {
+    errors: [],
+    previous: {}
+  });
 });
 
+router.post('/upload', upload.single('file'), async (req, res) => {
+  const title = (req.body.title || '').trim();
+  const text = (req.body.text || '').trim();
+  const priceRaw = (req.body.price || '').trim();
+  const category = (req.body.category || '').trim();
 
-router.post('/product/new', upload.single('image'), async (req, res) => {
+  const errors = [];
 
-    let product = {
-        user: req.body.user,
-        title: req.body.title,
-        text: req.body.text,
-        price: req.body.price,
-        category: req.body.category,
-        imageFilename: req.file?.filename
-    };
+  if (!title) errors.push('Product name is required.');
+  if (!text) errors.push('Description is required.');
+  if (!priceRaw) errors.push('Price is required.');
 
-    const result = await store.addProduct(product);
-    res.render('saved_product', { _id: result.insertedId.toString() });
+  const priceNumber = Number(priceRaw);
+  if (priceRaw && (Number.isNaN(priceNumber) || priceNumber <= 0)) {
+    errors.push('Price must be a number greater than 0.');
+  }
 
+  if (!category) errors.push('Category is required.');
+  if (!req.file) errors.push('Image is required.');
+
+  if (errors.length > 0) {
+    return res.status(400).render('upload', {
+      errors,
+      previous: { title, text, price: priceRaw, category }
+    });
+  }
+
+  const product = {
+    title,
+    text,
+    price: priceNumber + '€',
+    category,
+    imageFilename: req.file.filename,
+    image: '/uploads/' + req.file.filename
+  };
+
+  const result = await store.addProduct(product);
+  const savedProduct = await store.getProduct(result.insertedId.toString());
+  res.render('detail', { product: savedProduct });
 });
 
 router.get('/product/:id', async (req, res) => {
   const id = req.params.id;
-
   const product = await store.getProduct(id);
 
   if (!product) {
@@ -101,43 +116,19 @@ router.get('/product/:id', async (req, res) => {
   res.render('detail', { product });
 });
 
-
 router.get('/product/:id/delete', async (req, res) => {
+  let product = await store.deleteProduct(req.params.id);
 
-    let product = await store.deleteProduct(req.params.id);
+  if (product && product.imageFilename) {
+    await fs.rm(store.UPLOADS_FOLDER + '/' + product.imageFilename);
+  }
 
-    if (product && product.imageFilename) {
-        await fs.rm(store.UPLOADS_FOLDER + '/' + product.imageFilename);
-    }
-
-    res.render('deleted_product');
+  res.render('deleted_product');
 });
-
-  router.post('/upload', upload.single('file'), async (req, res) => {
-  const title = req.body.title;
-  const text = req.body.text;
-  const priceNumber = req.body.price;
-  const category = req.body.category;
-
-  const product = {
-    title: title,
-    text: text,
-    price: priceNumber + '€',
-    category: category,
-    imageFilename: req.file.filename,           
-    image: '/uploads/' + req.file.filename      
-  };
-  const result = await store.addProduct(product);
-  res.redirect(`/product/${result.insertedId.toString()}`);
-});
-
 
 router.get('/product/:id/image', async (req, res) => {
-
-    let product = await store.getProduct(req.params.id);
-
-    res.download(store.UPLOADS_FOLDER + '/' + product.imageFilename);
-
+  let product = await store.getProduct(req.params.id);
+  res.download(store.UPLOADS_FOLDER + '/' + product.imageFilename);
 });
 
 router.get('/product/:id/edit', async (req, res) => {
@@ -153,13 +144,13 @@ router.get('/product/:id/edit', async (req, res) => {
 
 router.post('/product/:id/edit', upload.single('image'), async (req, res) => {
   const id = req.params.id;
-
   const existing = await store.getProduct(id);
+
   if (!existing) {
     return res.status(404).render('deleted_product');
   }
 
-    const updatedFields = {
+  const updatedFields = {
     title: req.body.title,
     text: req.body.text,
     price: req.body.price,
@@ -173,18 +164,14 @@ router.post('/product/:id/edit', upload.single('image'), async (req, res) => {
       if (existing.imageFilename) {
         try {
           await fs.rm(store.UPLOADS_FOLDER + '/' + existing.imageFilename);
-        } catch (err) {
-          console.warn('Couldnt save the last uploaded image.', err.message);
-        }
+        } catch (_) {}
       }
-    } else {
     }
 
     await store.updateProduct(id, updatedFields);
-    res.render(`updated_product`);
+    res.render('updated_product');
 
   } catch (err) {
-    console.error('Error updating product:', err);
     res.status(500).send('Error updating product.');
   }
 });
