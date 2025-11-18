@@ -11,6 +11,8 @@ import path from 'path';
 const app = express();
 
 app.use(express.static('./public'));
+app.use('/uploads', express.static('./uploads'));
+
 
 app.engine('html', mustacheExpress(), ".html");
 app.set('view engine', 'html');

@@ -9,6 +9,10 @@ const router = express.Router();
 export default router;
 
 const upload = multer({ dest: store.UPLOADS_FOLDER })
+router.get('/upload', (req, res) => {
+    res.render('upload');
+});
+
 
 
 
@@ -69,13 +73,17 @@ router.post('/product/new', upload.single('image'), async (req, res) => {
 });
 
 router.get('/product/:id', async (req, res) => {
-    try {
-        let product = await store.getProduct(req.params.id);
-        res.render('detail', { product });
-    } catch (error) {
-        res.status(404).render('error', { message: 'Product not found' });
-    }
+  const id = req.params.id;
+
+  const product = await store.getProduct(id);
+
+  if (!product) {
+    return res.status(404).render('deleted_product');
+  }
+
+  res.render('detail', { product });
 });
+
 
 router.get('/product/:id/delete', async (req, res) => {
 
@@ -86,6 +94,26 @@ router.get('/product/:id/delete', async (req, res) => {
     }
 
     res.render('deleted_product');
+});
+
+router.post('/upload', upload.single('file'), async (req, res) => {
+
+    const title = req.body.title;
+    const text = req.body.text;
+    const priceNumber = req.body.price; 
+
+    const product = {
+        title: title,
+        text: text,
+        price: priceNumber + '€',                  
+    };
+
+
+    if (req.file) {
+        product.image = '/uploads/' + req.file.filename;
+    }
+    await store.addProduct(product);
+    res.redirect('/');
 });
 
 router.get('/product/:id/image', async (req, res) => {

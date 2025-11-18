@@ -1,27 +1,28 @@
 // src/product.js
-import fs from 'fs/promises';
-import path from 'path';
+import { MongoClient, ObjectId } from "mongodb";
+import path from "path";
 
-export const UPLOADS_FOLDER = path.resolve('./uploads');
+export const UPLOADS_FOLDER = path.resolve("./uploads");
 
-let products = []; // tableau temporaire pour stocker les produits
+const client = new MongoClient("mongodb://localhost:27017");
+await client.connect(); 
+
+const db = client.db("shop");             
+const productsCollection = db.collection("products"); 
 
 export async function getProducts() {
-    return products;
+    return await productsCollection.find().toArray();
 }
 
 export async function addProduct(product) {
-    products.push(product);
+    
+    await productsCollection.insertOne(product);
 }
 
 export async function getProduct(id) {
-    return products.find(p => p.id === id);
+    return await productsCollection.findOne({ _id: new ObjectId(id) });
 }
 
 export async function deleteProduct(id) {
-    const index = products.findIndex(p => p.id === id);
-    if (index !== -1) {
-        return products.splice(index, 1)[0];
-    }
-    return null;
+    return await productsCollection.deleteOne({ _id: new ObjectId(id) });
 }

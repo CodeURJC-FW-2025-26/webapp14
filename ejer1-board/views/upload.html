@@ -42,45 +42,36 @@
         <div class="ap-cont">
         <!-- fotos -->
         <div class="mainpic-container">
-            <img src="../public/img/imagen_2025-10-14_183044131.png" class="mainpic">
+            <img src="/img/imagen_2025-10-14_183044131.png" class="mainpic">
         </div>
 
 
         <!-- form -->
-        <form class="ap-right">
+    <form class="ap-right" action="/upload" method="post" enctype="multipart/form-data">
         <label>Product Name
-            <input type="text" placeholder="Enter product name">
+        <input type="text" name="title" placeholder="Enter product name" required>
         </label>
 
         <label>Description
-        <textarea rows="4" placeholder="Write a short description"></textarea>
+        <textarea name="text" rows="4" placeholder="Write a short description" required></textarea>
         </label>
 
         <label>Category
-        <select>
-            <option>Select Category</option>
-            <option>Videogames</option>
-            <option>Consoles</option>
-            <option>Merchandising & Letter Paper</option>
-            <option>Esports</option>
-            <option>Comics</option>
-            <option>Other</option>
-        </select>
+        <input type="text" name="category" placeholder="Enter category">
         </label>
 
         <label>Price
-        <input type="number" placeholder="Enter product price in €">
+        <input type="number" name="price" step="0.01" placeholder="Enter product price in €" required>
         </label>
 
         <label for="file">Select a file:</label>
         <input type="file" id="file" name="file">
-        </form>
 
         <div class="ap-btns">
-        <button type="button" class="btn-custom">Cancel</button>
+        <button type="button" class="btn-custom" onclick="window.history.back()">Cancel</button>
         <button type="submit" class="btn-custom">Save</button>
         </div>
-     </div>
+    </form>
     </body>
    
 </html>
