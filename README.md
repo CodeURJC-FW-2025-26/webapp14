@@ -14,8 +14,8 @@
 ## **Execution Instructions**
 
 ### **Prerequisites**
-- **Node.js** (required version)  
-- **MongoDB** (running locally)
+- **Node.js** v25.0.0
+- **MongoDB** (version)
 
 ### **1. Download the project**
 
