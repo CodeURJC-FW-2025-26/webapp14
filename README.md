@@ -19,8 +19,9 @@
 
 ### **1. Download the project**
 
-git clone <repository-url>
-cd webapp14/SellOra
+`git clone <repository-url>`
+
+`cd webapp14/SellOra`
 
 3. Install dependencies
 
@@ -35,8 +36,6 @@ cd webapp14/SellOra
 Open your browser at:
 
 `http://localhost:3000`
-
-### File Description
 
 ### File Description
 
