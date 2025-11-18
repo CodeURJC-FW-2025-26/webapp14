@@ -4,62 +4,98 @@
     "text": "Nintendo 3DS Console - Red Metallic Edition, Handheld Console with 3D Display, Touchscreen, Wi-Fi, and SD Card Support",
     "price": "249.99€",
     "image": "/img/NINTENDO SELLORA PIC.jpeg",
-    "category": "Consoles"
+    "category": "Consoles",
+    "reviews": [
+      { "author": "Alice", "text": "Great console!", "rating": "⭐⭐⭐⭐⭐" },
+      { "author": "Bob", "text": "Good, but expensive", "rating": "⭐⭐⭐⭐⭐" }
+    ]
   },
   {
     "title": "EA SPORTS F1 24",
     "text": "F1 24 - Official Formula 1 Racing Game Featuring 2024 Season Cars, Teams & Tracks, Realistic Graphics, Career and Online Modes, Compatible with PlayStation 4",
     "price": "29.99€",
     "image": "/img/F1 SELLORA PIC.jpg",
-    "category": "Videogames"
+    "category": "Videogames",
+    "reviews": [
+      { "author": "Alice", "text": "Great game!", "rating": "⭐⭐⭐⭐⭐" },
+      { "author": "Bob", "text": "Good", "rating": "⭐⭐⭐⭐⭐" }
+    ]
   },
   {
     "title": "T1 FAKER SHIRT",
     "text": "Shirt that belonged to the best League of Legends' player in the world, T1 Faker. Size M.",
     "price": "599,99€",
     "image": "/img/FAKER SHIRT.jpg",
-    "category": "Esports"
+    "category": "Esports",
+    "reviews": [
+      { "author": "Nuria", "text": "Goated!", "rating": "⭐⭐⭐⭐⭐" },
+      { "author": "Raul", "text": "Unkillable Demon King", "rating": "⭐⭐⭐⭐⭐" }
+    ]
   },
   {
     "title": "LEAGUE OF LEGENDS FIORA FIGURE",
     "text": "Figure of the best League of Legends' champion, Fiora. 50cm tall, hand-painted.",
     "price": "1559,00€",
     "image": "/img/FIORA FIGURA.jpg",
-    "category": "Merch"
+    "category": "Merch",
+    "reviews": [
+      { "author": "Alice", "text": "Great figure!", "rating": "⭐⭐⭐⭐⭐" },
+      { "author": "Bob", "text": "Good, but expensive", "rating": "⭐⭐⭐⭐⭐" }
+    ]
   },
   {
     "title": "Game Boy Retro Collection",
     "text": "Classic Game Boy 24-Game Retro Pack - Retro Handheld Collection, Authentic Titles for Collectors and Gamers",
     "price": "268,99€",
     "image": "/img/GAMEBOY GAMES SELLORA PIC.jpg",
-    "category": "Consoles"
+    "category": "Consoles",
+    "reviews": [
+      { "author": "Alice", "text": "Great collection!", "rating": "⭐⭐⭐⭐⭐" },
+      { "author": "Bob", "text": "Good, but expensive", "rating": "⭐⭐⭐⭐⭐" }
+    ]
   },
   {
     "title": "LEAGUE OF LEGENDS SION PORTRAIT",
     "text": "League of Legends champion Sion portrait. 24\" x 36\".",
     "price": "65,00€",
     "image": "/img/SION.webp",
-    "category": "Merch"
+    "category": "Merch",
+    "reviews": [
+      { "author": "Alice", "text": "Great portrait!", "rating": "⭐⭐⭐⭐⭐" },
+      { "author": "Bob", "text": "Good, but expensive", "rating": "⭐⭐⭐⭐⭐" }
+    ]
   },
   {
     "title": "PlayStation 2 - BLACK (FAT MODEL)",
     "text": "PlayStation 2 fat model in black. Controller and cables included. The all-time best-selling console in history, with a wide catalog full of amazing games that marked our early days!",
     "price": "80,00€",
     "image": "/img/foto_PS2.jpeg",
-    "category": "Consoles"
+    "category": "Consoles",
+    "reviews": [
+      { "author": "Alice", "text": "Great console!", "rating": "⭐⭐⭐⭐⭐" },
+      { "author": "Bob", "text": "Good, also nice prince for the condition", "rating": "⭐⭐⭐⭐⭐" }
+    ]
   },
   {
     "title": "Jojo's Bizarre Adventure All Star Battle",
     "text": "Jojo's Bizarre Adventure All Star Battle, PS3. A bizarre fighting game based on Hirohiko Araki's manga, a must-have on every Jojofan's shelf!",
     "price": "20,00€",
     "image": "/img/JoJos-Bizarre-Adventure-All-Star-Battle-JPN.webp",
-    "category": "Videogames"
+    "category": "Videogames",
+    "reviews": [
+      { "author": "Dio", "text": "JOTARO!", "rating": "⭐⭐⭐⭐⭐" },
+      { "author": "Jotaro", "text": "DIO!", "rating": "⭐⭐⭐⭐⭐" }
+    ]
   },
   {
     "title": "Metal Gear Solid",
     "text": "The first game of the saga Metal Gear Solid, PS1 version. English PAL Version. Accompany the legendary Solid Snake on his mission to Shadow Mosses.",
     "price": "120,00€",
     "image": "/img/MSG.jpg",
-    "category": "Videogames"
+    "category": "Videogames",
+    "reviews": [
+      { "author": "Big Boss", "text": "Kept you wating huh?", "rating": "⭐⭐⭐⭐⭐" },
+      { "author": "Solid Snake", "text": "Life isnt about passing on your genes", "rating": "⭐⭐⭐⭐⭐" }
+    ]
   }
 ]
