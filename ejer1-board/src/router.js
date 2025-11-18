@@ -141,7 +141,53 @@ router.get('/product/:id/image', async (req, res) => {
 
 });
 
+router.get('/product/:id/edit', async (req, res) => {
+  const id = req.params.id;
+  const product = await store.getProduct(id);
 
+  if (!product) {
+    return res.status(404).render('deleted_product');
+  }
 
+  res.render('edit', { product });
+});
 
+router.post('/product/:id/edit', upload.single('image'), async (req, res) => {
+  const id = req.params.id;
 
+  const existing = await store.getProduct(id);
+  if (!existing) {
+    return res.status(404).render('deleted_product');
+  }
+
+    const updatedFields = {
+    user: req.body.user,
+    title: req.body.title,
+    text: req.body.text,
+    price: req.body.price,
+    category: req.body.category
+  };
+
+  try {
+    if (req.file) {
+      updatedFields.imageFilename = req.file.filename;
+
+      if (existing.imageFilename) {
+        try {
+          await fs.rm(store.UPLOADS_FOLDER + '/' + existing.imageFilename);
+        } catch (err) {
+          console.warn('Couldnt save the last uploaded image.', err.message);
+        }
+      }
+    } else {
+    }
+
+    await store.updateProduct(id, updatedFields);
+
+    res.render('updated_product', { _id: id });
+
+  } catch (err) {
+    console.error('Error updating product:', err);
+    res.status(500).send('Error updating product.');
+  }
+});

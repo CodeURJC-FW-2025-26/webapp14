@@ -66,3 +66,9 @@ export async function getProductsPaginated(page = 1, limit = 6, searchTerm = '',
     };
 }
 
+export async function updateProduct(id, update) {
+    return await products.updateOne(
+        { _id: new ObjectId(id) },
+        { $set: update }
+    );
+}
