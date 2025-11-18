@@ -113,25 +113,24 @@ router.get('/product/:id/delete', async (req, res) => {
     res.render('deleted_product');
 });
 
-router.post('/upload', upload.single('file'), async (req, res) => {
+  router.post('/upload', upload.single('file'), async (req, res) => {
+  const title = req.body.title;
+  const text = req.body.text;
+  const priceNumber = req.body.price;
+  const category = req.body.category;
 
-    const title = req.body.title;
-    const text = req.body.text;
-    const priceNumber = req.body.price; 
-
-    const product = {
-        title: title,
-        text: text,
-        price: priceNumber + '€',                  
-    };
-
-
-    if (req.file) {
-        product.image = '/uploads/' + req.file.filename;
-    }
-    await store.addProduct(product);
-    res.redirect('/');
+  const product = {
+    title: title,
+    text: text,
+    price: priceNumber + '€',
+    category: category,
+    imageFilename: req.file.filename,           
+    image: '/uploads/' + req.file.filename      
+  };
+  const result = await store.addProduct(product);
+  res.redirect(`/product/${result.insertedId.toString()}`);
 });
+
 
 router.get('/product/:id/image', async (req, res) => {
 
@@ -183,8 +182,8 @@ router.post('/product/:id/edit', upload.single('image'), async (req, res) => {
     }
 
     await store.updateProduct(id, updatedFields);
+    res.redirect(`/product/${id}`);
 
-    res.render('updated_product', { _id: id });
 
   } catch (err) {
     console.error('Error updating product:', err);
