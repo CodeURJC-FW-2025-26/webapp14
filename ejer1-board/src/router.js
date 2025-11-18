@@ -62,8 +62,7 @@ router.get('/', async (req, res) => {
     navbarText: "- SellOra",
     navItems: [
         { label: "Home", link: "/", active: "active" },
-        { label: "Shop", link: "/shop", active: "" },
-        { label: "About", link: "/about", active: "" }
+       
     ]
     });
 });
