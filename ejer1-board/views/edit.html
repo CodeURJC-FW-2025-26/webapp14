@@ -15,33 +15,37 @@
       <h3>Edit product</h3>
 
       <form action="/product/{{product._id}}/edit" method="POST" enctype="multipart/form-data">
-        <div class="mb-3">
-          <label class="form-label">Usuario</label>
-          <input name="user" class="form-control" value="{{product.user}}">
-        </div>
 
         <div class="mb-3">
-          <label class="form-label">Título</label>
+          <label class="form-label">Title</label>
           <input name="title" class="form-control" required value="{{product.title}}">
         </div>
 
         <div class="mb-3">
-          <label class="form-label">Descripción</label>
+          <label class="form-label">Description</label>
           <textarea name="text" class="form-control" rows="4" required>{{product.text}}</textarea>
         </div>
 
         <div class="mb-3">
-          <label class="form-label">Precio</label>
+          <label class="form-label">Price</label>
           <input name="price" class="form-control" required value="{{product.price}}">
         </div>
 
         <div class="mb-3">
-          <label class="form-label">Categoría</label>
-          <input name="category" class="form-control" value="{{product.category}}">
+          <label>Category
+            <select name="category" required>
+            <option value="" disabled selected>Select a category</option>
+            <option value="Consoles">Consoles</option>
+            <option value="Videogames">Videogames</option>
+            <option value="Esports">Esports</option>
+            <option value="Comics">Comics</option>
+            <option value="Merch">Merch</option>
+            </select>
+          </label>
         </div>
 
         <div class="mb-3">
-          <label class="form-label">Imagen actual</label>
+          <label class="form-label">Image</label>
           <div>
                 {{#product.imageFilename}}
                 <img src="/product/{{product._id}}/image" class="product-image" alt="{{product.title}}">
@@ -66,11 +70,13 @@
         </div>
 
         <div class="d-flex gap-2">
-          <button class="btn btn-custom" type="submit">Save</button>
-          <a href="/product/{{product._id}}" class="btn btn-secondary">Cancel</a>
+          <button class="btn btn-custom me-2" type="submit">Save</button>
+          <a href="/product/{{product._id}}" class="btn btn-custom me-2">Cancel</a>
         </div>
       </form>
     </div>
   </div>
+
+  {{>partials/footer}}
 </body>
 </html>

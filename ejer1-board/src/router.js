@@ -160,7 +160,6 @@ router.post('/product/:id/edit', upload.single('image'), async (req, res) => {
   }
 
     const updatedFields = {
-    user: req.body.user,
     title: req.body.title,
     text: req.body.text,
     price: req.body.price,
@@ -183,7 +182,6 @@ router.post('/product/:id/edit', upload.single('image'), async (req, res) => {
 
     await store.updateProduct(id, updatedFields);
     res.redirect(`/product/${id}`);
-
 
   } catch (err) {
     console.error('Error updating product:', err);
