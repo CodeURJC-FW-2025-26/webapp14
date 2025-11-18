@@ -122,7 +122,8 @@ router.post('/upload', upload.single('file'), async (req, res) => {
     const product = {
         title: title,
         text: text,
-        price: priceNumber + '€',                  
+        price: priceNumber + '€',  
+        category: req.body.category,                
     };
 
 
