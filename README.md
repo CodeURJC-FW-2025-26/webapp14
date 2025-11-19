@@ -82,14 +82,14 @@ HTML templates rendered by the server:
 
 ## **Demonstration Video**
 
-The video includes:
+The video includes: 
 
   - The main features of the web application
   - Navigation through the website
   - Product viewing, editing, and uploading
 
 Video link: 
-
+https://youtu.be/NXUXLzrc36s
 ---------------------------------------
 ## **Members' participation**
 
@@ -122,13 +122,26 @@ Video link:
 
 #### Ignacio Roncero Medina – Product Detail Page
 **Tasks:**  
-
-  
+- Contributed to the router by adding/adjusting routes for products, reviews, and validations. 
+- Added some helper functions and updates in `store.js` for product and review management.
+- Improved the aesthetic of the edit page
+- Implemented the reviews and their interactive functions
+- Implemented interactive functions to products
+- Made confirmation pages for the tasks he worked on
+- overall aesthetics
+- 
 **5 most significant commits:**  
-
+1. [Detail funcional](https://github.com/CodeURJC-FW-2025-26/webapp14/commit/47393b767a921b5bc7ac409763d2958964d528b0) - functional detail page, updated to work with db
+2. [Delete product](https://github.com/CodeURJC-FW-2025-26/webapp14/commit/370e8d584d1e7436a3087119a6ac0ec838b3d316) - functional delete product function
+3. [botones borrar y editar](https://github.com/CodeURJC-FW-2025-26/webapp14/commit/a976c70e8172ea2a76829942b8132aa0367d27ef) -functional update product function and revised delete function
+4. [reviews funcionales](https://github.com/CodeURJC-FW-2025-26/webapp14/commit/fd9e88373736a26e4a2bd78d80abf89f835881f8)- functional review system
 
 **Files with most participation:**  
-
+- `router.js`  
+- `store.js`
+- `detail.html`
+- `edit.html`
+- `load_data.js`
 
 ---
 
