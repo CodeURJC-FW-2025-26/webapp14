@@ -17,21 +17,21 @@
 - **Node.js** (v25.0.0)
 - **MongoDB** (8.2.1)
 
-### **1. Download the project**
+**1. Download the project**
 
 `git clone <repository-url>`
 
 `cd webapp14/SellOra`
 
-3. Install dependencies
+**2. Install dependencies**
 
 `npm install`
 
-4. Run the application
+**3. Run the application**
 
 `npm run watch`
 
-5. Open the website
+**4. Open the website**
 
 Open your browser at:
 
