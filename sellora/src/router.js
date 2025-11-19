@@ -102,7 +102,7 @@ router.post('/upload', upload.single('file'), async (req, res) => {
 
   const result = await store.addProduct(product);
   const savedProduct = await store.getProduct(result.insertedId.toString());
-  res.render('detail', { product: savedProduct });
+  res.render("uploaded_product", { productId: result.insertedId.toString()});
 });
 
 router.get('/product/:id', async (req, res) => {
@@ -169,7 +169,7 @@ router.post('/product/:id/edit', upload.single('image'), async (req, res) => {
     }
 
     await store.updateProduct(id, updatedFields);
-    res.render('updated_product');
+     res.render('updated_product', { productId: id });
 
   } catch (err) {
     res.status(500).send('Error updating product.');
