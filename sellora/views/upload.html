@@ -61,19 +61,26 @@
             </label>
 
             <label>Description
-              <textarea name="text" rows="4" placeholder="Write a short description" required>{{previous.text}}</textarea>
-            </label>
+            <textarea 
+                name="text" 
+                rows="4" 
+                placeholder="Write a short description between 20 and 500 characters" 
+                required 
+                minlength="20" 
+                maxlength="500"
+            >{{previous.text}}</textarea>
+          </label>
 
-            <label>Category
+      <label>Category
                 <select name="category" required >
-                <option value="" disabled selected>Select a category required</option>
+                <option value="" disabled selected>Select a category</option>
                 <option value="Consoles">Consoles</option>
                 <option value="Videogames">Videogames</option>
                 <option value="Esports">Esports</option>
                 <option value="Comics">Comics</option>
                 <option value="Merch">Merch</option>
                 </select>
-            </label>
+        </label>
 
             <label>Price
               <input type="number" name="price" step="0.01"

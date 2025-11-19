@@ -8,7 +8,7 @@ const router = express.Router();
 export default router;
 
 const upload = multer({ dest: store.UPLOADS_FOLDER });
-const { validateProduct } = store; 
+const { validateProduct, existsProductWithTitle } = store;
 
 router.get('/', async (req, res) => {
   const page = Math.max(1, parseInt(req.query.page) || 1);
@@ -67,33 +67,33 @@ router.get('/upload', (req, res) => {
 
 router.post('/upload', upload.single('file'), async (req, res) => {
   const product = {
-   title  : (req.body.title || '').trim(),
-   text : (req.body.text || '').trim(),
-   price : Number((req.body.price || '').trim()),
-   category : (req.body.category || '').trim()
+    title: (req.body.title || '').trim(),
+    text: (req.body.text || '').trim(),
+    price: Number((req.body.price || '').trim()),
+    category: (req.body.category || '').trim()
   };
 
   const errors = validateProduct(product);
 
-  if (!req.file) errors.push("Image is required.");
+  if (!req.file) {
+    errors.push("Image is required.");
+  }
 
+  if (await existsProductWithTitle(product.title)) {
+    errors.push("A product with that title already exists.");
+  }
 
-if (errors.length > 0) {
+  if (errors.length > 0) {
     return res.status(400).render('error', {
       message: errors.join(' '),
-      backUrl: `/upload`,
+      backUrl: '/upload'
     });
   }
-   
-  product.imageFilename = req.file.filename;
-  product.image = '/uploads/' + req.file.filename;
-  product.price += '€';
 
-  const result = await store.addProduct(product);
-  res.render("uploaded_product", { productId: result.insertedId.toString() });
+  await store.addProduct(product, req.file.filename);
+
+  res.redirect('/');
 });
-
-
 
 router.get('/product/:id', async (req, res) => {
   const id = req.params.id;
@@ -107,7 +107,7 @@ router.get('/product/:id', async (req, res) => {
 });
 
 router.get('/product/:id/delete', async (req, res) => {
-  let product = await store.deleteProduct(req.params.id);
+  const product = await store.deleteProduct(req.params.id);
 
   if (product && product.imageFilename) {
     await fs.rm(store.UPLOADS_FOLDER + '/' + product.imageFilename);
@@ -117,7 +117,7 @@ router.get('/product/:id/delete', async (req, res) => {
 });
 
 router.get('/product/:id/image', async (req, res) => {
-  let product = await store.getProduct(req.params.id);
+  const product = await store.getProduct(req.params.id);
   res.download(store.UPLOADS_FOLDER + '/' + product.imageFilename);
 });
 
@@ -129,8 +129,15 @@ router.get('/product/:id/edit', async (req, res) => {
     return res.status(404).render('deleted_product');
   }
 
+  product.category_Consoles   = product.category === "Consoles";
+  product.category_Videogames = product.category === "Videogames";
+  product.category_Esports    = product.category === "Esports";
+  product.category_Comics     = product.category === "Comics";
+  product.category_Merch      = product.category === "Merch";
+
   res.render('edit', { product });
 });
+
 
 router.post('/product/:id/edit', upload.single('image'), async (req, res) => {
   const id = req.params.id;
@@ -141,19 +148,18 @@ router.post('/product/:id/edit', upload.single('image'), async (req, res) => {
   }
 
   const updatedFields = {
-    title: req.body.title,
-    text: req.body.text,
-    price: req.body.price,
-    category: req.body.category
+    title: (req.body.title || '').trim(),
+    text: (req.body.text || '').trim(),
+    price: Number((req.body.price || '').trim()),
+    category: (req.body.category || '').trim()
   };
-
 
   const errors = validateProduct(updatedFields);
 
-if (errors.length > 0) {
+  if (errors.length > 0) {
     return res.status(400).render('error', {
       message: errors.join(' '),
-      backUrl: `/product/${id}/edit`,
+      backUrl: `/product/${id}/edit`
     });
   }
 
@@ -169,94 +175,87 @@ if (errors.length > 0) {
     }
 
     await store.updateProduct(id, updatedFields);
-     res.render('updated_product', { productId: id });
-
+    res.render('updated_product', { productId: id });
   } catch (err) {
     res.status(500).send('Error updating product.');
   }
 });
 
 router.post('/product/:id/reviews', async (req, res) => {
-    const productId = req.params.id;
+  const productId = req.params.id;
 
-    const review = {
-        _id: new ObjectId(),
-        author: req.body.author,
-        text: req.body.text,
-        rating: req.body.rating,
-    };
+  const review = {
+    _id: new ObjectId(),
+    author: req.body.author,
+    text: req.body.text,
+    rating: req.body.rating
+  };
 
-    await store.addReview(productId, review);
+  await store.addReview(productId, review);
 
-    res.render("review_confirm", { 
-        message: "Your review has been submitted successfully!",
-        productId 
-    });
+  res.render("review_confirm", { 
+    message: "Your review has been submitted successfully!",
+    productId 
+  });
 });
-
 
 router.post('/product/:id/reviews/:reviewId/edit', async (req, res) => {
-    const { id, reviewId } = req.params;
+  const { id, reviewId } = req.params;
 
-    const updatedReview = {
-        author: req.body.author,
-        text: req.body.text,
-        rating: req.body.rating
-    };
+  const updatedReview = {
+    author: req.body.author,
+    text: req.body.text,
+    rating: req.body.rating
+  };
 
-    const errors = [];
-    if (!updatedReview.author || updatedReview.author.trim() === '') {
-        errors.push("Author is required.");
-    }
-    if (!updatedReview.text || updatedReview.text.trim().length < 1) {
-        errors.push("Review text is required.");
-    }
-    if (!updatedReview.rating || updatedReview.rating.trim() === '') {
-        errors.push("Rating is required.");
-    }
+  const errors = [];
+  if (!updatedReview.author || updatedReview.author.trim() === '') {
+    errors.push("Author is required.");
+  }
+  if (!updatedReview.text || updatedReview.text.trim().length < 1) {
+    errors.push("Review text is required.");
+  }
+  if (!updatedReview.rating || updatedReview.rating.trim() === '') {
+    errors.push("Rating is required.");
+  }
 
-    if (errors.length > 0) {
-        return res.status(400).render('error', {
-            message: errors.join(' '),
-            backUrl: `/product/${id}/reviews/${reviewId}/edit`
-        });
-    }
-
-    await store.updateReview(id, reviewId, updatedReview);
-
-    res.render("review_confirm", {
-        message: "Your review has been updated!",
-        productId: id
+  if (errors.length > 0) {
+    return res.status(400).render('error', {
+      message: errors.join(' '),
+      backUrl: `/product/${id}/reviews/${reviewId}/edit`
     });
-});
+  }
 
+  await store.updateReview(id, reviewId, updatedReview);
+
+  res.render("review_confirm", {
+    message: "Your review has been updated!",
+    productId: id
+  });
+});
 
 router.get('/product/:id/reviews/:reviewId/delete', async (req, res) => {
-    const { id, reviewId } = req.params;
+  const { id, reviewId } = req.params;
 
-    await store.deleteReview(id, reviewId);
+  await store.deleteReview(id, reviewId);
 
-    res.render("review_confirm", { 
-        message: "The review has been deleted.",
-        productId: id 
-    });
+  res.render("review_confirm", { 
+    message: "The review has been deleted.",
+    productId: id 
+  });
 });
-
-
-
 
 router.get('/product/:id/reviews/:reviewId/edit', async (req, res) => {
-    const { id, reviewId } = req.params;
+  const { id, reviewId } = req.params;
 
-    const review = await store.getReview(id, reviewId);
+  const review = await store.getReview(id, reviewId);
 
-    if (!review) {
-        return res.status(404).render('review_confirm', {
-            message: 'Review not found',
-            productId: id
-        });
-    }
+  if (!review) {
+    return res.status(404).render('review_confirm', {
+      message: 'Review not found',
+      productId: id
+    });
+  }
 
-    res.render('edit_review', { review, productId: id });
+  res.render('edit_review', { review, productId: id });
 });
-

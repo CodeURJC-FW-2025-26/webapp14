@@ -60,15 +60,30 @@
 
         <div class="mb-3">
           <label>Category
-            <select name="category" required >
-            <option value="" disabled selected>Select a category</option>
-            <option value="Consoles">Consoles</option>
-            <option value="Videogames">Videogames</option>
-            <option value="Esports">Esports</option>
-            <option value="Comics">Comics</option>
-            <option value="Merch">Merch</option>
-            </select>
-          </label>
+          <select name="category" required>
+
+          <option value="Consoles" {{#product.category_Consoles}}selected{{/product.category_Consoles}}>
+            Consoles
+          </option>
+
+          <option value="Videogames" {{#product.category_Videogames}}selected{{/product.category_Videogames}}>
+            Videogames
+          </option>
+
+          <option value="Esports" {{#product.category_Esports}}selected{{/product.category_Esports}}>
+            Esports
+          </option>
+
+          <option value="Comics" {{#product.category_Comics}}selected{{/product.category_Comics}}>
+            Comics
+          </option>
+
+          <option value="Merch" {{#product.category_Merch}}selected{{/product.category_Merch}}>
+            Merch
+          </option>
+  </select>
+</label>
+
         </div>
 
         <div class="mb-3">

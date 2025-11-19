@@ -119,7 +119,6 @@ export function validateProduct(product) {
         errors.push("Title cannot be empty.");
     }
 
-    // must start with capital letter
     if (product.title && !/^[A-Z]/.test(product.title)) {
         errors.push("Title must start with a capital letter.");
     }
@@ -132,5 +131,20 @@ export function validateProduct(product) {
         errors.push("Category is required.");
     }
 
+    const description = (product.text || "").trim();
+
+    if (description.length === 0) {
+        errors.push("Description is required.");
+    } else if (description.length < 20) {
+        errors.push("Description must be at least 20 characters long.");
+    } else if (description.length > 500) {
+        errors.push("Description cannot exceed 500 characters.");
+    }
+
     return errors;
+}
+
+export async function existsProductWithTitle(title) {
+    const products = await getProducts();
+    return products.some(p => p.title.toLowerCase() === title.toLowerCase());
 }
