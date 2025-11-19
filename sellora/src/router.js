@@ -163,13 +163,13 @@ router.post('/product/:id/edit', upload.single('image'), async (req, res) => {
     errors.push("A product with this title already exists.");
   }
 
-  if (errors.length > 0) {
-    return res.status(400).render('edit', {
-      product: existing,
-      errors: errors,
-      previous: updatedFields
-    });
-  }
+if (errors.length > 0) {
+  return res.status(400).render('error', {
+    message: errors.join(' '),
+    backUrl: `/product/${id}/edit`
+  });
+}
+
 
   try {
     if (req.file) {
