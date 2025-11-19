@@ -46,7 +46,7 @@ export async function getProductsPaginated(page = 1, limit = 6, searchTerm = '',
     const currentPage = page;
     const query = {};
     if (searchTerm) {
-        query.title = { $regex: searchTerm, $options: 'i' }; // búsqueda insensible a mayúsculas
+        query.title = { $regex: searchTerm, $options: 'i' };
     }
 
     if (category && category !== 'All') {
