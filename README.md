@@ -66,8 +66,6 @@ Open your browser at:
   - `data.json` – Example product data.
   - `images/` – Can be used for storing product images loaded from JSON.
 
-**/uploads**
-- Folder for storing uploaded product images.
 
 **/views**
 HTML templates rendered by the server:
