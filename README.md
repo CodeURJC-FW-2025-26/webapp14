@@ -37,7 +37,7 @@ Open your browser at:
 
 `http://localhost:3000`
 
-### File Description
+## **File Description**
 
 **/src**
 
@@ -82,7 +82,7 @@ HTML templates rendered by the server:
 - `updated_product.html` – Confirmation page after editing a product.
 
 
-### Demonstration Video
+## **Demonstration Video**
 
 The video includes:
 
@@ -93,7 +93,7 @@ The video includes:
 Video link: 
 
 
-### Members' participation 
+## **Members' participation**
 
 #### Rim Afoud – Home page
 **Tasks:**
