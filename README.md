@@ -135,6 +135,7 @@ https://youtu.be/NXUXLzrc36s
 2. [Delete product](https://github.com/CodeURJC-FW-2025-26/webapp14/commit/370e8d584d1e7436a3087119a6ac0ec838b3d316) - functional delete product function
 3. [botones borrar y editar](https://github.com/CodeURJC-FW-2025-26/webapp14/commit/a976c70e8172ea2a76829942b8132aa0367d27ef) -functional update product function and revised delete function
 4. [reviews funcionales](https://github.com/CodeURJC-FW-2025-26/webapp14/commit/fd9e88373736a26e4a2bd78d80abf89f835881f8)- functional review system
+5. [pagina error edit](https://github.com/CodeURJC-FW-2025-26/webapp14/commit/1b1182c70f64a191b065913fd9ae30ea01e61896) - Improvements on error page
 
 **Files with most participation:**  
 - `router.js`  
