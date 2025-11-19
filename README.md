@@ -90,19 +90,33 @@ The video includes:
 
 Video link: 
 
-
+---------------------------------------
 ## **Members' participation**
 
 #### Rim Afoud – Home page
-**Tasks:**
 
-
+**Tasks:**  
+- Contributed to the router by adding/adjusting routes for products, reviews, and validations.  
+- Added some helper functions and updates in `store.js` for product and review management.  
+- Worked on `header` and `footer` partials for consistent site layout.  
+- Implemented and improved the `SELLORA` homepage.  
+- Enhanced the `error` page to handle form validation feedback properly.  
 
 **5 most significant commits:**  
+1. [Error pages](https://github.com/CodeURJC-FW-2025-26/webapp14/commit/74715debebc2e4daa622042acc50add2aaf2e798) – Implemented error pages for invalid inputs or missing products.  
+2. [Pagination updates](https://github.com/CodeURJC-FW-2025-26/webapp14/commit/49a12fd3b5da2a02996773f214f99b333e55818e) – General fixes and improvements to router logic and template rendering.  
+3. [Previous/next page](https://github.com/CodeURJC-FW-2025-26/webapp14/commit/f8507c86ebf63edb41d3f29a513a1b81c569752f) – Added pagination logic to product listings.  
+4. [Search bar](https://github.com/CodeURJC-FW-2025-26/webapp14/commit/6ac9fbacea967afccfc6745de3d3e3af429f9cbb) – Implemented search functionality on the home page.
+
+
 
 
 **Files with most participation:**  
-
+- `views/SELLORA.ejs`  
+- `views/partials/header.ejs`  
+- `views/partials/footer.ejs`  
+- `router.js`  
+- `store.js`   
 
 ---
 

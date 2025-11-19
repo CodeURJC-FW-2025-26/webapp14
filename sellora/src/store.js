@@ -11,6 +11,7 @@ await client.connect();
 const db = client.db('store');
 const products = db.collection('products');
 
+
 export const UPLOADS_FOLDER = './uploads';
 
 export async function addProduct(product) {
@@ -122,6 +123,10 @@ export function validateProduct(product) {
     if (product.title && !/^[A-Z]/.test(product.title)) {
         errors.push("Title must start with a capital letter.");
     }
+    
+     if (!product.text || product.text.trim() === "") {
+        errors.push("Description cannot be empty.");
+    }
 
     if (!product.price || product.price <= 0) {
         errors.push("Price must be greater than 0.");
@@ -144,7 +149,13 @@ export function validateProduct(product) {
     return errors;
 }
 
+<<<<<<< HEAD
 export async function existsProductWithTitle(title) {
     const products = await getProducts();
     return products.some(p => p.title.toLowerCase() === title.toLowerCase());
 }
+=======
+export async function getAllProducts() {
+    return await products.find().toArray();
+}
+>>>>>>> 12618f60a71c409771c1dde7e00948682bf65e06
