@@ -14,8 +14,8 @@
 ## **Execution Instructions**
 
 ### **Prerequisites**
-- **Node.js** v25.0.0
-- **MongoDB** (version)
+- **Node.js** (v25.0.0)
+- **MongoDB** (8.2.1)
 
 ### **1. Download the project**
 
