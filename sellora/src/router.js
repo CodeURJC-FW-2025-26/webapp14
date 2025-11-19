@@ -8,6 +8,7 @@ const router = express.Router();
 export default router;
 
 const upload = multer({ dest: store.UPLOADS_FOLDER });
+const { validateProduct } = store; 
 
 router.get('/', async (req, res) => {
   const page = Math.max(1, parseInt(req.query.page) || 1);
@@ -65,45 +66,34 @@ router.get('/upload', (req, res) => {
 });
 
 router.post('/upload', upload.single('file'), async (req, res) => {
-  const title = (req.body.title || '').trim();
-  const text = (req.body.text || '').trim();
-  const priceRaw = (req.body.price || '').trim();
-  const category = (req.body.category || '').trim();
-
-  const errors = [];
-
-  if (!title) errors.push('Product name is required.');
-  if (!text) errors.push('Description is required.');
-  if (!priceRaw) errors.push('Price is required.');
-
-  const priceNumber = Number(priceRaw);
-  if (priceRaw && (Number.isNaN(priceNumber) || priceNumber <= 0)) {
-    errors.push('Price must be a number greater than 0.');
-  }
-
-  if (!category) errors.push('Category is required.');
-  if (!req.file) errors.push('Image is required.');
-
-  if (errors.length > 0) {
-    return res.status(400).render('upload', {
-      errors,
-      previous: { title, text, price: priceRaw, category }
-    });
-  }
-
   const product = {
-    title,
-    text,
-    price: priceNumber + '€',
-    category,
-    imageFilename: req.file.filename,
-    image: '/uploads/' + req.file.filename
+   title  : (req.body.title || '').trim(),
+   text : (req.body.text || '').trim(),
+   price : Number((req.body.price || '').trim()),
+   category : (req.body.category || '').trim()
   };
 
+  const errors = validateProduct(product);
+
+  if (!req.file) errors.push("Image is required.");
+
+
+if (errors.length > 0) {
+    return res.status(400).render('error', {
+      message: errors.join(' '),
+      backUrl: `/upload`,
+    });
+  }
+   
+  product.imageFilename = req.file.filename;
+  product.image = '/uploads/' + req.file.filename;
+  product.price += '€';
+
   const result = await store.addProduct(product);
-  const savedProduct = await store.getProduct(result.insertedId.toString());
-  res.render("uploaded_product", { productId: result.insertedId.toString()});
+  res.render("uploaded_product", { productId: result.insertedId.toString() });
 });
+
+
 
 router.get('/product/:id', async (req, res) => {
   const id = req.params.id;
@@ -157,6 +147,16 @@ router.post('/product/:id/edit', upload.single('image'), async (req, res) => {
     category: req.body.category
   };
 
+
+  const errors = validateProduct(updatedFields);
+
+if (errors.length > 0) {
+    return res.status(400).render('error', {
+      message: errors.join(' '),
+      backUrl: `/product/${id}/edit`,
+    });
+  }
+
   try {
     if (req.file) {
       updatedFields.imageFilename = req.file.filename;
@@ -194,6 +194,7 @@ router.post('/product/:id/reviews', async (req, res) => {
     });
 });
 
+
 router.post('/product/:id/reviews/:reviewId/edit', async (req, res) => {
     const { id, reviewId } = req.params;
 
@@ -203,13 +204,32 @@ router.post('/product/:id/reviews/:reviewId/edit', async (req, res) => {
         rating: req.body.rating
     };
 
+    const errors = [];
+    if (!updatedReview.author || updatedReview.author.trim() === '') {
+        errors.push("Author is required.");
+    }
+    if (!updatedReview.text || updatedReview.text.trim().length < 1) {
+        errors.push("Review text is required.");
+    }
+    if (!updatedReview.rating || updatedReview.rating.trim() === '') {
+        errors.push("Rating is required.");
+    }
+
+    if (errors.length > 0) {
+        return res.status(400).render('error', {
+            message: errors.join(' '),
+            backUrl: `/product/${id}/reviews/${reviewId}/edit`
+        });
+    }
+
     await store.updateReview(id, reviewId, updatedReview);
 
-    res.render("review_confirm", { 
+    res.render("review_confirm", {
         message: "Your review has been updated!",
-        productId: id 
+        productId: id
     });
 });
+
 
 router.get('/product/:id/reviews/:reviewId/delete', async (req, res) => {
     const { id, reviewId } = req.params;
@@ -221,6 +241,9 @@ router.get('/product/:id/reviews/:reviewId/delete', async (req, res) => {
         productId: id 
     });
 });
+
+
+
 
 router.get('/product/:id/reviews/:reviewId/edit', async (req, res) => {
     const { id, reviewId } = req.params;
@@ -237,19 +260,3 @@ router.get('/product/:id/reviews/:reviewId/edit', async (req, res) => {
     res.render('edit_review', { review, productId: id });
 });
 
-router.post('/product/:id/reviews/:reviewId/edit', async (req, res) => {
-    const { id, reviewId } = req.params;
-
-    const updatedReview = {
-        author: req.body.author,
-        text: req.body.text,
-        rating: req.body.rating
-    };
-
-    await store.updateReview(id, reviewId, updatedReview);
-
-    res.render("review_confirm", {
-        message: "Your review has been updated!",
-        productId: id
-    });
-});

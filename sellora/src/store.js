@@ -110,3 +110,27 @@ export async function getReview(productId, reviewId) {
     );
     return product?.reviews?.find(r => r._id.toString() === reviewId) || null;
 }
+
+
+export function validateProduct(product) {
+    const errors = [];
+
+    if (!product.title || product.title.trim() === "") {
+        errors.push("Title cannot be empty.");
+    }
+
+    // must start with capital letter
+    if (product.title && !/^[A-Z]/.test(product.title)) {
+        errors.push("Title must start with a capital letter.");
+    }
+
+    if (!product.price || product.price <= 0) {
+        errors.push("Price must be greater than 0.");
+    }
+
+    if (!product.category || product.category.trim() === "") {
+        errors.push("Category is required.");
+    }
+
+    return errors;
+}

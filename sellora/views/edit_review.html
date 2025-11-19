@@ -16,7 +16,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single+Ink:wght@100..900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=BBH+Sans+Bogle&family=Bitcount+Prop+Single+Ink:wght@100..900&family=Gravitas+One&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 </head>
-<body style="background-color: #9ba4b8;">
+<body>
 
 {{> partials/header}}
 
@@ -27,8 +27,8 @@
 
     <form action="/product/{{productId}}/reviews/{{review._id}}/edit" method="POST">
       <div class="mb-3">
-        <label for="author" class="form-label">Your Name</label>
-        <input type="text" id="author" name="author" class="form-control" value="{{review.author}}" required>
+        <label for="author" class="form-label" >Your Name</label>
+        <input type="text" id="author" name="author" class="form-control" value="{{review.author}}"  required>
       </div>
 
       <div class="mb-3">
