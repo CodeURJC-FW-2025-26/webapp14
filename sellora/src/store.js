@@ -134,3 +134,8 @@ export function validateProduct(product) {
 
     return errors;
 }
+
+export async function getAllProducts() {
+  const db = await getDatabase();
+  return await db.collection('products').find({}).toArray();
+}

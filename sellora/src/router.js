@@ -141,19 +141,33 @@ router.post('/product/:id/edit', upload.single('image'), async (req, res) => {
   }
 
   const updatedFields = {
-    title: req.body.title,
-    text: req.body.text,
-    price: req.body.price,
-    category: req.body.category
+    title: (req.body.title || '').trim(),
+    text: (req.body.text || '').trim(),
+    price: (req.body.price || '').trim(),
+    category: (req.body.category || '').trim()
   };
-
 
   const errors = validateProduct(updatedFields);
 
-if (errors.length > 0) {
-    return res.status(400).render('error', {
-      message: errors.join(' '),
-      backUrl: `/product/${id}/edit`,
+  if (!updatedFields.title) {
+    errors.push("Title cannot be empty.");
+  }
+
+  const allProducts = await store.getAllProducts();
+  const isDuplicate = allProducts.some(p => 
+    p._id.toString() !== id && 
+    p.title.toLowerCase() === updatedFields.title.toLowerCase()
+  );
+
+  if (isDuplicate) {
+    errors.push("A product with this title already exists.");
+  }
+
+  if (errors.length > 0) {
+    return res.status(400).render('edit', {
+      product: existing,
+      errors: errors,
+      previous: updatedFields
     });
   }
 
@@ -169,10 +183,10 @@ if (errors.length > 0) {
     }
 
     await store.updateProduct(id, updatedFields);
-     res.render('updated_product', { productId: id });
+    res.render('updated_product', { productId: id });
 
   } catch (err) {
-    res.status(500).send('Error updating product.');
+    res.status(500).render('error', { message: 'Error updating product.' });
   }
 });
 
