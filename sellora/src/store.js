@@ -149,13 +149,6 @@ export function validateProduct(product) {
     return errors;
 }
 
-<<<<<<< HEAD
-export async function existsProductWithTitle(title) {
-    const products = await getProducts();
-    return products.some(p => p.title.toLowerCase() === title.toLowerCase());
-}
-=======
 export async function getAllProducts() {
     return await products.find().toArray();
 }
->>>>>>> 12618f60a71c409771c1dde7e00948682bf65e06

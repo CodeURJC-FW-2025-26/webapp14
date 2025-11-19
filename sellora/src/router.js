@@ -150,26 +150,14 @@ router.post('/product/:id/edit', upload.single('image'), async (req, res) => {
   const updatedFields = {
     title: (req.body.title || '').trim(),
     text: (req.body.text || '').trim(),
-<<<<<<< HEAD
-    price: Number((req.body.price || '').trim()),
-=======
     price: (req.body.price || '').trim(),
->>>>>>> 12618f60a71c409771c1dde7e00948682bf65e06
     category: (req.body.category || '').trim()
   };
 
   const errors = validateProduct(updatedFields);
 
-<<<<<<< HEAD
-  if (errors.length > 0) {
-    return res.status(400).render('error', {
-      message: errors.join(' '),
-      backUrl: `/product/${id}/edit`
-    });
-=======
   if (!updatedFields.title) {
     errors.push("Title cannot be empty.");
->>>>>>> 12618f60a71c409771c1dde7e00948682bf65e06
   }
 
   const allProducts = await store.getAllProducts();
@@ -203,10 +191,6 @@ if (errors.length > 0) {
 
     await store.updateProduct(id, updatedFields);
     res.render('updated_product', { productId: id });
-<<<<<<< HEAD
-=======
-
->>>>>>> 12618f60a71c409771c1dde7e00948682bf65e06
   } catch (err) {
     res.status(500).render('error', { message: 'Error updating product.' });
   }
