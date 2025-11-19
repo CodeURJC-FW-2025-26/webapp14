@@ -134,10 +134,16 @@ Video link:
 
 #### Nuria Amrani Villuendas – Add New Product Page
 **Tasks:**  
-
+- Added form connection to data base.
+- Added backend form validation for every field.
+- Added validations if name already exists.
 
 **5 most significant commits:**  
-
+1. [Add Product](https://github.com/CodeURJC-FW-2025-26/webapp14/commit/3e2e9b246fbefbe3fa0de9e8083fa39d91d03ca8) – Implemented search functionality on the home page.
+2. [Category fixes](https://github.com/CodeURJC-FW-2025-26/webapp14/commit/2cc11a47a7e0a678fb974ab48cd4ed59cad285b5) – Implemented search functionality on the home page.
+3. [Redirect to Detail](https://github.com/CodeURJC-FW-2025-26/webapp14/commit/4ffc22d714fde6c1884f564b59a4acc4d5933dff) – Implemented search functionality on the home page.
+4. [Validations](https://github.com/CodeURJC-FW-2025-26/webapp14/commit/c76215d3515943e79645b9d3a42ae6b5ba367d13) – Implemented search functionality on the home page.
+5. [Form](https://github.com/CodeURJC-FW-2025-26/webapp14/commit/a761cb468644a23723ebca280f5c8dba267723b7) – Implemented search functionality on the home page.
 
 
 **Files with most participation:**  
