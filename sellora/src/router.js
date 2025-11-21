@@ -8,7 +8,6 @@ const router = express.Router();
 export default router;
 
 const upload = multer({ dest: store.UPLOADS_FOLDER });
-const { validateProduct, existsProductWithTitle } = store;
 
 router.get('/', async (req, res) => {
   const page = Math.max(1, parseInt(req.query.page) || 1);
@@ -73,13 +72,13 @@ router.post('/upload', upload.single('file'), async (req, res) => {
     category: (req.body.category || '').trim()
   };
 
-  const errors = validateProduct(product);
+  const errors = store.validateProduct(product);
 
   if (!req.file) {
     errors.push("Image is required.");
   }
 
-  if (await existsProductWithTitle(product.title)) {
+  if (await store.existsProductWithTitle(product.title)) {
     errors.push("A product with that title already exists.");
   }
 
@@ -138,7 +137,6 @@ router.get('/product/:id/edit', async (req, res) => {
   res.render('edit', { product });
 });
 
-
 router.post('/product/:id/edit', upload.single('image'), async (req, res) => {
   const id = req.params.id;
   const existing = await store.getProduct(id);
@@ -154,7 +152,7 @@ router.post('/product/:id/edit', upload.single('image'), async (req, res) => {
     category: (req.body.category || '').trim()
   };
 
-  const errors = validateProduct(updatedFields);
+  const errors = store.validateProduct(updatedFields);
 
   if (!updatedFields.title) {
     errors.push("Title cannot be empty.");
@@ -170,13 +168,12 @@ router.post('/product/:id/edit', upload.single('image'), async (req, res) => {
     errors.push("A product with this title already exists.");
   }
 
-if (errors.length > 0) {
-  return res.status(400).render('error', {
-    message: errors.join(' '),
-    backUrl: `/product/${id}/edit`
-  });
-}
-
+  if (errors.length > 0) {
+    return res.status(400).render('error', {
+      message: errors.join(' '),
+      backUrl: `/product/${id}/edit`
+    });
+  }
 
   try {
     if (req.file) {
@@ -185,7 +182,7 @@ if (errors.length > 0) {
       if (existing.imageFilename) {
         try {
           await fs.rm(store.UPLOADS_FOLDER + '/' + existing.imageFilename);
-        } catch (_) {}
+        } catch {}
       }
     }
 
