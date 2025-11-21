@@ -196,6 +196,7 @@ router.post('/product/:id/edit', upload.single('image'), async (req, res) => {
 router.post('/product/:id/reviews', async (req, res) => {
   const productId = req.params.id;
 
+  // 1. Crear el objeto de la reseña con los datos del body
   const review = {
     _id: new ObjectId(),
     author: req.body.author,
@@ -203,11 +204,29 @@ router.post('/product/:id/reviews', async (req, res) => {
     rating: req.body.rating
   };
 
+  const errors = [];
+  if (!review.author || review.author.trim() === '') {
+    errors.push("Author is required.");
+  }
+  if (!review.text || review.text.trim().length < 1) {
+    errors.push("Review text is required.");
+  }
+  if (!review.rating || review.rating.trim() === '') {
+    errors.push("Rating is required.");
+  }
+
+  if (errors.length > 0) {
+    return res.status(400).render('error', {
+      message: errors.join(' '),
+      backUrl: `/product/${productId}` 
+    });
+  }
+
   await store.addReview(productId, review);
 
-  res.render("review_confirm", { 
+  res.render("review_confirm", {
     message: "Your review has been submitted successfully!",
-    productId 
+    productId
   });
 });
 
