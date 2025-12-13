@@ -33,7 +33,7 @@ router.get('/', async (req, res) => {
     isActive: Boolean(category === cat) || (category === '' && cat === 'All')
   }));
 
-  // Transform products to include full image URLs
+  //  include full image URLs
   const productsWithImages = data.products.map(p => ({
     ...p,
     _id: p._id.toString(),
@@ -73,7 +73,7 @@ router.get('/loadmoreproducts', async (req, res) => {
 
     const data = await store.getProductsPaginated(page, limit, searchTerm, category);
     
-    // Transform products to include full image URLs
+    // include full image URLs
     const productsWithImages = data.products.map(p => ({
       ...p,
       _id: p._id.toString(),
@@ -134,7 +134,6 @@ router.get('/product/:id', async (req, res) => {
     return res.status(404).render('deleted_product');
   }
 
-  // Add image URL for display
   if (product.image && !product.image.startsWith('/')) {
     product.image = `/uploads/${product.image}`;
   } else if (!product.image) {
@@ -177,7 +176,6 @@ router.get('/product/:id/edit', async (req, res) => {
   product.category_Comics     = product.category === "Comics";
   product.category_Merch      = product.category === "Merch";
 
-  // Add image URL for display
   if (product.image) {
     product.imageUrl = product.image.startsWith('/') ? product.image : `/uploads/${product.image}`;
   }
@@ -224,15 +222,28 @@ router.post('/product/:id/edit', upload.single('image'), async (req, res) => {
   }
 
   try {
+    
     if (req.file) {
+      // New image uploaded  (even if remove checkbox was checked)
       updatedFields.image = req.file.filename;
 
-      if (existing.image) {
+      // Delete old image file
+      if (existing.image && !existing.image.startsWith('/')) {
+        try {
+          await fs.rm(store.UPLOADS_FOLDER + '/' + existing.image);
+        } catch {}
+      }
+    } else if (req.body.removeImage === 'on') {
+      // No new upload but user wants to remove the image
+      updatedFields.image = null;
+      
+      if (existing.image && !existing.image.startsWith('/')) {
         try {
           await fs.rm(store.UPLOADS_FOLDER + '/' + existing.image);
         } catch {}
       }
     }
+    
 
     await store.updateProduct(id, updatedFields);
     const updatedProduct = await store.getProduct(id); 

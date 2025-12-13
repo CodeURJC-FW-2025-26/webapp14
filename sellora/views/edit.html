@@ -69,6 +69,15 @@
           </div>
         </div>
 
+        {{#product.imageUrl}}
+        <div class="mb-3 form-check">
+          <input type="checkbox" name="removeImage" class="form-check-input" id="removeImage">
+          <label class="form-check-label" for="removeImage">
+            Remove current image
+          </label>
+        </div>
+        {{/product.imageUrl}}
+
         <div class="mb-3">
           <label class="form-label">Upload new image (optional)</label>
           <input type="file" name="image" accept=".jpg,.jpeg,.png" class="form-control">
