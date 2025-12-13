@@ -4,13 +4,17 @@ import fs from 'node:fs/promises';
 import { ObjectId } from 'mongodb';
 import * as store from './store.js';
 
+import { setTimeout} from 'node:timers/promises';
+
 const router = express.Router();
 export default router;
 
 const upload = multer({ dest: store.UPLOADS_FOLDER });
 
+
+
 router.get('/', async (req, res) => {
-  const page = Math.max(1, parseInt(req.query.page) || 1);
+  const page = 1;
   const limit = 6;
 
   const searchTerm = req.query.q || '';
@@ -28,20 +32,12 @@ router.get('/', async (req, res) => {
     isActive: Boolean(category === cat) || (category === '' && cat === 'All')
   }));
 
-  const pages = [];
-  for (let i = 1; i <= totalPages; i++) {
-    pages.push({ number: i, active: i === currentPage });
-  }
 
   res.render('SELLORA', {
     products: data.products || [],
     currentPage,
     totalPages,
-    pages,
-    hasPrevPage: currentPage > 1,
-    hasNextPage: currentPage < totalPages,
-    prevPage: Math.max(1, currentPage - 1),
-    nextPage: Math.min(totalPages, currentPage + 1),
+    hasMore : currentPage< totalPages,
     searchTerm,
     category,
     categories,
@@ -56,6 +52,28 @@ router.get('/', async (req, res) => {
     ]
   });
 });
+
+
+
+router.get('/loadmoreproducts', async (req, res) => {
+    const page = Math.max(1, parseInt(req.query.page) || 1);
+    const limit = 6;
+
+    const searchTerm = req.query.q || '';
+    const category = req.query.category || '';
+    
+    await setTimeout(500);
+
+    const data = await store.getProductsPaginated(page, limit, searchTerm, category);
+    
+    res.json({
+        products: data.products || [],
+        currentPage: data.currentPage,
+        totalPages: data.totalPages,
+        hasMore: data.currentPage < data.totalPages
+    });
+});
+
 
 router.get('/upload', (req, res) => {
   res.render('upload', {

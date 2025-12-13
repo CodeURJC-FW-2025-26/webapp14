@@ -97,5 +97,108 @@
       { "author": "Big Boss", "text": "Kept you wating huh?", "rating": "⭐⭐⭐⭐⭐" },
       { "author": "Solid Snake", "text": "Life isnt about passing on your genes", "rating": "⭐⭐⭐⭐⭐" }
     ]
+  },
+
+  {
+    "title": "Metal Gear Solid",
+    "text": "The first game of the saga Metal Gear Solid, PS1 version. English PAL Version. Accompany the legendary Solid Snake on his mission to Shadow Mosses.",
+    "price": "120,00€",
+    "image": "/img/MSG.jpg",
+    "category": "Videogames",
+    "reviews": [
+      { "author": "Big Boss", "text": "Kept you wating huh?", "rating": "⭐⭐⭐⭐⭐" },
+      { "author": "Solid Snake", "text": "Life isnt about passing on your genes", "rating": "⭐⭐⭐⭐⭐" }
+    ]
+  },
+
+  {
+    "title": "Metal Gear Solid",
+    "text": "The first game of the saga Metal Gear Solid, PS1 version. English PAL Version. Accompany the legendary Solid Snake on his mission to Shadow Mosses.",
+    "price": "120,00€",
+    "image": "/img/MSG.jpg",
+    "category": "Videogames",
+    "reviews": [
+      { "author": "Big Boss", "text": "Kept you wating huh?", "rating": "⭐⭐⭐⭐⭐" },
+      { "author": "Solid Snake", "text": "Life isnt about passing on your genes", "rating": "⭐⭐⭐⭐⭐" }
+    ]
+  },
+
+  {
+    "title": "Metal Gear Solid",
+    "text": "The first game of the saga Metal Gear Solid, PS1 version. English PAL Version. Accompany the legendary Solid Snake on his mission to Shadow Mosses.",
+    "price": "120,00€",
+    "image": "/img/MSG.jpg",
+    "category": "Videogames",
+    "reviews": [
+      { "author": "Big Boss", "text": "Kept you wating huh?", "rating": "⭐⭐⭐⭐⭐" },
+      { "author": "Solid Snake", "text": "Life isnt about passing on your genes", "rating": "⭐⭐⭐⭐⭐" }
+    ]
+  },
+  
+  {
+    "title": "Metal Gear Solid",
+    "text": "The first game of the saga Metal Gear Solid, PS1 version. English PAL Version. Accompany the legendary Solid Snake on his mission to Shadow Mosses.",
+    "price": "120,00€",
+    "image": "/img/MSG.jpg",
+    "category": "Videogames",
+    "reviews": [
+      { "author": "Big Boss", "text": "Kept you wating huh?", "rating": "⭐⭐⭐⭐⭐" },
+      { "author": "Solid Snake", "text": "Life isnt about passing on your genes", "rating": "⭐⭐⭐⭐⭐" }
+    ]
+  },
+  {
+    "title": "Nintendo 3DS",
+    "text": "Nintendo 3DS Console - Red Metallic Edition, Handheld Console with 3D Display, Touchscreen, Wi-Fi, and SD Card Support",
+    "price": "249.99€",
+    "image": "/img/NINTENDO SELLORA PIC.jpeg",
+    "category": "Consoles",
+    "reviews": [
+      { "author": "Alice", "text": "Great console!", "rating": "⭐⭐⭐⭐⭐" },
+      { "author": "Bob", "text": "Good, but expensive", "rating": "⭐⭐⭐⭐⭐" }
+    ]
+  },
+  {
+    "title": "Nintendo 3DS",
+    "text": "Nintendo 3DS Console - Red Metallic Edition, Handheld Console with 3D Display, Touchscreen, Wi-Fi, and SD Card Support",
+    "price": "249.99€",
+    "image": "/img/NINTENDO SELLORA PIC.jpeg",
+    "category": "Consoles",
+    "reviews": [
+      { "author": "Alice", "text": "Great console!", "rating": "⭐⭐⭐⭐⭐" },
+      { "author": "Bob", "text": "Good, but expensive", "rating": "⭐⭐⭐⭐⭐" }
+    ]
+  },
+  {
+    "title": "Nintendo 3DS",
+    "text": "Nintendo 3DS Console - Red Metallic Edition, Handheld Console with 3D Display, Touchscreen, Wi-Fi, and SD Card Support",
+    "price": "249.99€",
+    "image": "/img/NINTENDO SELLORA PIC.jpeg",
+    "category": "Consoles",
+    "reviews": [
+      { "author": "Alice", "text": "Great console!", "rating": "⭐⭐⭐⭐⭐" },
+      { "author": "Bob", "text": "Good, but expensive", "rating": "⭐⭐⭐⭐⭐" }
+    ]
+  },
+  {
+    "title": "Nintendo 3DS",
+    "text": "Nintendo 3DS Console - Red Metallic Edition, Handheld Console with 3D Display, Touchscreen, Wi-Fi, and SD Card Support",
+    "price": "249.99€",
+    "image": "/img/NINTENDO SELLORA PIC.jpeg",
+    "category": "Consoles",
+    "reviews": [
+      { "author": "Alice", "text": "Great console!", "rating": "⭐⭐⭐⭐⭐" },
+      { "author": "Bob", "text": "Good, but expensive", "rating": "⭐⭐⭐⭐⭐" }
+    ]
+  },
+  {
+    "title": "Nintendo 3DS",
+    "text": "Nintendo 3DS Console - Red Metallic Edition, Handheld Console with 3D Display, Touchscreen, Wi-Fi, and SD Card Support",
+    "price": "249.99€",
+    "image": "/img/NINTENDO SELLORA PIC.jpeg",
+    "category": "Consoles",
+    "reviews": [
+      { "author": "Alice", "text": "Great console!", "rating": "⭐⭐⭐⭐⭐" },
+      { "author": "Bob", "text": "Good, but expensive", "rating": "⭐⭐⭐⭐⭐" }
+    ]
   }
 ]
