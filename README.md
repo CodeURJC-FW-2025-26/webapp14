@@ -156,20 +156,5 @@ Video link:
 
 
 
-**5 most significant commits:**  
-
-
-
-
-
-**Files with most participation:**  
-- `views/SELLORA.ejs`  
-- `views/partials/header.ejs`  
-- `views/partials/footer.ejs`  
-- `router.js`  
-- `store.js`   
-
----
-
 
 
