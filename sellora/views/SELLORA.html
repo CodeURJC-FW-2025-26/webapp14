@@ -4,14 +4,10 @@
     <meta charset="UTF-8">
         <title>SellOra</title>
       {{> partials/head}}
+
   </head>
 
-
-<script src ="/js/infinite-scroll.js"></script>
-
 <body>
-
-
   <header class="header text-center position relative" >
 
   <div style="background: url('/img/HEADER\ BACKGROUND.jpg') center/cover no-repeat;
@@ -78,14 +74,17 @@
 
   <script> 
     window.selloraData = {
-     hasMore : {{hasMore}},
+     hasMore : "{{hasMore}}",
       searchTerm : "{{searchTerm}}",
       category : "{{category}}",
       currentPage : 1
     };
    </script>
 
+<script src ="/js/app.js"></script>
+
 {{>partials/footer}}
+
 
 </body>
 </html> 

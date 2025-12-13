@@ -5,7 +5,7 @@
     <title>Edit product - SellOra</title>
     {{> partials/head}}
       
-      <meta http-equiv="refresh" content="3;url=/product/{{productId}}">
+      <meta http-equiv="refresh" content="3;url=/product/{{product._id}}">
     </head>
 
 <body style="background-color: #9ba4b8;">
@@ -15,11 +15,13 @@
       
       <h2 class="product-name mb-3">Product Updated Successfully!</h2>
 
+      <img src="{{product.image}}" class="product-image mb-3" alt="{{product.title}}" style="max-width: 200px; width: 100%; border-radius: 10px;">
+      
       <p class="product-description mb-4" style="font-size: 1.1rem;">
         Your changes were saved. You will be redirected in 3 seconds.
       </p>
 
-      <a href="/product/{{productId}}" class="btn btn-custom btn-lg">
+      <a href="/product/{{product._id}}" class="btn btn-custom btn-lg">
       Go to detail page
       </a>
     </div>

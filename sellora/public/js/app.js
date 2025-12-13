@@ -19,6 +19,9 @@ document.addEventListener('DOMContentLoaded', function() {
   const loadingIndicator = document.getElementById('loading-indicator');
   const noMoreMessage = document.getElementById('no-more-products');
 
+  // Only run infinite scroll if we're on the main page
+  if (!container) return;
+
   // Fetch products JSON
 
   async function fetchProducts(page) {
@@ -87,4 +90,18 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   window.addEventListener('scroll', checkScroll);
 
+
+
 });
+
+
+
+
+
+
+
+
+
+
+
+

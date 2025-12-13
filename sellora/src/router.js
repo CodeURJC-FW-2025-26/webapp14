@@ -1,6 +1,7 @@
 import express from 'express';
 import multer from 'multer';
 import fs from 'node:fs/promises';
+import path from 'node:path';
 import { ObjectId } from 'mongodb';
 import * as store from './store.js';
 
@@ -32,9 +33,15 @@ router.get('/', async (req, res) => {
     isActive: Boolean(category === cat) || (category === '' && cat === 'All')
   }));
 
+  // Transform products to include full image URLs
+  const productsWithImages = data.products.map(p => ({
+    ...p,
+    _id: p._id.toString(),
+    image: p.image ? (p.image.startsWith('/') ? p.image : `/uploads/${p.image}`) : '/img/placeholder.png'
+  }));
 
   res.render('SELLORA', {
-    products: data.products || [],
+    products: productsWithImages,
     currentPage,
     totalPages,
     hasMore : currentPage< totalPages,
@@ -66,8 +73,15 @@ router.get('/loadmoreproducts', async (req, res) => {
 
     const data = await store.getProductsPaginated(page, limit, searchTerm, category);
     
+    // Transform products to include full image URLs
+    const productsWithImages = data.products.map(p => ({
+      ...p,
+      _id: p._id.toString(),
+      image: p.image ? (p.image.startsWith('/') ? p.image : `/uploads/${p.image}`) : '/img/placeholder.png'
+    }));
+    
     res.json({
-        products: data.products || [],
+        products: productsWithImages,
         currentPage: data.currentPage,
         totalPages: data.totalPages,
         hasMore: data.currentPage < data.totalPages
@@ -120,23 +134,34 @@ router.get('/product/:id', async (req, res) => {
     return res.status(404).render('deleted_product');
   }
 
+  // Add image URL for display
+  if (product.image && !product.image.startsWith('/')) {
+    product.image = `/uploads/${product.image}`;
+  } else if (!product.image) {
+    product.image = '/img/placeholder.png';
+  }
+
   res.render('detail', { product });
 });
 
 router.get('/product/:id/delete', async (req, res) => {
   const product = await store.deleteProduct(req.params.id);
 
-  if (product && product.imageFilename) {
-    await fs.rm(store.UPLOADS_FOLDER + '/' + product.imageFilename);
+  if (product && product.image) {
+    await fs.rm(store.UPLOADS_FOLDER + '/' + product.image);
   }
 
   res.render('deleted_product');
 });
 
+
 router.get('/product/:id/image', async (req, res) => {
   const product = await store.getProduct(req.params.id);
-  res.download(store.UPLOADS_FOLDER + '/' + product.imageFilename);
+  if (!product || !product.image) return res.sendStatus(404);
+
+  res.sendFile(path.resolve(store.UPLOADS_FOLDER, product.image));
 });
+
 
 router.get('/product/:id/edit', async (req, res) => {
   const id = req.params.id;
@@ -151,6 +176,11 @@ router.get('/product/:id/edit', async (req, res) => {
   product.category_Esports    = product.category === "Esports";
   product.category_Comics     = product.category === "Comics";
   product.category_Merch      = product.category === "Merch";
+
+  // Add image URL for display
+  if (product.image) {
+    product.imageUrl = product.image.startsWith('/') ? product.image : `/uploads/${product.image}`;
+  }
 
   res.render('edit', { product });
 });
@@ -178,8 +208,8 @@ router.post('/product/:id/edit', upload.single('image'), async (req, res) => {
 
   const allProducts = await store.getAllProducts();
   const isDuplicate = allProducts.some(p => 
-    p._id.toString() !== id && 
-    p.title.toLowerCase() === updatedFields.title.toLowerCase()
+    p._id.toString() !== id.toString() && 
+    p.title.trim().toLowerCase() === updatedFields.title.trim().toLowerCase()
   );
 
   if (isDuplicate) {
@@ -195,17 +225,34 @@ router.post('/product/:id/edit', upload.single('image'), async (req, res) => {
 
   try {
     if (req.file) {
-      updatedFields.imageFilename = req.file.filename;
+      updatedFields.image = req.file.filename;
 
-      if (existing.imageFilename) {
+      if (existing.image) {
         try {
-          await fs.rm(store.UPLOADS_FOLDER + '/' + existing.imageFilename);
+          await fs.rm(store.UPLOADS_FOLDER + '/' + existing.image);
         } catch {}
       }
     }
 
     await store.updateProduct(id, updatedFields);
-    res.render('updated_product', { productId: id });
+    const updatedProduct = await store.getProduct(id); 
+
+     const productForTemplate = {
+            ...updatedProduct,
+            _id: updatedProduct._id.toString(),
+            title: updatedProduct.title,
+            text: updatedProduct.text,
+            price: updatedProduct.price,
+            category: updatedProduct.category,
+            image: updatedProduct.image ? (updatedProduct.image.startsWith('/') ? updatedProduct.image : `/uploads/${updatedProduct.image}`) : '/img/placeholder.png'
+
+        };
+
+    res.render('updated_product', { 
+    product: productForTemplate,  
+    backUrl: `/product/${id}/edit` 
+});
+
   } catch (err) {
     res.status(500).render('error', { message: 'Error updating product.' });
   }
@@ -214,7 +261,7 @@ router.post('/product/:id/edit', upload.single('image'), async (req, res) => {
 router.post('/product/:id/reviews', async (req, res) => {
   const productId = req.params.id;
 
-  // 1. Crear el objeto de la reseña con los datos del body
+  // create the review object with body data
   const review = {
     _id: new ObjectId(),
     author: req.body.author,

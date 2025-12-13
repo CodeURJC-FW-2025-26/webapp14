@@ -12,7 +12,7 @@
     <div class="card p-4">
       <h3>Edit product</h3>
 
-      <form action="/product/{{product._id}}/edit" method="POST" enctype="multipart/form-data">
+      <form id="edit-product-form" action="/product/{{product._id}}/edit" method="POST" enctype="multipart/form-data">
 
         <div class="mb-3">
           <label class="form-label">Title</label>
@@ -58,27 +58,20 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label">Image</label>
+          <label class="form-label">Current Image</label>
           <div>
-                {{#product.imageFilename}}
-                <img src="/product/{{product._id}}/image" class="product-image" alt="{{product.title}}">
-                {{/product.imageFilename}}
-
-                {{^product.imageFilename}}
-                {{#product.image}}
-                    <img src="{{product.image}}" class="product-image" alt="{{product.title}}">
-                {{/product.image}}
-
-                {{^product.image}}
-                    <img src="/img/placeholder.png" class="product-image" alt="sin imagen">
-                {{/product.image}}
-                {{/product.imageFilename}}
+            {{#product.imageUrl}}
+              <img src="{{product.imageUrl}}" class="product-image" alt="{{product.title}}" style="max-width: 300px;">
+            {{/product.imageUrl}}
+            {{^product.imageUrl}}
+              <img src="/img/placeholder.png" class="product-image" alt="No image" style="max-width: 300px;">
+            {{/product.imageUrl}}
           </div>
         </div>
 
         <div class="mb-3">
           <label class="form-label">Upload new image (optional)</label>
-          <input type="file" name="image" class="form-control">
+          <input type="file" name="image" accept=".jpg,.jpeg,.png" class="form-control">
           <div class="form-text">If you don't select a file, the previous image will be kept.</div>
         </div>
 
@@ -89,6 +82,8 @@
       </form>
     </div>
   </div>
+
+  <script src="/js/app.js"></script>
 
  
 </body>
