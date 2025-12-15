@@ -33,7 +33,6 @@ router.get('/', async (req, res) => {
     isActive: Boolean(category === cat) || (category === '' && cat === 'All')
   }));
 
-  //  include full image URLs
   const productsWithImages = data.products.map(p => ({
     ...p,
     _id: p._id.toString(),
@@ -73,7 +72,6 @@ router.get('/loadmoreproducts', async (req, res) => {
 
     const data = await store.getProductsPaginated(page, limit, searchTerm, category);
     
-    // include full image URLs
     const productsWithImages = data.products.map(p => ({
       ...p,
       _id: p._id.toString(),
@@ -97,6 +95,10 @@ router.get('/upload', (req, res) => {
 });
 
 router.post('/upload', upload.single('file'), async (req, res) => {
+  const wantsJson = (req.headers.accept || '').includes('application/json') ||
+    req.xhr ||
+    req.headers['x-requested-with'] === 'XMLHttpRequest';
+
   const product = {
     title: (req.body.title || '').trim(),
     text: (req.body.text || '').trim(),
@@ -115,6 +117,10 @@ router.post('/upload', upload.single('file'), async (req, res) => {
   }
 
   if (errors.length > 0) {
+    if (wantsJson) {
+      return res.status(400).json({ success: false, errors });
+    }
+
     return res.status(400).render('error', {
       message: errors.join(' '),
       backUrl: '/upload'
@@ -122,6 +128,10 @@ router.post('/upload', upload.single('file'), async (req, res) => {
   }
 
   await store.addProduct(product, req.file.filename);
+
+  if (wantsJson) {
+    return res.json({ success: true, redirectUrl: '/' });
+  }
 
   res.redirect('/');
 });
@@ -242,17 +252,14 @@ router.post('/product/:id/edit', upload.single('image'), async (req, res) => {
   try {
     
     if (req.file) {
-      // New image uploaded  (even if remove checkbox was checked)
       updatedFields.image = req.file.filename;
 
-      // Delete old image file
       if (existing.image && !existing.image.startsWith('/')) {
         try {
           await fs.rm(store.UPLOADS_FOLDER + '/' + existing.image);
         } catch {}
       }
     } else if (req.body.removeImage === 'on') {
-      // No new upload but user wants to remove the image
       updatedFields.image = null;
       
       if (existing.image && !existing.image.startsWith('/')) {
