@@ -133,7 +133,15 @@ router.get('/product/:id', async (req, res) => {
   if (!product) {
     return res.status(404).render('deleted_product');
   }
+  product._id = product._id.toString();
 
+  if (product.reviews && Array.isArray(product.reviews)) {
+    product.reviews = product.reviews.map(review => ({
+      ...review,
+      _id: review._id.toString() 
+    }));
+  }
+  
   if (product.image && !product.image.startsWith('/')) {
     product.image = `/uploads/${product.image}`;
   } else if (!product.image) {
@@ -143,14 +151,24 @@ router.get('/product/:id', async (req, res) => {
   res.render('detail', { product });
 });
 
-router.get('/product/:id/delete', async (req, res) => {
-  const product = await store.deleteProduct(req.params.id);
+router.delete('/product/:id', async (req, res) => {
+  try {
+    const product = await store.deleteProduct(req.params.id);
 
-  if (product && product.image) {
-    await fs.rm(store.UPLOADS_FOLDER + '/' + product.image);
+    if (product && product.image) {
+      try {
+        await fs.rm(store.UPLOADS_FOLDER + '/' + product.image);
+      } catch (err) {
+        console.error("Error deleting image:", err);
+      }
+    }
+
+    res.json({ success: true });
+    
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: "Error deleting product on server" });
   }
-
-  res.render('deleted_product');
 });
 
 
@@ -272,84 +290,98 @@ router.post('/product/:id/edit', upload.single('image'), async (req, res) => {
 router.post('/product/:id/reviews', async (req, res) => {
   const productId = req.params.id;
 
-  // create the review object with body data
   const review = {
     _id: new ObjectId(),
-    author: req.body.author,
-    text: req.body.text,
-    rating: req.body.rating
+    author: (req.body.author || '').trim(),
+    text: (req.body.text || '').trim(),
+    rating: req.body.rating,
   };
 
   const errors = [];
-  if (!review.author || review.author.trim() === '') {
+  if (!review.author) {
     errors.push("Author is required.");
   }
-  if (!review.text || review.text.trim().length < 1) {
+  if (!review.text || review.text.length < 1) {
     errors.push("Review text is required.");
   }
-  if (!review.rating || review.rating.trim() === '') {
+  if (!review.rating) {
     errors.push("Rating is required.");
   }
 
   if (errors.length > 0) {
-    return res.status(400).render('error', {
-      message: errors.join(' '),
-      backUrl: `/product/${productId}` 
+    return res.status(400).json({ 
+      success: false, 
+      message: errors.join(' ') 
     });
   }
 
-  await store.addReview(productId, review);
-
-  res.render("review_confirm", {
-    message: "Your review has been submitted successfully!",
-    productId
-  });
+  try {
+    await store.addReview(productId, review);
+    
+    res.json({ 
+      success: true, 
+      message: "Review added successfully",
+      review: review 
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Server error saving review" });
+  }
 });
 
 router.post('/product/:id/reviews/:reviewId/edit', async (req, res) => {
   const { id, reviewId } = req.params;
 
   const updatedReview = {
-    author: req.body.author,
-    text: req.body.text,
-    rating: req.body.rating
+    _id: new ObjectId(reviewId),
+    author: (req.body.author || '').trim(),
+    text: (req.body.text || '').trim(),
+    rating: req.body.rating,
   };
 
   const errors = [];
-  if (!updatedReview.author || updatedReview.author.trim() === '') {
+  if (!updatedReview.author) {
     errors.push("Author is required.");
   }
-  if (!updatedReview.text || updatedReview.text.trim().length < 1) {
+  if (!updatedReview.text || updatedReview.text.length < 1) {
     errors.push("Review text is required.");
   }
-  if (!updatedReview.rating || updatedReview.rating.trim() === '') {
+  if (!updatedReview.rating) {
     errors.push("Rating is required.");
   }
 
   if (errors.length > 0) {
-    return res.status(400).render('error', {
-      message: errors.join(' '),
-      backUrl: `/product/${id}/reviews/${reviewId}/edit`
+    return res.status(400).json({ 
+      success: false, 
+      message: errors.join(' ') 
     });
   }
 
-  await store.updateReview(id, reviewId, updatedReview);
-
-  res.render("review_confirm", {
-    message: "Your review has been updated!",
-    productId: id
-  });
+  try {
+    await store.updateReview(id, reviewId, updatedReview);
+    
+    res.json({ 
+      success: true, 
+      message: "Review updated successfully",
+      review: updatedReview
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: "Server error updating review" });
+  }
 });
 
-router.get('/product/:id/reviews/:reviewId/delete', async (req, res) => {
+router.delete('/product/:id/reviews/:reviewId', async (req, res) => {
   const { id, reviewId } = req.params;
 
-  await store.deleteReview(id, reviewId);
-
-  res.render("review_confirm", { 
-    message: "The review has been deleted.",
-    productId: id 
-  });
+  try {
+    await store.deleteReview(id, reviewId);
+    
+    res.json({ success: true, message: 'Review deleted successfully' });
+    
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Server error deleting review' });
+  }
 });
 
 router.get('/product/:id/reviews/:reviewId/edit', async (req, res) => {
@@ -365,4 +397,14 @@ router.get('/product/:id/reviews/:reviewId/edit', async (req, res) => {
   }
 
   res.render('edit_review', { review, productId: id });
+});
+
+router.delete('/product/:id/reviews/:reviewId', async (req, res) => {
+  const { id, reviewId } = req.params;
+  try {
+    await store.deleteReview(id, reviewId);
+    res.json({ success: true, message: 'Review deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Server error deleting review' });
+  }
 });

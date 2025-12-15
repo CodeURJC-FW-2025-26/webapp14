@@ -1,71 +1,99 @@
 <!DOCTYPE html>
 <html>
- <head>
-<meta charset="UTF-8">
-        <title>SellOra</title>
-      {{> partials/head}}
-  </head>
-  
+<head>
+    <meta charset="UTF-8">
+    <title>SellOra</title>
+    {{> partials/head}}
+</head>
+
 {{> partials/header}}
 
 <button class="btn-custom back-btn" onclick="window.location.href='/'">Go Back</button>
 
-  <body style="background-color: #9ba4b8;">
+<body style="background-color: #9ba4b8;">
     <main class="container py-4">
-      <div class="product-card">
-        <img src="{{product.image}}" class="product-image" alt="{{product.title}}">
-        <div class="product-details">
-          <div>
-            <div class="product-name">{{product.title}}</div>
-            <div class="product-description">{{product.text}}</div>
-          </div>
-          <div class="d-flex justify-content-between align-items-center">
-            <div class="product-price mb-0">{{product.price}}</div>
-            <div class="review-actions">
-              <a href="/product/{{product._id}}/edit" class="btn btn-custom me-2">Edit</a>
-              <a href="/product/{{product._id}}/delete" class="btn btn-custom me-2">Delete</a>
+        <div class="product-card">
+            <img src="{{product.image}}" class="product-image" alt="{{product.title}}">
+            <div class="product-details">
+                <div>
+                    <div class="product-name">{{product.title}}</div>
+                    <div class="product-description">{{product.text}}</div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="product-price mb-0">{{product.price}}€</div>
+                    <div class="review-actions">
+                        <a href="/product/{{product._id}}/edit" class="btn btn-custom me-2">Edit</a>
+                        <button onclick="deleteProduct('{{product._id}}')" class="btn btn-custom me-2">Delete</button>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
 
-<form class="review-form" action="/product/{{product._id}}/reviews" method="POST">
-  <h3>Leave your review!</h3>
-  <input type="text" name="author" class="review-textarea" placeholder="Your name" required>
-  <input type="text" name="text" class="review-textarea" placeholder="Write your review here..." required>
-  <select name="rating" required>
-      <option >⭐⭐⭐⭐⭐</option>
-      <option >⭐⭐⭐⭐☆</option>
-      <option >⭐⭐⭐☆☆</option>
-      <option >⭐⭐☆☆☆</option>
-      <option >⭐☆☆☆☆</option>
-  </select>
+        <form id="review-form" class="review-form" novalidate onsubmit="submitReview(event, '{{product._id}}')">
+            <h3>Leave your review!</h3>
 
-  <button type="submit" class="btn btn-custom me-2">Upload</button>
-</form>
+            <div class="mb-3">
+                <input type="text" id="review-author" name="author" class="review-textarea form-control" placeholder="Your name" required>
+                <div class="invalid-feedback">Please enter your name.</div>
+            </div>
 
-{{#product.reviews}}
-<div class="review-card">
-  <div class="review-header">
-    <div class="review-author">{{author}}</div>
-    <div class="review-date">{{date}}</div>
-  </div>
+            <div class="mb-3">
+                <input type="text" id="review-text" name="text" class="review-textarea form-control" placeholder="Write your review here..." required>
+                <div class="invalid-feedback">Please write a review text.</div>
+            </div>
 
-  <div class="review-content">“{{text}}”</div>
+            <div class="mb-3">
+                <select id="review-rating" name="rating" class="form-select" required>
+                    <option value="" selected disabled>Select rating</option>
+                    <option>⭐⭐⭐⭐⭐</option>
+                    <option>⭐⭐⭐⭐☆</option>
+                    <option>⭐⭐⭐☆☆</option>
+                    <option>⭐⭐☆☆☆</option>
+                    <option>⭐☆☆☆☆</option>
+                </select>
+                <div class="invalid-feedback">Please select a rating.</div>
+            </div>
 
-  <div class="review-rating">{{rating}}</div>
+            <button type="submit" class="btn btn-custom me-2">Upload</button>
+        </form>
 
-  <div class="review-actions">
-    <a href="/product/{{product._id}}/reviews/{{_id}}/edit" class="btn btn-custom me-2">Edit</a>
-    <a href="/product/{{product._id}}/reviews/{{_id}}/delete" class="btn btn-custom me-2">Delete</a>
-  </div>
-</div>
-{{/product.reviews}}
+        <div id="reviews-container">
+            {{#product.reviews}}
+            <div class="review-card" id="review-{{_id}}" data-author="{{author}}" data-text="{{text}}" data-rating="{{rating}}">
 
-</main>
+                <div class="review-view">
+                    <div class="review-header">
+                        <div class="review-author">{{author}}</div>
+                    </div>
 
-{{>partials/footer}}
+                    <div class="review-content">“{{text}}”</div>
 
+                    <div class="review-rating">{{rating}}</div>
+
+                    <div class="review-actions">
+                        <button onclick="editReview('{{_id}}')" class="btn btn-custom me-2">Edit</button>
+                        <button class="btn btn-custom me-2 btn-delete-review" 
+                                data-product-id="{{product._id}}" 
+                                data-review-id="{{_id}}">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {{/product.reviews}}
+        </div> </main> <div id="loader-reviews" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1050; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 15px rgba(0,0,0,0.2);">
+        <div class="spinner-border text-primary" role="status"></div>
+        <span class="ms-2">Processing...</span> 
+    </div>
+
+    <dialog id="modal-error-reviews" style="border: none; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); padding: 20px; text-align: center;">
+        <h3 class="mb-3">Error</h3>
+        <p id="txt-error-reviews" class="mb-4"></p>
+        <button id="btn-cerrar-modal-reviews" class="btn btn-custom">Close</button>
+    </dialog>
+
+    <script src="/js/app.js"></script>
+
+    {{>partials/footer}}
 </body>
 </html>
-
