@@ -259,7 +259,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Convert review card to edit form
+// Convert review card to edit form.
 window.editReview = function(reviewId) {
     const card = document.getElementById(`review-${reviewId}`);
     if (!card) return;
