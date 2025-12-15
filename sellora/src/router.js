@@ -95,7 +95,8 @@ router.get('/upload', (req, res) => {
 });
 
 router.post('/upload', upload.single('file'), async (req, res) => {
-  const wantsJson = (req.headers.accept || '').includes('application/json') ||
+  const wantsJson =
+    (req.headers.accept || '').includes('application/json') ||
     req.xhr ||
     req.headers['x-requested-with'] === 'XMLHttpRequest';
 
@@ -127,14 +128,20 @@ router.post('/upload', upload.single('file'), async (req, res) => {
     });
   }
 
-  await store.addProduct(product, req.file.filename);
+  const insertedId = await store.addProduct(product, req.file.filename);
+  const productId = insertedId.toString();
 
   if (wantsJson) {
-    return res.json({ success: true, redirectUrl: '/' });
+    return res.json({
+      success: true,
+      redirectUrl: `/product/${productId}`
+    });
   }
 
-  res.redirect('/');
+  res.redirect(`/product/${productId}`);
 });
+
+
 
 router.get('/product/:id', async (req, res) => {
   const id = req.params.id;
