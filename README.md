@@ -92,7 +92,9 @@ Open your browser at:
 **/public**
 - `css/` – Stylesheets used across the website.
 - `img/` – All static images used in the web app (product photos, icons, etc.).
-- `js/` – Client-side JavaScript for interactive features like infinite scroll, AJAX operations, and form validation
+- `js/` – Client-side JavaScript for interactive features:
+  - `app.js` – Infinite scroll functionality, dynamic product loading,AJAX operations, and form interactions
+  - `upload.js` – Client-side validation for both upload and edit forms with:validation
 - `data/`
   - `data.json` – Example product data.
   - `images/` – Can be used for storing product images loaded from JSON.
@@ -105,6 +107,8 @@ HTML templates rendered by the server:
   - `header.html` – Reusable header section.
   - `footer.html` – Reusable footer section.
   -  `head.html` – Reusable head section.
+  - `spinner.html` – Reusable loading spinner component
+
 
 - `SELLORA.html` – Homepage (displays products with infinite scroll, category filtering and search funcitonality)
 - `upload.html` – Page for adding a new product (fields for title, description, price, category, and image)
@@ -116,7 +120,7 @@ HTML templates rendered by the server:
 
 **Tasks:**  
 - Implemented **infinite scroll** functionality for the homepage 
-- Added **loading spinner** visual feedback
+- Added **loading spinners** visual feedback
 - Developed **image edition and removal features** for product editing
 - Implemented validations to the edit page to handle errors
  
@@ -135,7 +139,7 @@ HTML templates rendered by the server:
 - `app.js` (public)
 - `SELLORA.html` 
 - `edit.html` 
-- `detail.html` 
+- `spinner.html` (partials)
 - `README.md` 
 
 ---
