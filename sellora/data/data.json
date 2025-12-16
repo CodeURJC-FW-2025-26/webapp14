@@ -104,7 +104,7 @@
     "text": "Nintendo Entertainment System NES Classic Edition- Game Console With Controller Included [video game] ",
     "price": "179,99€",
     "image": "/img/NES.jpg",
-    "category": "Videogames",
+    "category": "Consoles",
     "reviews": [
       { "author": "Cillian Murphy", "text": "Love it ", "rating": "⭐⭐⭐⭐⭐" },
       { "author": "Bob Mars", "text": "Great one, highly recommend ", "rating": "⭐⭐⭐⭐⭐" }
@@ -112,93 +112,91 @@
   },
 
   {
-    "title": "Metal Gear Solid",
-    "text": "The first game of the saga Metal Gear Solid, PS1 version. English PAL Version. Accompany the legendary Solid Snake on his mission to Shadow Mosses.",
-    "price": "120,00€",
-    "image": "/img/MSG.jpg",
-    "category": "Videogames",
+    "title": "Turtle Beach Recon 70 Wired Gaming Headset ",
+    "text": "Gaming Headset - Licensed for Nintendo Switch 2, Nintendo Switch/Lite/OLED Model, Flip-to-Mute Mic, Adjustable, Lightweight, On-Ear Controls, 40mm Drivers, Black and White",
+    "price": "39,99€",
+    "image": "/img/headphones.jpg",
+    "category": "Consoles",
     "reviews": [
-      { "author": "Big Boss", "text": "Kept you wating huh?", "rating": "⭐⭐⭐⭐⭐" },
-      { "author": "Solid Snake", "text": "Life isnt about passing on your genes", "rating": "⭐⭐⭐⭐⭐" }
+      { "author": "Victor", "text": "Good quality", "rating": "⭐⭐⭐⭐⭐" },
+      { "author": "Martin Games", "text": "Highly recommend", "rating": "⭐⭐⭐⭐⭐" }
     ]
   },
 
   {
-    "title": "Metal Gear Solid",
-    "text": "The first game of the saga Metal Gear Solid, PS1 version. English PAL Version. Accompany the legendary Solid Snake on his mission to Shadow Mosses.",
-    "price": "120,00€",
-    "image": "/img/MSG.jpg",
-    "category": "Videogames",
+    "title": "Nintendo Wii Console",
+    "text": "Nintendo Wii Console, White Premium Bundle, with controllers and sensor bar included. Enjoy a wide range of family-friendly games and innovative motion controls.",
+    "price": "379,99€",
+    "image": "/img/WII.jpg",
+    "category": "Consoles",
     "reviews": [
-      { "author": "Big Boss", "text": "Kept you wating huh?", "rating": "⭐⭐⭐⭐⭐" },
-      { "author": "Solid Snake", "text": "Life isnt about passing on your genes", "rating": "⭐⭐⭐⭐⭐" }
+      { "author": "Big Boss", "text": "Good", "rating": "⭐⭐⭐⭐⭐" },
+      { "author": "Solid Snake", "text": "Very satisifed with this purchase", "rating": "⭐⭐⭐⭐⭐" }
     ]
   },
   
   {
-    "title": "Metal Gear Solid",
-    "text": "The first game of the saga Metal Gear Solid, PS1 version. English PAL Version. Accompany the legendary Solid Snake on his mission to Shadow Mosses.",
-    "price": "120,00€",
-    "image": "/img/MSG.jpg",
+    "title": "League of Legends Gift Card ",
+    "text": "NA Server Only [Online Game Code]",
+    "price": "100,00€",
+    "image": "/img/lol100.jpg",
     "category": "Videogames",
     "reviews": [
-      { "author": "Big Boss", "text": "Kept you wating huh?", "rating": "⭐⭐⭐⭐⭐" },
-      { "author": "Solid Snake", "text": "Life isnt about passing on your genes", "rating": "⭐⭐⭐⭐⭐" }
+      { "author": "Alex", "text": "Finally a LOL gift card!!", "rating": "⭐⭐⭐⭐⭐" }
     ]
   },
   {
-    "title": "Nintendo 3DS",
-    "text": "Nintendo 3DS Console - Red Metallic Edition, Handheld Console with 3D Display, Touchscreen, Wi-Fi, and SD Card Support",
-    "price": "249.99€",
-    "image": "/img/NINTENDO SELLORA PIC.jpeg",
-    "category": "Consoles",
+    "title": "FIFA 16 ",
+    "text": "Standard Edition - Xbox One",
+    "price": "7.59€",
+    "image": "/img/FIFA16.jpg",
+    "category": "Videogames",
     "reviews": [
-      { "author": "Alice", "text": "Great console!", "rating": "⭐⭐⭐⭐⭐" },
-      { "author": "Bob", "text": "Good, but expensive", "rating": "⭐⭐⭐⭐⭐" }
+      { "author": "Max", "text": "Great game!", "rating": "⭐⭐⭐⭐⭐" }
     ]
   },
   {
-    "title": "Nintendo 3DS",
-    "text": "Nintendo 3DS Console - Red Metallic Edition, Handheld Console with 3D Display, Touchscreen, Wi-Fi, and SD Card Support",
-    "price": "249.99€",
-    "image": "/img/NINTENDO SELLORA PIC.jpeg",
-    "category": "Consoles",
+    "title": " Red Bull Racing F1 Men's 2025 Team Polo Shirt",
+    "text": "OFFICIAL RED BULL RACING TEAM POLO: Authentic 2025 Formula 1 team shirt featuring official Red Bull Racing branding and team sponsors",
+    "price": "59.99€",
+    "image": "/img/rebullshirt.jpg",
+    "category": "Merch",
     "reviews": [
-      { "author": "Alice", "text": "Great console!", "rating": "⭐⭐⭐⭐⭐" },
-      { "author": "Bob", "text": "Good, but expensive", "rating": "⭐⭐⭐⭐⭐" }
+      { "author": "Lucas", "text": "Great shirt!", "rating": "⭐⭐⭐⭐⭐" },
+      { "author": "Carlos", "text": "Very satisified with my purchase", "rating": "⭐⭐⭐⭐⭐" }
     ]
   },
   {
-    "title": "Nintendo 3DS",
-    "text": "Nintendo 3DS Console - Red Metallic Edition, Handheld Console with 3D Display, Touchscreen, Wi-Fi, and SD Card Support",
-    "price": "249.99€",
-    "image": "/img/NINTENDO SELLORA PIC.jpeg",
-    "category": "Consoles",
+    "title": "Spider-Man: Kraven's Last Hunt Paperback ",
+    "text": "Marvel Universe, English version - 168 pages – April 6, 2010",
+    "price": "18.49",
+    "image": "/img/spidermancomic.jpg",
+    "category": "Comics",
     "reviews": [
-      { "author": "Alice", "text": "Great console!", "rating": "⭐⭐⭐⭐⭐" },
-      { "author": "Bob", "text": "Good, but expensive", "rating": "⭐⭐⭐⭐⭐" }
+      { "author": "Mark", "text": "Great one!Recommend", "rating": "⭐⭐⭐⭐⭐" },
+      { "author": "Bob", "text": "Good, but a little expensive", "rating": "⭐⭐⭐⭐⭐" }
+    ]
+  },
+
+  {
+    "title": "Donkey Kong Country™ Returns HD",
+    "text": "Jump, roll, and stomp through Donkey Kong Island in 2D platforming action Help Donkey Kong and Diddy Kong recover their precious banana hoard from the villainous Tiki Tak Tribe!",
+    "price": "50.39",
+    "image": "/img/donkey.jpg",
+    "category": "Videogames",
+    "reviews": [
+      { "author": "Eva", "text": "Great game!", "rating": "⭐⭐⭐⭐⭐" },
+      { "author": "Maria", "text": "Good", "rating": "⭐⭐⭐⭐⭐" }
     ]
   },
   {
-    "title": "Nintendo 3DS",
-    "text": "Nintendo 3DS Console - Red Metallic Edition, Handheld Console with 3D Display, Touchscreen, Wi-Fi, and SD Card Support",
-    "price": "249.99€",
-    "image": "/img/NINTENDO SELLORA PIC.jpeg",
-    "category": "Consoles",
+    "title": "Aston Martin 24 Formula 1 Racing Car Building Se",
+    "text": " AM24 Building Set, 1:8 Scale Collectible Set for Adults, Authentically Detailed Build and Display Model for Home or Office Décor (2351PCS, NF10279)",
+    "price": "89.99€",
+    "image": "/img/f1building.jpg",
+    "category": "Merch",
     "reviews": [
-      { "author": "Alice", "text": "Great console!", "rating": "⭐⭐⭐⭐⭐" },
-      { "author": "Bob", "text": "Good, but expensive", "rating": "⭐⭐⭐⭐⭐" }
-    ]
-  },
-  {
-    "title": "Nintendo 3DS",
-    "text": "Nintendo 3DS Console - Red Metallic Edition, Handheld Console with 3D Display, Touchscreen, Wi-Fi, and SD Card Support",
-    "price": "249.99€",
-    "image": "/img/NINTENDO SELLORA PIC.jpeg",
-    "category": "Consoles",
-    "reviews": [
-      { "author": "Alice", "text": "Great console!", "rating": "⭐⭐⭐⭐⭐" },
-      { "author": "Bob", "text": "Good, but expensive", "rating": "⭐⭐⭐⭐⭐" }
+      { "author": "Steven", "text": "Love it", "rating": "⭐⭐⭐⭐⭐" }
     ]
   }
 ]
