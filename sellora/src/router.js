@@ -100,6 +100,8 @@ router.post('/upload', upload.single('file'), async (req, res) => {
     req.xhr ||
     req.headers['x-requested-with'] === 'XMLHttpRequest';
 
+  await setTimeout(1000);
+
   const product = {
     title: (req.body.title || '').trim(),
     text: (req.body.text || '').trim(),
