@@ -68,22 +68,31 @@ Open your browser at:
 
 - `router.js` – Handles all web routes:
   - Rendering pages: homepage, product detail, upload, edit
-  - Pagination, search, and category filtering
+  - Infinite scroll  (`GET /loadmoreproducts`): Loads additional products dynamically with a 500ms delay and spinner effect
+  - Search and category filtering
   - Image uploads and downloads via `multer`
   - Delegates database operations to `store.js`
+  - **Product upload** (`GET /upload`, `POST /upload`): Allows users to create new products with image upload validation
+  - **Product editing** (`GET /product/:id/edit`, `POST /product/:id/edit`): 
+    - Enables editing of existing products
+    - Supports image replacement and removal 
+  - **Product deletion** (`DELETE /product/:id`): Removes products and their associated images
+
 
 - `store.js` – Handles all database operations:
   - Connects to MongoDB and manages the `products` collection
   - CRUD operations: create, read, update, delete products
-  - Pagination and filtering
+  - Filtering
 
 - `load_data.js` – Functions for loading data from JSON or the database.
-
+  - Reads product data from `/data/data.json`
+  - Clears existing database and loads demo products
 
 
 **/public**
 - `css/` – Stylesheets used across the website.
 - `img/` – All static images used in the web app (product photos, icons, etc.).
+- `js/` – Client-side JavaScript for interactive features like infinite scroll, AJAX operations, and form validation
 - `data/`
   - `data.json` – Example product data.
   - `images/` – Can be used for storing product images loaded from JSON.
@@ -95,36 +104,40 @@ HTML templates rendered by the server:
 - `partials/`
   - `header.html` – Reusable header section.
   - `footer.html` – Reusable footer section.
+  -  `head.html` – Reusable head section.
 
-- `SELLORA.html` – Homepage.
-- `upload.html` – Page for adding a new product.
-- `detail.html` – Product detail page.
+- `SELLORA.html` – Homepage (displays products with infinite scroll, category filtering and search funcitonality)
+- `upload.html` – Page for adding a new product (fields for title, description, price, category, and image)
+- `detail.html` – Product detail page (full product information display, review section with add/edit/delete functionalities)
+- `edit.html` – Product editing page (pre-filled form with existing product data, image preview)
 
-
-## **Demonstration Video**
-
-The video includes: 
-
-  - The main features of the web application
-  - Navigation through the website
-  - Product viewing, editing, and uploading
-
-Video link: 
----------------------------------------
-## **Members' participation**
 
 #### Rim Afoud – 
 
 **Tasks:**  
- 
+ - Implemented **infinite scroll** functionality for the homepage (created `/loadmoreproducts` in `router.js` with pagination support and dynamic product loading without page refresh)
+- Added **loading spinner** visual feedback
+- Developed **image removal feature** for product editing
+  - Added checkbox option in `edit.html` to remove product images
+  - Implemented server-side logic in `router.js` to handle image deletion
+  - Automatically deletes image files from `/uploads` directory when removed
 
-**5 most significant commits:**  
-
-
+** Most significant commits:**  
+1. [Commit 1][# Infinite scroll+loading spinner ](https://github.com/CodeURJC-FW-2025-26/webapp14/commit/48948b81507912d43768ce4e18cacb76843b90bc)
+2. [Commit 2][# Image editing feature in edit page] (https://github.com/CodeURJC-FW-2025-26/webapp14/commit/d97f9a9f3580415253b19b93cd0f34ef676c86a7)
+3. [Commit 3][# Image deletion feature in edit page] (https://github.com/CodeURJC-FW-2025-26/webapp14/commit/507e96c37673888587f9036c86adada5be1a91fd)
+4. [Commit 4][#README file creation]()
+5. [Commit 5][# new products in data file] ()
 
 
 
 **Files with most participation:**  
+- `router.js`
+- `app.js` (public)
+- `SELLORA.html` 
+- `edit.html` 
+- `detail.html` 
+- `README.md` 
 
 ---
 
@@ -132,7 +145,7 @@ Video link:
 **Tasks:**  
 
 - 
-**5 most significant commits:**  
+**Most significant commits:**  
 
 
 **Files with most participation:**  
@@ -143,7 +156,7 @@ Video link:
 **Tasks:**  
 
 
-**5 most significant commits:**  
+**Most significant commits:**  
 
 
 
