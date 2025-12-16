@@ -143,12 +143,18 @@ HTML templates rendered by the server:
 #### Ignacio Roncero Medina – 
 **Tasks:**  
 
-- 
+- Implemented AJAX functionality to secundary entities(Create, edit and delete reviews)
+- AJAX deletion of primary entities (products)
+- adapted the interactive images with AJAX from the upload page in edit page
 **Most significant commits:**  
-
+1.[Commit 1 - Delete product, submit, delete and edit review (AJAX)](https://github.com/CodeURJC-FW-2025-26/webapp14/commit/274de3c2baa79b17274488fee48c108e890d8f9f)
+2.[Commit 2 - imagen ajax pagina edit product](https://github.com/CodeURJC-FW-2025-26/webapp14/commit/119b7c3ffb351cc5ab2e95f441fd9b9420c64f11)
 
 **Files with most participation:**  
-
+- `router.js`
+- `app.js` (public)
+- `detail.html`
+- `edit.html`
 ---
 
 #### Nuria Amrani Villuendas – 
