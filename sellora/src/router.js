@@ -453,6 +453,17 @@ router.delete('/product/:id/reviews/:reviewId', async (req, res) => {
   const { id, reviewId } = req.params;
 
   try {
+    // First check if product and review exist
+    const product = await store.getProduct(id);
+    if (!product) {
+      return res.status(404).json({ success: false, message: 'Product not found' });
+    }
+    
+    const reviewExists = product.reviews && product.reviews.some(r => r._id.toString() === reviewId);
+    if (!reviewExists) {
+      return res.status(404).json({ success: false, message: 'Review not found' });
+    }
+    
     await store.deleteReview(id, reviewId);
     
     res.json({ success: true, message: 'Review deleted successfully' });

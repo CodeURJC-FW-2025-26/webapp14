@@ -111,10 +111,11 @@ export async function addReview(productId, review) {
 }
 
 export async function deleteReview(productId, reviewId) {
-  await products.updateOne(
+  const result = await products.updateOne(
     { _id: new ObjectId(productId) },
     { $pull: { reviews: { _id: new ObjectId(reviewId) } } }
   );
+  return result;
 }
 
 export async function updateReview(productId, reviewId, updatedReview) {
