@@ -88,6 +88,11 @@
           <button class="btn btn-custom me-2" type="submit">Save</button>
           <a href="/product/{{product._id}}" class="btn btn-custom me-2">Cancel</a>
         </div>
+        
+        <!-- Loading Spinner -->
+        {{#editSpinner}}
+          {{> partials/spinner}}
+        {{/editSpinner}}
       </form>
     </div>
   </div>

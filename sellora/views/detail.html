@@ -55,6 +55,11 @@
             </div>
 
             <button type="submit" class="btn btn-custom me-2">Upload</button>
+            
+            <!-- Loading Spinner -->
+            {{#reviewSpinner}}
+              {{> partials/spinner}}
+            {{/reviewSpinner}}
         </form>
 
         <div id="reviews-container">
@@ -81,10 +86,14 @@
                 </div>
             </div>
             {{/product.reviews}}
-        </div> </main> <div id="loader-reviews" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1050; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 15px rgba(0,0,0,0.2);">
+    
+    <!-- Edit Review Spinner -->
+    <div id="loading-indicator" class="text-center" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1050; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 15px rgba(0,0,0,0.2);">
         <div class="spinner-border text-primary" role="status"></div>
-        <span class="ms-2">Processing...</span> 
+        <p class="mt-2 mb-0" id="spinner-text">Updating review...</p> 
     </div>
+        </div>
+    </main>
 
     <dialog id="modal-error-reviews" style="border: none; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); padding: 20px; text-align: center;">
         <h3 class="mb-3">Error</h3>

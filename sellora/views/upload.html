@@ -51,10 +51,9 @@
               <button id="upload-submit-btn" type="submit" class="btn-custom">Save</button>
             </div>
 
-            <div id="upload-loading-indicator" class="text-center my-3" style="display:none">
-              <div class="spinner-border" role="status"></div>
-              <p class="mt-2">Processing...</p>
-            </div>
+            {{#uploadSpinner}}
+              {{> partials/spinner}}
+            {{/uploadSpinner}}
           </form>
         </div>
       </div>

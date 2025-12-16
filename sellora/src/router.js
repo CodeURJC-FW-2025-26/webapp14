@@ -55,7 +55,11 @@ router.get('/', async (req, res) => {
     navbarText: "- SellOra",
     navItems: [
       { label: "Home", link: "/", active: "active" }
-    ]
+    ],
+    loadMoreSpinner: {
+      id: 'loading-indicator',
+      message: 'Loading more products...'
+    }
   });
 });
 
@@ -90,7 +94,11 @@ router.get('/loadmoreproducts', async (req, res) => {
 router.get('/upload', (req, res) => {
   res.render('upload', {
     errors: [],
-    previous: {}
+    previous: {},
+    uploadSpinner: {
+      id: 'upload-loading-indicator',
+      message: 'Processing...'
+    }
   });
 });
 
@@ -100,7 +108,7 @@ router.post('/upload', upload.single('file'), async (req, res) => {
     req.xhr ||
     req.headers['x-requested-with'] === 'XMLHttpRequest';
 
-  await setTimeout(1000);
+  await setTimeout(500);
 
   const product = {
     title: (req.body.title || '').trim(),
@@ -167,7 +175,17 @@ router.get('/product/:id', async (req, res) => {
     product.image = '/img/placeholder.png';
   }
 
-  res.render('detail', { product });
+  res.render('detail', { 
+    product,
+    reviewSpinner: {
+      id: 'review-loading-indicator',
+      message: 'Submitting review...'
+    },
+    editReviewSpinner: {
+      id: 'loading-indicator',
+      message: 'Updating review...'
+    }
+  });
 });
 
 router.delete('/product/:id', async (req, res) => {
@@ -217,10 +235,18 @@ router.get('/product/:id/edit', async (req, res) => {
     product.imageUrl = product.image.startsWith('/') ? product.image : `/uploads/${product.image}`;
   }
 
-  res.render('edit', { product });
+  res.render('edit', { 
+    product,
+    editSpinner: {
+      id: 'edit-loading-indicator',
+      message: 'Saving changes...'
+    }
+  });
 });
 
 router.post('/product/:id/edit', upload.single('image'), async (req, res) => {
+  await setTimeout(500);
+  
   const id = req.params.id;
   const existing = await store.getProduct(id);
 
@@ -303,6 +329,8 @@ router.post('/product/:id/edit', upload.single('image'), async (req, res) => {
 });
 
 router.post('/product/:id/reviews', async (req, res) => {
+  await setTimeout(800);
+  
   const productId = req.params.id;
 
   const review = {
@@ -344,6 +372,8 @@ router.post('/product/:id/reviews', async (req, res) => {
 });
 
 router.post('/product/:id/reviews/:reviewId/edit', async (req, res) => {
+  await setTimeout(800);
+  
   const { id, reviewId } = req.params;
 
   const updatedReview = {
@@ -386,6 +416,8 @@ router.post('/product/:id/reviews/:reviewId/edit', async (req, res) => {
 });
 
 router.delete('/product/:id/reviews/:reviewId', async (req, res) => {
+  await setTimeout(500);
+  
   const { id, reviewId } = req.params;
 
   try {

@@ -98,10 +98,6 @@ window.deleteProduct = async function(productId) {
     //Confirmation
     if (!confirm("Are you sure you want to delete this product?")) return;
 
-    //Spinner
-    const spinner = document.getElementById('delete-spinner');
-    if (spinner) spinner.style.display = 'flex';
-
     try {
         //AJAX petition
         const response = await fetch(`/product/${productId}`, {
@@ -116,7 +112,6 @@ window.deleteProduct = async function(productId) {
         }
 
     } catch (error) {
-        if (spinner) spinner.style.display = 'none';
         alert("Error deleting product: " + error.message);
     }
 };
@@ -143,7 +138,7 @@ window.submitReview = async function(event, productId) {
     if (!isValid) return;
 
     // Spinner
-    const spinner = document.getElementById('loading-indicator');
+    const spinner = document.getElementById('review-loading-indicator');
     if (spinner) spinner.style.display = 'block';
 
     const formData = new URLSearchParams();
@@ -411,8 +406,6 @@ function renderReviewView(container, review) {
 
 // AJAX delete review
 document.addEventListener('DOMContentLoaded', () => {
-    const loader = document.getElementById('loader-reviews');
-
     document.body.addEventListener('click', async function(e) {
         if (e.target.classList.contains('btn-delete-review')) {
 
@@ -421,9 +414,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const btn = e.target;
             const productId = btn.dataset.productId;
             const reviewId = btn.dataset.reviewId;
-
-            //loader
-            if(loader) loader.style.display = 'block';
 
             try {
                 // Ajax request
@@ -441,9 +431,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     throw new Error("Invalid server response");
                 }
 
-                // hide loader
-                if(loader) loader.style.display = 'none';
-
                 if (response.ok && data.success) {
                     const reviewCard = document.getElementById(`review-${reviewId}`);
                     if (reviewCard) {
@@ -454,7 +441,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
             } catch (error) {
-                if(loader) loader.style.display = 'none';
                 console.error(error);
                 alert('Connection error. Please try again.');
             }
@@ -469,6 +455,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     editForm.addEventListener('submit', async function(e) {
         e.preventDefault();
+        
+        // Show spinner
+        const spinner = document.getElementById('edit-loading-indicator');
+        if (spinner) spinner.style.display = 'block';
         
         const formData = new FormData(this);
         
@@ -488,6 +478,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     document.close();
                 }
             } else {
+                // Hide spinner on error
+                if (spinner) spinner.style.display = 'none';
+                
                 // Error, get error bootstrap modal
                 const data = await response.json();
                 if (data.errors && data.errors.length > 0) {
@@ -498,6 +491,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         } catch (error) {
+            // Hide spinner on error
+            const spinner = document.getElementById('edit-loading-indicator');
+            if (spinner) spinner.style.display = 'none';
+            
             console.error('Error:', error);
             const errorList = document.getElementById('errorList');
             errorList.innerHTML = '<li>An error occurred while updating the product.</li>';
