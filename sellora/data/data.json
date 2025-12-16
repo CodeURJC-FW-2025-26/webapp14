@@ -100,14 +100,14 @@
   },
 
   {
-    "title": "Metal Gear Solid",
-    "text": "The first game of the saga Metal Gear Solid, PS1 version. English PAL Version. Accompany the legendary Solid Snake on his mission to Shadow Mosses.",
-    "price": "120,00€",
-    "image": "/img/MSG.jpg",
+    "title": "Nintendo NES",
+    "text": "Nintendo Entertainment System NES Classic Edition- Game Console With Controller Included [video game] ",
+    "price": "179,99€",
+    "image": "/img/NES.jpg",
     "category": "Videogames",
     "reviews": [
-      { "author": "Big Boss", "text": "Kept you wating huh?", "rating": "⭐⭐⭐⭐⭐" },
-      { "author": "Solid Snake", "text": "Life isnt about passing on your genes", "rating": "⭐⭐⭐⭐⭐" }
+      { "author": "Cillian Murphy", "text": "Love it ", "rating": "⭐⭐⭐⭐⭐" },
+      { "author": "Bob Mars", "text": "Great one, highly recommend ", "rating": "⭐⭐⭐⭐⭐" }
     ]
   },
 

@@ -223,7 +223,7 @@ router.post('/product/:id/edit', upload.single('image'), async (req, res) => {
   const existing = await store.getProduct(id);
 
   if (!existing) {
-    return res.status(404).render('deleted_product');
+    return res.status(404).json({ success: false, errors: ['Product not found'] });
   }
 
   const updatedFields = {
@@ -240,20 +240,20 @@ router.post('/product/:id/edit', upload.single('image'), async (req, res) => {
   }
 
   const allProducts = await store.getAllProducts();
-  const isDuplicate = allProducts.some(p => 
-    p._id.toString() !== id.toString() && 
-    p.title.trim().toLowerCase() === updatedFields.title.trim().toLowerCase()
-  );
+  const currentProductId = new ObjectId(id);
+  const isDuplicate = allProducts.some(p => {
+    // exclude the current product being edited
+    const isSameProduct = p._id.equals(currentProductId);
+    const hasSameTitle = p.title.trim().toLowerCase() === updatedFields.title.trim().toLowerCase();
+    return !isSameProduct && hasSameTitle;
+  });
 
   if (isDuplicate) {
     errors.push("A product with this title already exists.");
   }
 
   if (errors.length > 0) {
-    return res.status(400).render('error', {
-      message: errors.join(' '),
-      backUrl: `/product/${id}/edit`
-    });
+    return res.status(400).json({ success: false, errors });
   }
 
   try {
@@ -280,24 +280,23 @@ router.post('/product/:id/edit', upload.single('image'), async (req, res) => {
     await store.updateProduct(id, updatedFields);
     const updatedProduct = await store.getProduct(id); 
 
-     const productForTemplate = {
-            ...updatedProduct,
-            _id: updatedProduct._id.toString(),
-            title: updatedProduct.title,
-            text: updatedProduct.text,
-            price: updatedProduct.price,
-            category: updatedProduct.category,
-            image: updatedProduct.image ? (updatedProduct.image.startsWith('/') ? updatedProduct.image : `/uploads/${updatedProduct.image}`) : '/img/placeholder.png'
+    const productForTemplate = {
+      ...updatedProduct,
+      _id: updatedProduct._id.toString(),
+      title: updatedProduct.title,
+      text: updatedProduct.text,
+      price: updatedProduct.price,
+      category: updatedProduct.category,
+      image: updatedProduct.image ? (updatedProduct.image.startsWith('/') ? updatedProduct.image : `/uploads/${updatedProduct.image}`) : '/img/placeholder.png'
+    };
 
-        };
-
-    res.render('updated_product', { 
-    product: productForTemplate,  
-    backUrl: `/product/${id}/edit` 
-});
+    res.render('detail.html', { 
+      product: productForTemplate,  
+      backUrl: `/product/${id}/edit` 
+    });
 
   } catch (err) {
-    res.status(500).render('error', { message: 'Error updating product.' });
+    res.status(500).json({ success: false, errors: ['Error updating product.'] });
   }
 });
 
@@ -323,7 +322,7 @@ router.post('/product/:id/reviews', async (req, res) => {
   }
 
   if (errors.length > 0) {
-    return res.status(400).json({ 
+    return res.status(400).json({
       success: false, 
       message: errors.join(' ') 
     });

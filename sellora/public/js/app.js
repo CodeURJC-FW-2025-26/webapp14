@@ -461,3 +461,48 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+// check product form for edit page
+document.addEventListener('DOMContentLoaded', () => {
+    const editForm = document.getElementById('edit-product-form');
+    if (!editForm) return;
+
+    editForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(this);
+        
+        try {
+            const response = await fetch(this.action, {
+                method: 'POST',
+                body: formData
+            });
+            
+            if (response.ok) {
+                const contentType = response.headers.get('content-type');
+                if (contentType && contentType.includes('text/html')) {
+                    // Success, get the page
+                    const html = await response.text();
+                    document.open();
+                    document.write(html);
+                    document.close();
+                }
+            } else {
+                // Error, get error bootstrap modal
+                const data = await response.json();
+                if (data.errors && data.errors.length > 0) {
+                    const errorList = document.getElementById('errorList');
+                    errorList.innerHTML = data.errors.map(err => `<li>${err}</li>`).join('');
+                    const modal = new bootstrap.Modal(document.getElementById('errorModal'));
+                    modal.show();
+                }
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            const errorList = document.getElementById('errorList');
+            errorList.innerHTML = '<li>An error occurred while updating the product.</li>';
+            const modal = new bootstrap.Modal(document.getElementById('errorModal'));
+            modal.show();
+        }
+    });
+});
