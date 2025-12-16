@@ -586,3 +586,43 @@ body {
     justify-content: center;
   }
 }
+
+/* Styled remove image button for upload form */
+.btn-remove-image {
+  display: none; /* shown via JS when a file is selected */
+  background: linear-gradient(90deg,#ff6b6b,#ff4d4d);
+  color: white;
+  border: none;
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(255,77,77,0.18);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  align-items: center;
+  gap: 8px;
+}
+.btn-remove-image:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(255,77,77,0.22);
+}
+.btn-remove-image:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 900px) {
+  .btn-remove-image { font-size: 0.9rem; padding: 7px 10px; }
+}
+
+/* Field-level error messages shown under inputs */
+.field-error {
+  color: #b00020;
+  font-size: 0.9rem;
+  margin-top: 6px;
+  min-height: 1.2em; /* keep space so layout doesn't shift too much */
+}
+
+.input-invalid {
+  border-color: #b00020 !important;
+  box-shadow: 0 0 0 3px rgba(176,0,32,0.06);
+}

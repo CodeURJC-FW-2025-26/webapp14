@@ -138,17 +138,31 @@ router.post('/upload', upload.single('file'), async (req, res) => {
     });
   }
 
-  const insertedId = await store.addProduct(product, req.file.filename);
-  const productId = insertedId.toString();
+  try {
+    const insertedId = await store.addProduct(product, req.file.filename);
+    const productId = insertedId.toString();
 
-  if (wantsJson) {
-    return res.json({
-      success: true,
-      redirectUrl: `/product/${productId}`
-    });
+    if (wantsJson) {
+      return res.json({
+        success: true,
+        redirectUrl: `/product/${productId}`
+      });
+    }
+
+    return res.redirect(`/product/${productId}`);
+  } catch (err) {
+    // Handle duplicate title error from MongoDB unique index
+    if (err && (err.code === 11000 || (err.codeName && err.codeName === 'DuplicateKey'))) {
+      const dupErr = ['A product with that title already exists.'];
+      if (wantsJson) return res.status(400).json({ success: false, errors: dupErr });
+      return res.status(400).render('error', { message: dupErr.join(' '), backUrl: '/upload' });
+    }
+
+    // rethrow unexpected errors
+    console.error('Error inserting product:', err);
+    if (wantsJson) return res.status(500).json({ success: false, errors: ['Server error saving product.'] });
+    return res.status(500).render('error', { message: 'Server error saving product.', backUrl: '/upload' });
   }
-
-  res.redirect(`/product/${productId}`);
 });
 
 
