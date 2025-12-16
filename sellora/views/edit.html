@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-      <title>Edit product - SellOra</title>
+  <title>Edit product - SellOra</title>
   {{> partials/head}}
 </head>
 <body>
@@ -12,103 +12,81 @@
     <div class="card p-4">
       <h3>Edit product</h3>
 
-      <form id="edit-product-form" action="/product/{{product._id}}/edit" method="POST" enctype="multipart/form-data" novalidate>
+      <form id="edit-product-form" action="/product/{{product._id}}/edit" method="POST" enctype="multipart/form-data">
 
         <div class="mb-3">
           <label class="form-label">Title</label>
           <input name="title" class="form-control" required value="{{product.title}}">
-          <div class="field-error" id="error-title" aria-live="polite"></div>
+          <div class="text-danger mt-1" id="error-title"></div>
         </div>
 
         <div class="mb-3">
           <label class="form-label">Description</label>
-          <textarea name="text" class="form-control" rows="4" required minlength="20" maxlength="500">{{product.text}}</textarea>
-          <div class="field-error" id="error-description" aria-live="polite"></div>
+          <textarea name="text" class="form-control" rows="4" required>{{product.text}}</textarea>
+          <div class="text-danger mt-1" id="error-description"></div>
         </div>
 
         <div class="mb-3">
           <label class="form-label">Price</label>
-          <input name="price" type="number" step="0.01" class="form-control" required value="{{product.price}}">
-          <div class="field-error" id="error-price" aria-live="polite"></div>
+          <input name="price" class="form-control" required value="{{product.price}}">
+          <div class="text-danger mt-1" id="error-price"></div>
         </div>
 
         <div class="mb-3">
           <label>Category
-          <select name="category" required>
-
-          <option value="Consoles" {{#product.category_Consoles}}selected{{/product.category_Consoles}}>
-            Consoles
-          </option>
-
-          <option value="Videogames" {{#product.category_Videogames}}selected{{/product.category_Videogames}}>
-            Videogames
-          </option>
-
-          <option value="Esports" {{#product.category_Esports}}selected{{/product.category_Esports}}>
-            Esports
-          </option>
-
-          <option value="Comics" {{#product.category_Comics}}selected{{/product.category_Comics}}>
-            Comics
-          </option>
-
-          <option value="Merch" {{#product.category_Merch}}selected{{/product.category_Merch}}>
-            Merch
-          </option>
-  </select>
-</label>
-          <div class="field-error" id="error-category" aria-live="polite"></div>
+            <select name="category" required class="form-select">
+              <option value="Consoles" {{#product.category_Consoles}}selected{{/product.category_Consoles}}>Consoles</option>
+              <option value="Videogames" {{#product.category_Videogames}}selected{{/product.category_Videogames}}>Videogames</option>
+              <option value="Esports" {{#product.category_Esports}}selected{{/product.category_Esports}}>Esports</option>
+              <option value="Comics" {{#product.category_Comics}}selected{{/product.category_Comics}}>Comics</option>
+              <option value="Merch" {{#product.category_Merch}}selected{{/product.category_Merch}}>Merch</option>
+            </select>
+          </label>
+          <div class="text-danger mt-1" id="error-category"></div>
         </div>
 
         <div class="mb-3">
-          <label class="form-label">Current Image</label>
-          <div>
+          <label class="form-label">Product Image</label>
+          
+          <div class="mainpic-container mb-2" style="max-width: 300px;">
             {{#product.imageUrl}}
-              <img src="{{product.imageUrl}}" class="product-image" alt="{{product.title}}" style="max-width: 300px;">
+              <img id="preview-image" src="{{product.imageUrl}}" class="product-image w-100 rounded" alt="{{product.title}}">
             {{/product.imageUrl}}
             {{^product.imageUrl}}
-              <img src="/img/placeholder.png" class="product-image" alt="No image" style="max-width: 300px;">
+              <img id="preview-image" src="/img/imagen_2025-10-14_183044131.png" class="product-image w-100 rounded" alt="No image">
             {{/product.imageUrl}}
+          </div>
+
+          <input type="hidden" name="removeImage" id="remove-image-hidden" value="off">
+
+          <div class="d-flex align-items-center gap-2">
+            <input type="file" id="file-input" name="file" accept=".jpg,.jpeg,.png,.webp" class="form-control">
+            
+            <button type="button" id="remove-image-btn" class="btn-remove-image" style="display: none;">Remove</button>
           </div>
         </div>
 
-        {{#product.imageUrl}}
-        <div class="mb-3 form-check">
-          <input type="checkbox" name="removeImage" class="form-check-input" id="removeImage">
-          <label class="form-check-label" for="removeImage">
-            Remove current image
-          </label>
-        </div>
-        {{/product.imageUrl}}
-
-        <div class="mb-3">
-          <label class="form-label">Upload new image (optional)</label>
-          <input type="file" name="image" accept=".jpg,.jpeg,.png" class="form-control">
-          <div class="form-text">If you don't select a file, the previous image will be kept.</div>
+        <div id="edit-loading-indicator" style="display:none;" class="mb-3">
+           <div class="spinner-border text-primary" role="status"></div> Processing...
         </div>
 
         <div class="d-flex gap-2">
           <button class="btn btn-custom me-2" type="submit">Save</button>
           <a href="/product/{{product._id}}" class="btn btn-custom me-2">Cancel</a>
         </div>
-        
-        <!-- Loading Spinner -->
-        {{#editSpinner}}
-          {{> partials/spinner}}
-        {{/editSpinner}}
       </form>
     </div>
   </div>
 
-  <div class="modal fade" id="errorModal" tabindex="-1">
+  <div class="modal fade" id="errorModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Error editing product</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          <h5 class="modal-title">Check these errors</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <ul id="errorList"></ul>
+          <ul id="errorList" class="text-danger"></ul>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -117,6 +95,7 @@
     </div>
   </div>
 
+  <script src="/js/app.js"></script>
   <script src="/js/upload.js"></script>
  
 </body>

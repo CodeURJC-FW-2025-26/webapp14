@@ -25,7 +25,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const fileInput = document.getElementById('file-input');
   const previewImage = document.getElementById('preview-image');
+  const removeHidden = document.getElementById('remove-image-hidden');
   let _currentObjectUrl = null;
+
+  // Placeholder images paths 
+  const PLACEHOLDERS = ['/img/imagen_2025-10-14_183044131.png', '/img/placeholder.png'];
 
   if (fileInput && previewImage) {
     const removeBtn = document.getElementById('remove-image-btn');
@@ -33,6 +37,11 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!removeBtn) return;
       removeBtn.style.display = visible ? 'inline-flex' : 'none';
     };
+
+    const currentSrc = previewImage.getAttribute('src');
+    if (currentSrc && !PLACEHOLDERS.some(p => currentSrc.includes(p))) {
+        updateRemoveBtn(true);
+    }
 
     fileInput.addEventListener('change', () => {
       const file = fileInput.files && fileInput.files[0];
@@ -46,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
         _currentObjectUrl = URL.createObjectURL(file);
         previewImage.src = _currentObjectUrl;
         updateRemoveBtn(true);
+        if (removeHidden) removeHidden.value = 'off';
       } else {
         if (_currentObjectUrl) {
           URL.revokeObjectURL(_currentObjectUrl);
@@ -56,8 +66,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    if (document.getElementById('remove-image-btn')) {
-      document.getElementById('remove-image-btn').addEventListener('click', () => {
+    if (removeBtn) {
+      removeBtn.addEventListener('click', () => {
         if (_currentObjectUrl) {
           URL.revokeObjectURL(_currentObjectUrl);
           _currentObjectUrl = null;
@@ -65,18 +75,19 @@ document.addEventListener('DOMContentLoaded', () => {
         fileInput.value = '';
         previewImage.src = '/img/imagen_2025-10-14_183044131.png';
         updateRemoveBtn(false);
+        if (removeHidden) removeHidden.value = 'on';
       });
     }
   }
 
   const showSpinner = () => {
-    spinner.style.display = 'block';
-    submitBtn.disabled = true;
+    if(spinner) spinner.style.display = 'block';
+    if(submitBtn) submitBtn.disabled = true;
   };
 
   const hideSpinner = () => {
-    spinner.style.display = 'none';
-    submitBtn.disabled = false;
+    if(spinner) spinner.style.display = 'none';
+    if(submitBtn) submitBtn.disabled = false;
   };
 
   // clear any inline field errors and invalid visual state
@@ -242,7 +253,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const data = await response.json();
 
       if (response.ok && data.success) {
-        window.location.href = data.redirectUrl;
+        window.location.href = data.redirectUrl || `/product/${data.product._id}`;
         return;
       }
 

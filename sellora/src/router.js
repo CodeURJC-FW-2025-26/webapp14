@@ -273,7 +273,7 @@ router.get('/product/:id/edit', async (req, res) => {
   });
 });
 
-router.post('/product/:id/edit', upload.single('image'), async (req, res) => {
+router.post('/product/:id/edit', upload.single('file'), async (req, res) => {
   await setTimeout(500);
   
   const id = req.params.id;
