@@ -1,8 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('upload-form');
-  const spinner = document.getElementById('upload-loading-indicator');
-  const submitBtn = document.getElementById('upload-submit-btn');
-  const errorList = document.getElementById('error-modal-list');
+  // Works for both upload and edit forms
+  const form = document.getElementById('upload-form') || document.getElementById('edit-product-form');
+  if (!form) return; // No form found, exit
+  
+  const spinner = document.getElementById('upload-loading-indicator') || document.getElementById('edit-loading-indicator');
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const errorList = document.getElementById('error-modal-list') || document.getElementById('errorList');
   const errorModalEl = document.getElementById('errorModal');
   const errorModal = errorModalEl ? new bootstrap.Modal(errorModalEl) : null;
 
@@ -78,8 +81,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // clear any inline field errors and invalid visual state
   const clearFieldErrors = () => {
-    [errTitle, errDescription, errCategory, errPrice, errFile].forEach(el => { if (el) el.textContent = ''; });
-    [titleInput, descriptionInput, categorySelect, priceInput, fileInput].forEach(el => { if (el && el.classList) el.classList.remove('input-invalid'); });
+    [errTitle, errDescription, errCategory, errPrice, errFile].filter(el => el).forEach(el => el.textContent = '');
+    [titleInput, descriptionInput, categorySelect, priceInput, fileInput].filter(el => el).forEach(el => el.classList.remove('input-invalid'));
     if (errorList) errorList.innerHTML = '';
   };
 
@@ -95,6 +98,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (v.rangeOverflow) return `Value must be no more than ${fld.max}.`;
     if (v.stepMismatch) return 'Please enter a valid value.';
     if (v.patternMismatch) return 'Please match the requested format.';
+    // Custom validation: title must start with capital letter
+    if (fld === titleInput && fld.value && fld.value.trim()) {
+      const firstChar = fld.value.trim()[0];
+      if (firstChar !== firstChar.toUpperCase() || firstChar.toLowerCase() === firstChar) {
+        return 'Title must start with a capital letter.';
+      }
+    }
     return 'Invalid value';
   };
 
@@ -103,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!original) return '';
     const s = String(original || '');
     const low = s.toLowerCase();
-    if (fieldKey === 'description') {
+    if (fieldKey === 'description' || fieldKey === 'text') {
       if (low.includes('longitud') || low.includes('min') || low.includes('length') || low.includes('at least')) {
         const n = (descriptionInput && descriptionInput.minLength) || 20;
         return `Please lengthen this text to ${n} characters or more.`;
@@ -192,6 +202,20 @@ document.addEventListener('DOMContentLoaded', () => {
     let ok = true;
     for (const fld of fieldsToCheck) {
       if (!fld) continue;
+      
+      // Check custom title validation (capital letter)
+      if (fld === titleInput && fld.value && fld.value.trim()) {
+        const firstChar = fld.value.trim()[0];
+        if (firstChar !== firstChar.toUpperCase() || firstChar.toLowerCase() === firstChar) {
+          ok = false;
+          if (errTitle) {
+            errTitle.textContent = 'Title must start with a capital letter.';
+            fld.classList.add('input-invalid');
+          }
+          continue;
+        }
+      }
+      
       if (!fld.checkValidity()) {
         ok = false;
         const vm = getValidationMessage(fld) || 'Invalid value';
@@ -249,8 +273,8 @@ document.addEventListener('DOMContentLoaded', () => {
           displayFieldErrors(raw);
         }
       }
-      // if there are generic errors and a modal exists, show it for visibility
-      if (errorList && errorList.children.length && errorModal) errorModal.show();
+      // Only show modal if there are generic errors that couldn't be mapped to fields
+      if (errorList && errorList.children.length > 0 && errorModal) errorModal.show();
 
     } catch (err) {
       // network or unexpected error

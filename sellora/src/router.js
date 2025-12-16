@@ -117,23 +117,38 @@ router.post('/upload', upload.single('file'), async (req, res) => {
     category: (req.body.category || '').trim()
   };
 
-  const errors = store.validateProduct(product);
+  const validationErrors = store.validateProduct(product);
+  const errors = {};
+
+  // Map validation errors to field-specific errors
+  validationErrors.forEach(err => {
+    const errLower = err.toLowerCase();
+    if (errLower.includes('title')) {
+      errors.title = err;
+    } else if (errLower.includes('description') || errLower.includes('text')) {
+      errors.text = err;
+    } else if (errLower.includes('price')) {
+      errors.price = err;
+    } else if (errLower.includes('category')) {
+      errors.category = err;
+    }
+  });
 
   if (!req.file) {
-    errors.push("Image is required.");
+    errors.file = "Image is required.";
   }
 
-  if (await store.existsProductWithTitle(product.title)) {
-    errors.push("A product with that title already exists.");
+  if (product.title && await store.existsProductWithTitle(product.title)) {
+    errors.title = "A product with this title already exists.";
   }
 
-  if (errors.length > 0) {
+  if (Object.keys(errors).length > 0) {
     if (wantsJson) {
       return res.status(400).json({ success: false, errors });
     }
 
     return res.status(400).render('error', {
-      message: errors.join(' '),
+      message: Object.values(errors).join(' '),
       backUrl: '/upload'
     });
   }
@@ -275,26 +290,39 @@ router.post('/product/:id/edit', upload.single('image'), async (req, res) => {
     category: (req.body.category || '').trim()
   };
 
-  const errors = store.validateProduct(updatedFields);
+  const validationErrors = store.validateProduct(updatedFields);
+  const errors = {};
 
-  if (!updatedFields.title) {
-    errors.push("Title cannot be empty.");
-  }
-
-  const allProducts = await store.getAllProducts();
-  const currentProductId = new ObjectId(id);
-  const isDuplicate = allProducts.some(p => {
-    // exclude the current product being edited
-    const isSameProduct = p._id.equals(currentProductId);
-    const hasSameTitle = p.title.trim().toLowerCase() === updatedFields.title.trim().toLowerCase();
-    return !isSameProduct && hasSameTitle;
+  // Map validation errors to field-specific errors
+  validationErrors.forEach(err => {
+    const errLower = err.toLowerCase();
+    if (errLower.includes('title')) {
+      errors.title = err;
+    } else if (errLower.includes('description') || errLower.includes('text')) {
+      errors.text = err;
+    } else if (errLower.includes('price')) {
+      errors.price = err;
+    } else if (errLower.includes('category')) {
+      errors.category = err;
+    }
   });
 
-  if (isDuplicate) {
-    errors.push("A product with this title already exists.");
+  // Check for duplicate title (case-insensitive)
+  if (updatedFields.title) {
+    const allProducts = await store.getAllProducts();
+    const currentProductId = new ObjectId(id);
+    const isDuplicate = allProducts.some(p => {
+      const isSameProduct = p._id.equals(currentProductId);
+      const hasSameTitle = p.title.trim().toLowerCase() === updatedFields.title.trim().toLowerCase();
+      return !isSameProduct && hasSameTitle;
+    });
+
+    if (isDuplicate) {
+      errors.title = "A product with this title already exists.";
+    }
   }
 
-  if (errors.length > 0) {
+  if (Object.keys(errors).length > 0) {
     return res.status(400).json({ success: false, errors });
   }
 
@@ -320,25 +348,15 @@ router.post('/product/:id/edit', upload.single('image'), async (req, res) => {
     
 
     await store.updateProduct(id, updatedFields);
-    const updatedProduct = await store.getProduct(id); 
 
-    const productForTemplate = {
-      ...updatedProduct,
-      _id: updatedProduct._id.toString(),
-      title: updatedProduct.title,
-      text: updatedProduct.text,
-      price: updatedProduct.price,
-      category: updatedProduct.category,
-      image: updatedProduct.image ? (updatedProduct.image.startsWith('/') ? updatedProduct.image : `/uploads/${updatedProduct.image}`) : '/img/placeholder.png'
-    };
-
-    res.render('detail.html', { 
-      product: productForTemplate,  
-      backUrl: `/product/${id}/edit` 
+    // Return JSON for AJAX requests
+    return res.json({
+      success: true,
+      redirectUrl: `/product/${id}`
     });
 
   } catch (err) {
-    res.status(500).json({ success: false, errors: ['Error updating product.'] });
+    res.status(500).json({ success: false, errors: { general: 'Error updating product.' } });
   }
 });
 

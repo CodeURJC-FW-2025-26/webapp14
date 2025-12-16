@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   let page = window.selloraData?.currentPage || 1;
   let loading = false;
-  let hasMore = window.selloraData?.hasMore ?? true;
+  let hasMore = window.selloraData?.hasMore === 'true' || window.selloraData?.hasMore === true;
 
   
   const container = document.getElementById('products-container');
