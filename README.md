@@ -123,11 +123,11 @@ HTML templates rendered by the server:
   - Automatically deletes image files from `/uploads` directory when removed
 
 ** Most significant commits:**  
-1. [Commit 1][#Infinite scroll+loading spinner ](https://github.com/CodeURJC-FW-2025-26/webapp14/commit/48948b81507912d43768ce4e18cacb76843b90bc)
-2. [Commit 2][#Image editing feature in edit page ] (https://github.com/CodeURJC-FW-2025-26/webapp14/commit/d97f9a9f3580415253b19b93cd0f34ef676c86a7)
-3. [Commit 3][#Image deletion feature in edit page] (https://github.com/CodeURJC-FW-2025-26/webapp14/commit/507e96c37673888587f9036c86adada5be1a91fd)
-4. [Commit 4][#README file creation](https://github.com/CodeURJC-FW-2025-26/webapp14/commit/bdc9d3b5f82a1354fb79c478a33566f56aa49005)
-5. [Commit 5][#New products in data file] ()
+1. [Commit 1 - Infinite scroll+loading spinner](https://github.com/CodeURJC-FW-2025-26/webapp14/commit/48948b81507912d43768ce4e18cacb76843b90bc)
+2. [Commit 2 - Image editing feature in edit page ](https://github.com/CodeURJC-FW-2025-26/webapp14/commit/d97f9a9f3580415253b19b93cd0f34ef676c86a7)
+3. [Commit 3 - Image deletion feature in edit page](https://github.com/CodeURJC-FW-2025-26/webapp14/commit/507e96c37673888587f9036c86adada5be1a91fd)
+4. [Commit 4  -README file creation](https://github.com/CodeURJC-FW-2025-26/webapp14/commit/bdc9d3b5f82a1354fb79c478a33566f56aa49005)
+5. [Commit 5 - New products in data file] ()
 
 
 
