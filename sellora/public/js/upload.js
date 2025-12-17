@@ -140,15 +140,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const arr = Array.isArray(errors) ? errors : [errors];
     arr.forEach(message => {
       const m = String(message).toLowerCase();
-      if (m.includes('title') || m.includes('nombre') || m.includes('product name')) {
+      if (m.includes('title') || m.includes('product name')) {
         if (errTitle) { errTitle.textContent = message; titleInput && titleInput.classList.add('is-invalid'); return; }
       }
-      if (m.includes('longitud') || m.includes('length') || m.includes('texto') || m.includes('description') || m.includes('min')) {
+      if (m.includes('length') || m.includes('description') || m.includes('min')) {
         if (errDescription) { errDescription.textContent = message; descriptionInput && descriptionInput.classList.add('is-invalid'); return; }
       }
       if (m.includes('category')) { if (errCategory) { errCategory.textContent = message; categorySelect && categorySelect.classList.add('is-invalid'); return; } }
-      if (m.includes('price') || m.includes('precio')) { if (errPrice) { errPrice.textContent = message; priceInput && priceInput.classList.add('is-invalid'); return; } }
-      if (m.includes('file') || m.includes('imagen') || m.includes('image')) { if (errFile) { errFile.textContent = message; fileInput && fileInput.classList.add('is-invalid'); return; } }
+      if (m.includes('price')) { if (errPrice) { errPrice.textContent = message; priceInput && priceInput.classList.add('is-invalid'); return; } }
+      if (m.includes('file') || m.includes('image')) { if (errFile) { errFile.textContent = message; fileInput && fileInput.classList.add('is-invalid'); return; } }
 
       if (errorList) {
         const li = document.createElement('li'); li.textContent = message; errorList.appendChild(li);
