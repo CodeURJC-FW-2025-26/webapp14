@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Works for both upload and edit forms
+  // Get upload or edit form
   const form = document.getElementById('upload-form') || document.getElementById('edit-product-form');
-  if (!form) return; // No form found, exit
+  if (!form) return;
   
   const spinner = document.getElementById('upload-loading-indicator') || document.getElementById('edit-loading-indicator');
   const submitBtn = form.querySelector('button[type="submit"]');
@@ -9,14 +9,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const errorModalEl = document.getElementById('errorModal');
   const errorModal = errorModalEl ? new bootstrap.Modal(errorModalEl) : null;
 
-  // form fields
+  // Get form fields
   const titleInput = form.querySelector('input[name="title"]');
   const descriptionInput = form.querySelector('textarea[name="text"]');
   const categorySelect = form.querySelector('select[name="category"]');
   const priceInput = form.querySelector('input[name="price"]');
-  // fileInput defined below
 
-  // field error containers
+  // Error message containers
   const errTitle = document.getElementById('error-title');
   const errDescription = document.getElementById('error-description');
   const errCategory = document.getElementById('error-category');
@@ -28,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const removeHidden = document.getElementById('remove-image-hidden');
   let _currentObjectUrl = null;
 
-  // Placeholder images paths 
+  // Default image paths
   const PLACEHOLDERS = ['/img/imagen_2025-10-14_183044131.png', '/img/placeholder.png'];
 
   if (fileInput && previewImage) {
@@ -90,14 +89,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if(submitBtn) submitBtn.disabled = false;
   };
 
-  // clear any inline field errors and invalid visual state
+  // Clear all error messages
   const clearFieldErrors = () => {
     [errTitle, errDescription, errCategory, errPrice, errFile].filter(el => el).forEach(el => el.textContent = '');
     [titleInput, descriptionInput, categorySelect, priceInput, fileInput].filter(el => el).forEach(el => el.classList.remove('input-invalid'));
     if (errorList) errorList.innerHTML = '';
   };
 
-  // Provide consistent English validation messages independent of browser locale
+  // Get validation error message
   const getValidationMessage = (fld) => {
     if (!fld) return 'Invalid value';
     const v = fld.validity;
@@ -109,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (v.rangeOverflow) return `Value must be no more than ${fld.max}.`;
     if (v.stepMismatch) return 'Please enter a valid value.';
     if (v.patternMismatch) return 'Please match the requested format.';
-    // Custom validation: title must start with capital letter
+    // Check if title starts with capital letter
     if (fld === titleInput && fld.value && fld.value.trim()) {
       const firstChar = fld.value.trim()[0];
       if (firstChar !== firstChar.toUpperCase() || firstChar.toLowerCase() === firstChar) {
@@ -119,51 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return 'Invalid value';
   };
 
-  // Translate or normalize server messages into English for a specific field
-  const translateServerMessage = (fieldKey, original) => {
-    if (!original) return '';
-    const s = String(original || '');
-    const low = s.toLowerCase();
-    if (fieldKey === 'description' || fieldKey === 'text') {
-      if (low.includes('longitud') || low.includes('min') || low.includes('length') || low.includes('at least')) {
-        const n = (descriptionInput && descriptionInput.minLength) || 20;
-        return `Please lengthen this text to ${n} characters or more.`;
-      }
-      return s;
-    }
-    if (fieldKey === 'title') {
-      // If server message indicates duplication, preserve that meaning
-      if (low.includes('exist') || low.includes('already exists') || low.includes('ya existe') || low.includes('duplicate') || low.includes('duplicado')) {
-        return 'A product with that title already exists.';
-      }
-      // If server indicates required/empty, map to required
-      if (low.includes('required') || low.includes('requer') || low.includes('cannot be empty') || low.includes('is required')) {
-        return 'Title is required.';
-      }
-      // otherwise return the original message (best effort)
-      return s;
-    }
-    if (fieldKey === 'category') {
-      return 'Please select a category.';
-    }
-    if (fieldKey === 'price') {
-      return 'Please enter a valid price.';
-    }
-    if (fieldKey === 'file') {
-      return 'Please upload an image (jpg, png, webp).';
-    }
-    // Fallback: try to translate common Spanish fragments to English
-    if (low.includes('aumenta la longitud') || low.includes('longitud') || low.includes('caracter')) {
-      // try to infer number in text
-      const m = s.match(/(\d+)/);
-      const n = m ? m[1] : (descriptionInput && descriptionInput.minLength) || 20;
-      return `Please lengthen this text to ${n} characters or more.`;
-    }
-    if (low.includes('requer') || low.includes('obligatorio') || low.includes('campo')) return 'This field is required.';
-    return s; // otherwise return original (best-effort)
-  };
-
-  // Display server-sent or mapped errors under fields.
+  // Show error messages
   const displayFieldErrors = (errors) => {
     if (!errors) return;
     if (typeof errors === 'object' && !Array.isArray(errors)) {
@@ -188,15 +143,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const arr = Array.isArray(errors) ? errors : [errors];
     arr.forEach(message => {
       const m = String(message).toLowerCase();
-      if (m.includes('title') || m.includes('nombre') || m.includes('product name')) {
+      if (m.includes('title')) {
         if (errTitle) { errTitle.textContent = message; titleInput && titleInput.classList.add('input-invalid'); return; }
       }
-      if (m.includes('longitud') || m.includes('length') || m.includes('texto') || m.includes('description') || m.includes('min')) {
+      if (m.includes('description') || m.includes('text')) {
         if (errDescription) { errDescription.textContent = message; descriptionInput && descriptionInput.classList.add('input-invalid'); return; }
       }
-      if (m.includes('category')) { if (errCategory) { errCategory.textContent = message; categorySelect && categorySelect.classList.add('input-invalid'); return; } }
-      if (m.includes('price') || m.includes('precio')) { if (errPrice) { errPrice.textContent = message; priceInput && priceInput.classList.add('input-invalid'); return; } }
-      if (m.includes('file') || m.includes('imagen') || m.includes('image')) { if (errFile) { errFile.textContent = message; fileInput && fileInput.classList.add('input-invalid'); return; } }
+      if (m.includes('category')) {
+        if (errCategory) { errCategory.textContent = message; categorySelect && categorySelect.classList.add('input-invalid'); return; }
+      }
+      if (m.includes('price')) {
+        if (errPrice) { errPrice.textContent = message; priceInput && priceInput.classList.add('input-invalid'); return; }
+      }
+      if (m.includes('file') || m.includes('image')) {
+        if (errFile) { errFile.textContent = message; fileInput && fileInput.classList.add('input-invalid'); return; }
+      }
 
       if (errorList) {
         const li = document.createElement('li'); li.textContent = message; errorList.appendChild(li);
@@ -208,13 +169,13 @@ document.addEventListener('DOMContentLoaded', () => {
     event.preventDefault();
     clearFieldErrors();
 
-    // client-side validation: use constraint validation API and show messages inline
+    // Check all fields before submitting
     const fieldsToCheck = [titleInput, descriptionInput, categorySelect, priceInput, fileInput];
     let ok = true;
     for (const fld of fieldsToCheck) {
       if (!fld) continue;
       
-      // Check custom title validation (capital letter)
+      // Check if title starts with capital
       if (fld === titleInput && fld.value && fld.value.trim()) {
         const firstChar = fld.value.trim()[0];
         if (firstChar !== firstChar.toUpperCase() || firstChar.toLowerCase() === firstChar) {
@@ -257,38 +218,12 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      // Show server-side validation errors inline (translate Spanish to English where possible)
-      // If server returned an object mapping, translate values per field
-      if (data && data.errors && typeof data.errors === 'object' && !Array.isArray(data.errors)) {
-        const translated = {};
-        Object.keys(data.errors).forEach(k => {
-          translated[k] = translateServerMessage(k, data.errors[k]);
-        });
-        displayFieldErrors(translated);
-      } else {
-        // array or string
-        const raw = data.errors || ['Server Error'];
-        // attempt heuristic mapping but translate messages
-        if (Array.isArray(raw)) {
-          const translatedArr = raw.map(msg => {
-            // detect likely field for better translation
-            const low = String(msg).toLowerCase();
-            if (low.includes('longitud') || low.includes('texto') || low.includes('description')) return translateServerMessage('description', msg);
-            if (low.includes('titulo') || low.includes('title') || low.includes('nombre')) return translateServerMessage('title', msg);
-            if (low.includes('precio') || low.includes('price')) return translateServerMessage('price', msg);
-            if (low.includes('imagen') || low.includes('file') || low.includes('image')) return translateServerMessage('file', msg);
-            return String(msg);
-          });
-          displayFieldErrors(translatedArr);
-        } else {
-          displayFieldErrors(raw);
-        }
-      }
-      // Only show modal if there are generic errors that couldn't be mapped to fields
+      // Show server errors
+      displayFieldErrors(data.errors || ['Server Error']);
+      // Show error modal if needed
       if (errorList && errorList.children.length > 0 && errorModal) errorModal.show();
 
     } catch (err) {
-      // network or unexpected error
       displayFieldErrors(['Cannot connect to server']);
       if (errorModal) errorModal.show();
     } finally {
