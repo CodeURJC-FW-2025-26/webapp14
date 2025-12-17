@@ -13,6 +13,9 @@ export default router;
 const upload = multer({ dest: store.UPLOADS_FOLDER });
 
 
+router.get('/index', (req, res) => {
+  res.redirect('/');
+});
 
 router.get('/', async (req, res) => {
   const page = 1;
