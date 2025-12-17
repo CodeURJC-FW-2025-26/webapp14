@@ -488,13 +488,3 @@ router.get('/product/:id/reviews/:reviewId/edit', async (req, res) => {
 
   res.render('edit_review', { review, productId: id });
 });
-
-router.delete('/product/:id/reviews/:reviewId', async (req, res) => {
-  const { id, reviewId } = req.params;
-  try {
-    await store.deleteReview(id, reviewId);
-    res.json({ success: true, message: 'Review deleted successfully' });
-  } catch (error) {
-    res.status(500).json({ success: false, message: 'Server error deleting review' });
-  }
-});

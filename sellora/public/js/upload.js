@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Get upload or edit form
+  // Works for both upload and edit forms
   const form = document.getElementById('upload-form') || document.getElementById('edit-product-form');
   if (!form) return;
   
@@ -24,10 +24,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const fileInput = document.getElementById('file-input');
   const previewImage = document.getElementById('preview-image');
-  const removeHidden = document.getElementById('remove-image-hidden');
   let _currentObjectUrl = null;
 
-  // Default image paths
+  // Default images paths 
   const PLACEHOLDERS = ['/img/imagen_2025-10-14_183044131.png', '/img/placeholder.png'];
 
   if (fileInput && previewImage) {
@@ -54,7 +53,6 @@ document.addEventListener('DOMContentLoaded', () => {
         _currentObjectUrl = URL.createObjectURL(file);
         previewImage.src = _currentObjectUrl;
         updateRemoveBtn(true);
-        if (removeHidden) removeHidden.value = 'off';
       } else {
         if (_currentObjectUrl) {
           URL.revokeObjectURL(_currentObjectUrl);
@@ -74,7 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
         fileInput.value = '';
         previewImage.src = '/img/imagen_2025-10-14_183044131.png';
         updateRemoveBtn(false);
-        if (removeHidden) removeHidden.value = 'on';
       });
     }
   }
@@ -92,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Clear all error messages
   const clearFieldErrors = () => {
     [errTitle, errDescription, errCategory, errPrice, errFile].filter(el => el).forEach(el => el.textContent = '');
-    [titleInput, descriptionInput, categorySelect, priceInput, fileInput].filter(el => el).forEach(el => el.classList.remove('input-invalid'));
+    [titleInput, descriptionInput, categorySelect, priceInput, fileInput].filter(el => el).forEach(el => el.classList.remove('is-invalid'));
     if (errorList) errorList.innerHTML = '';
   };
 
@@ -126,11 +123,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const val = errors[k];
         const msg = Array.isArray(val) ? val.join(', ') : String(val);
         switch (k.toLowerCase()) {
-          case 'title': if (errTitle) { errTitle.textContent = msg; titleInput && titleInput.classList.add('input-invalid'); } break;
-          case 'text': case 'description': if (errDescription) { errDescription.textContent = msg; descriptionInput && descriptionInput.classList.add('input-invalid'); } break;
-          case 'category': if (errCategory) { errCategory.textContent = msg; categorySelect && categorySelect.classList.add('input-invalid'); } break;
-          case 'price': if (errPrice) { errPrice.textContent = msg; priceInput && priceInput.classList.add('input-invalid'); } break;
-          case 'file': if (errFile) { errFile.textContent = msg; fileInput && fileInput.classList.add('input-invalid'); } break;
+          case 'title': if (errTitle) { errTitle.textContent = msg; titleInput && titleInput.classList.add('is-invalid'); } break;
+          case 'text': case 'description': if (errDescription) { errDescription.textContent = msg; descriptionInput && descriptionInput.classList.add('is-invalid'); } break;
+          case 'category': if (errCategory) { errCategory.textContent = msg; categorySelect && categorySelect.classList.add('is-invalid'); } break;
+          case 'price': if (errPrice) { errPrice.textContent = msg; priceInput && priceInput.classList.add('is-invalid'); } break;
+          case 'file': if (errFile) { errFile.textContent = msg; fileInput && fileInput.classList.add('is-invalid'); } break;
           default:
             if (errorList) {
               const li = document.createElement('li'); li.textContent = msg; errorList.appendChild(li);
@@ -143,21 +140,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const arr = Array.isArray(errors) ? errors : [errors];
     arr.forEach(message => {
       const m = String(message).toLowerCase();
-      if (m.includes('title')) {
-        if (errTitle) { errTitle.textContent = message; titleInput && titleInput.classList.add('input-invalid'); return; }
+      if (m.includes('title') || m.includes('nombre') || m.includes('product name')) {
+        if (errTitle) { errTitle.textContent = message; titleInput && titleInput.classList.add('is-invalid'); return; }
       }
-      if (m.includes('description') || m.includes('text')) {
-        if (errDescription) { errDescription.textContent = message; descriptionInput && descriptionInput.classList.add('input-invalid'); return; }
+      if (m.includes('longitud') || m.includes('length') || m.includes('texto') || m.includes('description') || m.includes('min')) {
+        if (errDescription) { errDescription.textContent = message; descriptionInput && descriptionInput.classList.add('is-invalid'); return; }
       }
-      if (m.includes('category')) {
-        if (errCategory) { errCategory.textContent = message; categorySelect && categorySelect.classList.add('input-invalid'); return; }
-      }
-      if (m.includes('price')) {
-        if (errPrice) { errPrice.textContent = message; priceInput && priceInput.classList.add('input-invalid'); return; }
-      }
-      if (m.includes('file') || m.includes('image')) {
-        if (errFile) { errFile.textContent = message; fileInput && fileInput.classList.add('input-invalid'); return; }
-      }
+      if (m.includes('category')) { if (errCategory) { errCategory.textContent = message; categorySelect && categorySelect.classList.add('is-invalid'); return; } }
+      if (m.includes('price') || m.includes('precio')) { if (errPrice) { errPrice.textContent = message; priceInput && priceInput.classList.add('is-invalid'); return; } }
+      if (m.includes('file') || m.includes('imagen') || m.includes('image')) { if (errFile) { errFile.textContent = message; fileInput && fileInput.classList.add('is-invalid'); return; } }
 
       if (errorList) {
         const li = document.createElement('li'); li.textContent = message; errorList.appendChild(li);
@@ -182,7 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
           ok = false;
           if (errTitle) {
             errTitle.textContent = 'Title must start with a capital letter.';
-            fld.classList.add('input-invalid');
+            fld.classList.add('is-invalid');
           }
           continue;
         }
@@ -191,11 +182,11 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!fld.checkValidity()) {
         ok = false;
         const vm = getValidationMessage(fld) || 'Invalid value';
-        if (fld === titleInput && errTitle) { errTitle.textContent = vm; fld.classList.add('input-invalid'); }
-        else if (fld === descriptionInput && errDescription) { errDescription.textContent = vm; fld.classList.add('input-invalid'); }
-        else if (fld === categorySelect && errCategory) { errCategory.textContent = vm; fld.classList.add('input-invalid'); }
-        else if (fld === priceInput && errPrice) { errPrice.textContent = vm; fld.classList.add('input-invalid'); }
-        else if (fld === fileInput && errFile) { errFile.textContent = vm; fld.classList.add('input-invalid'); }
+        if (fld === titleInput && errTitle) { errTitle.textContent = vm; fld.classList.add('is-invalid'); }
+        else if (fld === descriptionInput && errDescription) { errDescription.textContent = vm; fld.classList.add('is-invalid'); }
+        else if (fld === categorySelect && errCategory) { errCategory.textContent = vm; fld.classList.add('is-invalid'); }
+        else if (fld === priceInput && errPrice) { errPrice.textContent = vm; fld.classList.add('is-invalid'); }
+        else if (fld === fileInput && errFile) { errFile.textContent = vm; fld.classList.add('is-invalid'); }
       }
     }
     if (!ok) return;
@@ -219,7 +210,11 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       // Show server errors
-      displayFieldErrors(data.errors || ['Server Error']);
+      if (data && data.errors) {
+        displayFieldErrors(data.errors);
+      } else {
+        displayFieldErrors(['Server Error']);
+      }
       // Show error modal if needed
       if (errorList && errorList.children.length > 0 && errorModal) errorModal.show();
 
