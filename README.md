@@ -163,14 +163,22 @@ HTML templates rendered by the server:
 
 #### Nuria Amrani Villuendas – 
 **Tasks:**  
-
+- Implemented backend verifications in upload form.
+- Adapted interactive images in the upload form.
+- Implemented errors under the form fields.
+- Implemented errors as popups.
 
 **Most significant commits:**  
-
-
+1. [Commit 1 - Backend Verifications, image preview and errors under fields](https://github.com/CodeURJC-FW-2025-26/webapp14/commit/51708bccc3c71dfa9d6d3b9222bd4be79ae72a72)
+2. [Commit 2- Errors as popups](https://github.com/CodeURJC-FW-2025-26/webapp14/commit/5b524ef0c9dcb54adc4da13e7b4a79812c17bf45)
+3. [Commit 3 - Redirect to detail page after uploading](https://github.com/CodeURJC-FW-2025-26/webapp14/commit/927cd3deafa6df9da09638cad76de67864496fe3)
+4. [Commit 4- Implemented AJAX in upload form](https://github.com/CodeURJC-FW-2025-26/webapp14/commit/045ff6721b23f22977b09aa9dfa09965cd4c608e)
 
 
 **Files with most participation:**  
+- `router.js`
+- `app.js`
+- `upload.html`
 
 
 
