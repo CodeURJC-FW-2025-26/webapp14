@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return data.products;
       }
 
-  //Render products in DOM
+  // Render products in DOM
 
       function renderProducts(products) {
         products.forEach(product => {
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
       }
 
-  //Load next page 
+  // Load next page
       async function loadNextPage() {
         if (loading || !hasMore) return;
 
@@ -93,27 +93,40 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-// Defined outsiede DOMContentLoaded to be globally accessible
+// Defined outside DOMContentLoaded to be globally accessible
 window.deleteProduct = async function(productId) {
-    //Confirmation
-    if (!confirm("Are you sure you want to delete this product?")) return;
+    // Show confirmation modal
+    const confirmModal = new bootstrap.Modal(document.getElementById('confirmDeleteProductModal'));
+    const confirmBtn = document.getElementById('confirmDeleteProductBtn');
+    
+    confirmModal.show();
+    
+    // Wait for user confirmation
+    const handleConfirm = async () => {
+        confirmBtn.removeEventListener('click', handleConfirm);
+        confirmModal.hide();
+        
+        try {
+            // AJAX request
+            const response = await fetch(`/product/${productId}`, {
+                method: 'DELETE'
+            });
 
-    try {
-        //AJAX petition
-        const response = await fetch(`/product/${productId}`, {
-            method: 'DELETE'
-        });
-
-        if (response.ok) {
-            window.location.href = '/';
-        } else {
-            const data = await response.json();
-            throw new Error(data.message || 'Server Error');
+            if (response.ok) {
+                window.location.href = '/';
+            } else {
+                const data = await response.json();
+                throw new Error(data.message || 'Server Error');
+            }
+        } catch (error) {
+            // Show error modal
+            const errorModal = new bootstrap.Modal(document.getElementById('errorProductModal'));
+            document.getElementById('errorProductMessage').textContent = error.message;
+            errorModal.show();
         }
-
-    } catch (error) {
-        alert("Error deleting product: " + error.message);
-    }
+    };
+    
+    confirmBtn.addEventListener('click', handleConfirm);
 };
 
 
@@ -194,7 +207,10 @@ window.submitReview = async function(event, productId) {
 
     } catch (error) {
         console.error(error);
-        alert("Error: " + error.message);
+        // Show error modal
+        const errorModal = new bootstrap.Modal(document.getElementById('errorReviewModal'));
+        document.getElementById('errorReviewMessage').textContent = error.message;
+        errorModal.show();
     } finally {
         if (spinner) spinner.style.display = 'none';
     }
@@ -371,7 +387,10 @@ window.updateReview = async function(event, productId, reviewId) {
 
     } catch (error) {
         console.error(error);
-        alert("Error: " + error.message);
+        // Show error modal
+        const errorModal = new bootstrap.Modal(document.getElementById('errorReviewModal'));
+        document.getElementById('errorReviewMessage').textContent = error.message;
+        errorModal.show();
     } finally {
         if (spinner) spinner.style.display = 'none';
     }
@@ -409,41 +428,56 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.addEventListener('click', async function(e) {
         if (e.target.classList.contains('btn-delete-review')) {
 
-            if(!confirm("Are you sure you want to delete this review?")) return;
-
             const btn = e.target;
             const productId = btn.dataset.productId;
             const reviewId = btn.dataset.reviewId;
 
-            try {
-                // Ajax request
-                const response = await fetch(`/product/${productId}/reviews/${reviewId}`, {
-                    method: 'DELETE',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                });
-
-                let data;
+            // Show confirmation modal
+            const confirmModal = new bootstrap.Modal(document.getElementById('confirmDeleteReviewModal'));
+            const confirmBtn = document.getElementById('confirmDeleteReviewBtn');
+            
+            confirmModal.show();
+            
+            // Wait for user confirmation
+            const handleConfirm = async () => {
+                confirmBtn.removeEventListener('click', handleConfirm);
+                confirmModal.hide();
+                
                 try {
-                    data = await response.json();
-                } catch (err) {
-                    throw new Error("Invalid server response");
-                }
+                    // AJAX request
+                    const response = await fetch(`/product/${productId}/reviews/${reviewId}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    });
 
-                if (response.ok && data.success) {
-                    const reviewCard = document.getElementById(`review-${reviewId}`);
-                    if (reviewCard) {
-                        reviewCard.remove();
+                    let data;
+                    try {
+                        data = await response.json();
+                    } catch (err) {
+                        throw new Error("Invalid server response");
                     }
-                } else {
-                    alert(data.message || 'Error deleting review.');
-                }
 
-            } catch (error) {
-                console.error(error);
-                alert('Connection error. Please try again.');
-            }
+                    if (response.ok && data.success) {
+                        const reviewCard = document.getElementById(`review-${reviewId}`);
+                        if (reviewCard) {
+                            reviewCard.remove();
+                        }
+                    } else {
+                        throw new Error(data.message || 'Error deleting review.');
+                    }
+
+                } catch (error) {
+                    console.error(error);
+                    // Show error modal
+                    const errorModal = new bootstrap.Modal(document.getElementById('errorReviewModal'));
+                    document.getElementById('errorReviewMessage').textContent = error.message;
+                    errorModal.show();
+                }
+            };
+            
+            confirmBtn.addEventListener('click', handleConfirm);
         }
     });
 });
