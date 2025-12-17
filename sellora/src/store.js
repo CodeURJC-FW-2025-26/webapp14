@@ -7,7 +7,7 @@ await client.connect();
 
 const db = client.db('store');
 const products = db.collection('products');
-// Ensure title is unique (case-insensitive) to prevent race-conditions creating duplicates
+// Ensure title is unique (case-insensitive) 
 await products.createIndex({ title: 1 }, { unique: true, collation: { locale: 'en', strength: 2 } });
 
 export async function deleteProducts() {
