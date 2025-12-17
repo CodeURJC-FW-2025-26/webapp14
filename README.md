@@ -109,8 +109,7 @@ HTML templates rendered by the server:
   -  `head.html` – Reusable head section.
   - `spinner.html` – Reusable loading spinner component
 
-
-- `SELLORA.html` – Homepage (displays products with infinite scroll, category filtering and search funcitonality)
+- `index.html` – Homepage (displays products with infinite scroll, category filtering and search funcitonality)
 - `upload.html` – Page for adding a new product (fields for title, description, price, category, and image)
 - `detail.html` – Product detail page (full product information display, review section with add/edit/delete functionalities)
 - `edit.html` – Product editing page (pre-filled form with existing product data, image preview)
@@ -137,7 +136,7 @@ HTML templates rendered by the server:
 **Files with most participation:**  
 - `router.js`
 - `app.js` (public)
-- `SELLORA.html` 
+- `index.html` 
 - `edit.html` 
 - `spinner.html` (partials)
 - `README.md` 

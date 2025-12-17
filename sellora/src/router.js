@@ -39,7 +39,7 @@ router.get('/', async (req, res) => {
     image: p.image ? (p.image.startsWith('/') ? p.image : `/uploads/${p.image}`) : '/img/placeholder.png'
   }));
 
-  res.render('SELLORA', {
+  res.render('index', {
     products: productsWithImages,
     currentPage,
     totalPages,
