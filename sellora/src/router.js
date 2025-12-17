@@ -12,7 +12,7 @@ export default router;
 
 const upload = multer({ dest: store.UPLOADS_FOLDER });
 
-
+//Home page route
 router.get('/index', (req, res) => {
   res.redirect('/');
 });
